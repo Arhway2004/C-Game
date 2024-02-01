@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yangyaohui/Desktop/C-Game",
-      "program": "/Users/yangyaohui/Desktop/C-Game/build/Debug/outDebug"
+      "cwd": "/Users/yangyaohui/Documents/GitHub/C-Game",
+      "program": "/Users/yangyaohui/Documents/GitHub/C-Game/build/Debug/outDebug"
     }
   ]
 }
