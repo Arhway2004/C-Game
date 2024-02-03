@@ -1,28 +1,11 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include <time.h>
+#include <stdlib.h>
+#include "../include/Game.h"
 
 int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed){
-                std::cout << "End2"; 
-                window.close();
-            }
-            
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+{   
+    srand(time(static_cast<unsigned>(0)));
+    Game game; 
+    game.run(); 
+    return 0; 
 }
