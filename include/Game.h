@@ -1,31 +1,31 @@
 #pragma once 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-#include <map>
-#include <string>
+#include "GameState.h"
+#include <iostream>
+#include "MainMenu.h"
 
 class Game{
     private: 
-        sf::RenderWindow* window; 
+        sf::RenderWindow* window;
 
+        sf::Clock dtClock;
+        float dt; //Synchonize graphics for every computer 
+        std::stack<GameState*> states; //scenes
         //resources
-        sf::Font font; 
+        sf::Font font;
 
         //init
         void initWindow(); 
         void initVariables(); 
-        void initSystem(); 
+        void initStates(); 
 
-    public: 
+    public:
         Game(); 
         virtual ~Game(); 
 
         void run(); 
         void update(); 
+        void updateDt(); 
         void updateGUI(); //update fonts, score display etc
         void render(); 
+        void endApplication(); 
 };
