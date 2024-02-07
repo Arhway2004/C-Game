@@ -18,7 +18,7 @@ Game::~Game(){
 }
 
 void Game::endApplication(){
-    std::cout << "Ending Application"; 
+    std::cout << "Ending Application\n"; 
 }
 
 void Game::initWindow(){

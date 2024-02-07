@@ -10,6 +10,7 @@ class Game{
         sf::Clock dtClock;
         float dt; //Synchonize graphics for every computer 
         std::stack<GameState*> states; //scenes
+
         //resources
         sf::Font font;
 

@@ -14,6 +14,7 @@ enum button_states{
 
 class Button{
     private: 
+        // sf::RenderWindow* window; 
         short unsigned buttonStates; 
 
         sf::RectangleShape shape; 
@@ -26,9 +27,8 @@ class Button{
         sf::Color hoverColor; 
         sf::Color activeColor; 
 
-        
     public: 
-        Button(float x, float y, float width, float height, sf::Font* font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor); 
+        Button(float x=0.0, float y=0.0, float width=0.0 , float height=0.0, sf::Font* font = nullptr, std::string text = "text"); 
         ~Button(); 
 
         //accessor

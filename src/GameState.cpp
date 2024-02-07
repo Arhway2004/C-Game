@@ -10,6 +10,15 @@ GameState::~GameState(){
 }
 
 void GameState::update(const float& dt){
+    this->updateMousePosition(); 
+}
+
+void GameState::updateInput(const float& dt){
+    
+}
+
+//temp
+void GameState::updateMouseTemp(){
 
 }
 
@@ -27,8 +36,10 @@ void GameState::checkForEnd(){
     }
 }
 
-void GameState::render(sf::RenderTarget* target){
-
+void GameState::updateMousePosition(){
+    this->mousePosScreen = sf::Mouse::getPosition(); 
+    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+    this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 }
 
 
