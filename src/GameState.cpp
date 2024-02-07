@@ -22,6 +22,16 @@ void GameState::updateMouseTemp(){
 
 }
 
+void GameState::setText(sf::Text* text, sf::Font font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg){
+    text->setFont(font);
+    text->setString(msg); 
+    text->setFillColor(msg_color); 
+    text->setCharacterSize(size); 
+    text->setPosition(
+        pos_x, pos_y
+    );
+}
+
 bool GameState::getQuit() const{
     return this->endNow; 
 }

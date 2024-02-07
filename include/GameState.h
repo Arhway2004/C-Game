@@ -23,6 +23,7 @@ class GameState{
     protected: 
         //temp
         // sf::Vector2f mousePos; 
+        sf::Text* game_title; 
         sf::Vector2i mousePosScreen; 
         sf::Vector2i mousePosWindow; //track only mouse in Window frame
         sf::Vector2f mousePosView; 
@@ -37,6 +38,8 @@ class GameState{
         virtual void updateMousePosition(); 
         //temp
         virtual void updateMouseTemp(); 
+        virtual void setText(sf::Text* text, sf::Font font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg);
+
         // void transitiionTo(GameState* nextState); 
 
         virtual void endState() = 0;

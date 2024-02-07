@@ -4,8 +4,10 @@
 MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 {
     this->initFont(); 
+    this->game_title = new sf::Text; 
+    this->setText(game_title, this->font, sf::Color::White, 60, 350, 150, "Untitled"); 
     // this->initKeyBinds(); for what
-
+    
     this->main_menu_btn = new Button(350.0, 300.0, 150.0, 60.0, &this->font, "Start Game");
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);  
@@ -13,6 +15,7 @@ MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 
 MainMenu::~MainMenu(){
     delete this->main_menu_btn; 
+    delete this->game_title; 
 }
 
 void MainMenu::updateInput(const float& dt){
@@ -74,6 +77,7 @@ void MainMenu::render(sf::RenderTarget* target) {
         target = this->window; 
     }
         
-    target->draw(this->background); 
-    this->main_menu_btn->render(target); 
+    target->draw(this->background);
+    this->window->draw(*game_title);
+    this->main_menu_btn->render(target);
 }
