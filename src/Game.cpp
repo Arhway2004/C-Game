@@ -3,12 +3,22 @@
 
 Game::Game(){
     this->initWindow();
+    this->initStates(); 
     this->run(); 
     this->update();
     this->render(); 
 }
 
 Game::~Game(){
+    delete this->window; 
+    while(!this->states.empty()){
+        delete this->states.top(); 
+        this->states.pop(); 
+    }
+}
+
+void Game::endApplication(){
+    std::cout << "Ending Application\n"; 
 }
 
 void Game::initWindow(){
@@ -21,8 +31,9 @@ void Game::initVariables(){
     
 }
 
-void Game::initSystem(){
-
+void Game::initStates(){
+    this->states.push(new Basement(this->window));
+    this->states.push(new MainMenu(this->window));
 }
 
 void Game::run(){
@@ -33,11 +44,23 @@ void Game::run(){
                 window->close(); 
             }
         }
-        this->update(); 
-        this->render(); 
+        this->updateDt(); //set new dt every framerate
+        this->update();
+        this->render();
     }
 }
 
+void Game::add_scene(GameState* scene){
+    this->states.push(scene); 
+}
+
+void Game::updateDt(){
+    //update dt with time taken to update and render 1 frame
+    this->dt = this->dtClock.restart().asSeconds(); 
+    //debug
+    // std::cout << "\x1B[2J\x1B[H"; 
+    // std::cout << this->dt << "\n"; 
+}
 
 void Game::updateGUI(){
     if(!this->font.loadFromFile("../assets/font/SEASHORE.otf")){
@@ -46,10 +69,36 @@ void Game::updateGUI(){
 }
 
 void Game::update(){
-    this->updateGUI(); 
+    // this->updateGUI();
+    //temp
+    // std::cout << "states size: "<< this->states.size() << "\n";
+    if(!this->states.empty()){
+        // this->states.top()->checkForEnd(); 
+
+        this->states.top()->update(this->dt); //if met some condition = ask to quit
+
+        std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
+        if(this->states.top()->getQuit()){
+            this->states.top()->endState(); 
+            delete this->states.top(); 
+            this -> states.pop(); 
+
+            std::cout << "states len : " << this->states.size() << "\n";
+        }
+    }//App ends
+    else{
+        this->endApplication(); 
+        this->window->close(); 
+    }
 }
 
 void Game::render(){
     this->window->clear(); 
+
+    //render item
+    if(!this->states.empty()){
+        // this->states.top()->endState(); 
+        this->states.top()->render(this->window);   
+    }
     this->window->display(); 
 }
