@@ -32,7 +32,8 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    this->states.push(new MainMenu(this->window)); 
+    this->states.push(new Basement(this->window));
+    this->states.push(new MainMenu(this->window));
 }
 
 void Game::run(){
@@ -44,9 +45,13 @@ void Game::run(){
             }
         }
         this->updateDt(); //set new dt every framerate
-        this->update(); 
+        this->update();
         this->render();
     }
+}
+
+void Game::add_scene(GameState* scene){
+    this->states.push(scene); 
 }
 
 void Game::updateDt(){
@@ -64,16 +69,21 @@ void Game::updateGUI(){
 }
 
 void Game::update(){
-    this->updateGUI(); 
+    // this->updateGUI();
+    //temp
+    // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
-        this->states.top()->checkForEnd(); 
+        // this->states.top()->checkForEnd(); 
 
         this->states.top()->update(this->dt); //if met some condition = ask to quit
 
+        std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
         if(this->states.top()->getQuit()){
             this->states.top()->endState(); 
             delete this->states.top(); 
             this -> states.pop(); 
+
+            std::cout << "states len : " << this->states.size() << "\n";
         }
     }//App ends
     else{

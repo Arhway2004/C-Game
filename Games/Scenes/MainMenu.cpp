@@ -1,36 +1,39 @@
 //base class for game to call other scene
-#include "../include/MainMenu.h"
+#include "MainMenu.h"
 
 MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 {
-    this->initFont(); 
-    this->game_title = new sf::Text; 
-    this->setText(game_title, this->font, sf::Color::White, 60, 350, 150, "Untitled"); 
+    this->endNow = false;
+    this->initFont(this->font, "../assets/font/SEASHORE.otf"); 
+    // this->game_title = new sf::Text; 
+    this->setText(this->game_title, this->font, sf::Color::White, 100, 270, 150, "Untitled"); 
     // this->initKeyBinds(); for what
     
-    this->main_menu_btn = new Button(350.0, 300.0, 150.0, 60.0, &this->font, "Start Game");
+    this->main_menu_btn = new Button(300.0, 300.0, 150.0, 60.0, &this->font, "Start Game");
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);  
 }
 
 MainMenu::~MainMenu(){
-    delete this->main_menu_btn; 
-    delete this->game_title; 
+    delete this->main_menu_btn;
+    // delete this->game_title;
 }
 
+
+//how to change scene 
 void MainMenu::updateInput(const float& dt){
-    this->checkForEnd();
-
-}
-
-void MainMenu::initFont(){
-    if(!this->font.loadFromFile("../assets/font/SEASHORE.otf")){
-        std::cout << "ERROR at MainMenu/initFont::couldn't upload the font" << std::endl; 
+    std::cout << "button pressed: " << this->main_menu_btn->isPressed() << "\n";
+    if(this->main_menu_btn->isPressed()){
+        this->endNow = true;
+    }else{
+        this->endNow = false;
     }
+    // this->checkForEnd();
 }
 
 void MainMenu::endState(){
-    std::cout << "Ending Main Menu" << "\n"; 
+    //transfer to another scene
+    std::cout << "Ending Main Menu" << "\n";
 }
 
 // bool MainMenu::getQuit() const {
@@ -41,21 +44,9 @@ void MainMenu::endState(){
 //     GameState::checkForEnd(); 
 // }
 
-//temp
-void MainMenu::updateMouseTemp(){
-    // sf::Vector2f temp = sf::Vector2f(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y); 
-    // this->mousePos = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)); 
-    // this->mousePos = sf::Vector2f(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y); 
-}
-
 
 void MainMenu::update(const float& dt){
     //update per frame
-    //temp
-    // this->updateMouseTemp(); 
-    // this->main_menu_btn->update(this->mousePos); 
-    // this->main_menu_btn->update(this->mousePosView); 
-
     //update mouse
     this->updateMousePosition();
     std::cout << "mousePosView: " << this->mousePosView.x << ", " << this->mousePosView.y << std::endl; 
@@ -76,8 +67,7 @@ void MainMenu::render(sf::RenderTarget* target) {
     if(!target){
         target = this->window; 
     }
-        
     target->draw(this->background);
-    this->window->draw(*game_title);
+    target->draw(game_title);
     this->main_menu_btn->render(target);
 }

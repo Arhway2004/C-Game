@@ -14,19 +14,19 @@
 
 //more general purpose than gamestate
 class GameState{
-
     private:
         sf::RenderWindow* window; 
         std::vector<sf::Texture*> textures;
-        bool endNow; 
+        
 
     protected: 
-        //temp
-        // sf::Vector2f mousePos; 
-        sf::Text* game_title; 
+        bool endNow; 
+        
+        sf::Text game_title; 
         sf::Vector2i mousePosScreen; 
         sf::Vector2i mousePosWindow; //track only mouse in Window frame
         sf::Vector2f mousePosView; 
+        void initFont(sf::Font& font, std::string path); 
 
     public:
         GameState(sf::RenderWindow* window);
@@ -37,8 +37,8 @@ class GameState{
         virtual void updateInput(const float& dt) = 0; 
         virtual void updateMousePosition(); 
         //temp
-        virtual void updateMouseTemp(); 
-        virtual void setText(sf::Text* text, sf::Font font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg);
+        // virtual void updateMouseTemp(); 
+        virtual void setText(sf::Text& text, sf::Font& font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg);
 
         // void transitiionTo(GameState* nextState); 
 
