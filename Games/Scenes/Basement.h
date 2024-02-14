@@ -13,7 +13,7 @@ class Basement : public GameState{
         Basement(sf::RenderWindow* window); 
         virtual ~Basement(); 
         
-        void updateInput(const float& dt) override;
+        // void updateInput(const float& dt, Button* btn) override;
         void endState() override; 
         void update(const float& dt) override; 
         void render(sf::RenderTarget* target = nullptr) override;

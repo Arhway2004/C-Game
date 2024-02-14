@@ -1,16 +1,7 @@
 #pragma once 
-#include <vector>
-#include <iostream>
-#include <cstdlib>
-#include <map>
-#include <string>
-#include <stack>
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+#include "../src/Config.h"
+#include "../UI/Button.h"
 
 //more general purpose than gamestate
 class GameState{
@@ -34,10 +25,8 @@ class GameState{
     
         // virtual void enter() = 0;
         // virtual void endState() = 0;
-        virtual void updateInput(const float& dt) = 0; 
+        // virtual void updateInput(const float& dt, Button* btn) = 0; 
         virtual void updateMousePosition(); 
-        //temp
-        // virtual void updateMouseTemp(); 
         virtual void setText(sf::Text& text, sf::Font& font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg);
 
         // void transitiionTo(GameState* nextState); 

@@ -22,9 +22,9 @@ void Game::endApplication(){
 }
 
 void Game::initWindow(){
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Untitled"); 
-    this->window->setFramerateLimit(144); 
-    this->window->setVerticalSyncEnabled(false); 
+    this->window = new sf::RenderWindow(sf::VideoMode(960, 540), "Untitled"); 
+    this->window->setFramerateLimit(144);
+    this->window->setVerticalSyncEnabled(false);
 }
 
 void Game::initVariables(){
@@ -97,7 +97,6 @@ void Game::render(){
 
     //render item
     if(!this->states.empty()){
-        // this->states.top()->endState(); 
         this->states.top()->render(this->window);   
     }
     this->window->display(); 
