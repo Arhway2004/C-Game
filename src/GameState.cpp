@@ -13,9 +13,9 @@ void GameState::update(const float& dt){
     this->updateMousePosition(); 
 }
 
-void GameState::updateInput(const float& dt){
+// void GameState::updateInput(const float& dt, Button* btn){
     
-}
+// }
 
 void GameState::initFont(sf::Font& font, std::string path){
     if(!font.loadFromFile(path)){
@@ -25,8 +25,8 @@ void GameState::initFont(sf::Font& font, std::string path){
 
 void GameState::setText(sf::Text& text, sf::Font& font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg){
     text.setFont(font);
-    text.setString(msg); 
-    text.setFillColor(msg_color); 
+    text.setString(msg);
+    text.setFillColor(msg_color);
     text.setCharacterSize(size); 
     text.setPosition(
         pos_x, pos_y
@@ -52,7 +52,3 @@ void GameState::updateMousePosition(){
     this->mousePosWindow = sf::Mouse::getPosition(*this->window);
     this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 }
-
-
-
-

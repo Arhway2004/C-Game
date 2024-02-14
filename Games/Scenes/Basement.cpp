@@ -15,10 +15,10 @@ Basement::~Basement()
     delete this->window; 
 }
 
-void Basement::updateInput(const float& dt)
-{
+// void Basement::updateInput(const float& dt, Button* btn)
+// {
 
-}
+// }
 
 void Basement::endState()
 {
