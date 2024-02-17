@@ -5,9 +5,9 @@
 Basement::Basement(sf::RenderWindow* window) : GameState(window)
 {
     this->endNow = false;
-    this->window = window;
+    this->window = window; 
     this->background.setSize(sf::Vector2f(this->window->getSize().x, this->window->getSize().y));
-    this->background.setFillColor(sf::Color::White);
+    this->background.setFillColor(sf::Color::Blue);
 }
 
 Basement::~Basement()

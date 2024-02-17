@@ -7,15 +7,13 @@
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
 
-
-
 class MainMenu : public GameState{
     private:
-        sf::RenderWindow* window; 
+        sf::RenderWindow* window;
         bool isPressed;
-        bool showOption = false; 
+        bool showOption = false;
 
-        sf::RectangleShape background; 
+        sf::RectangleShape background;
         sf::Font font; 
 
         // void initKeybinds(); for what 
