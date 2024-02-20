@@ -1,5 +1,7 @@
 #include "Options.h"
 
+//what is the purpose of this function?
+
 Options::Options() : Base("Options", 280, 100, 1.0, 1.2){
     this->currentState = BASE; 
     this->resume_icon = new ClickableIcon(440 , 140, 0.25, 0.25, "../assets/icons/resume2.png");
