@@ -14,6 +14,8 @@ public:
      virtual ~ClickableIcon();
      const bool getClicked() const;
      bool isClicked(const sf::Vector2f mousePos);
+     bool onceClicked(const sf::Vector2f mousePos);
+     bool resetClick();
      void update(const float &dt);
      void render(sf::RenderTarget *target = nullptr);
 };

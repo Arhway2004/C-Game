@@ -2,13 +2,31 @@
 
 #include "../src/Config.h"
 #include "../UI/Button.h"
+#include "../UI/ClickableIcon.h"
+#include "../Games/Settings/Options.h"
+#include <memory>
+#include "../Games/Settings/Guide.h"
 
 //more general purpose than gamestate
 class GameState{
     private:
         sf::RenderWindow* window; 
         std::vector<sf::Texture*> textures;
-        
+
+        ClickableIcon* option_icon;
+        // Options* option_page; 
+        bool showOption = false;
+        // Guide* guide_page;
+
+        std::unique_ptr<Options> option_page; 
+        std::unique_ptr<Guide> guide_page;
+
+        // bool isPressed; 
+        // bool resume_isPressed;
+        // bool restart_isPressed;
+        // bool setting_isPressed;
+        // bool guide_icon_isPressed;
+        // bool quit_icon_isPressed;
 
     protected: 
         bool endNow; 

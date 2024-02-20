@@ -7,7 +7,7 @@ Basement::Basement(sf::RenderWindow* window) : GameState(window)
     this->endNow = false;
     this->window = window;
     this->background.setSize(sf::Vector2f(this->window->getSize().x, this->window->getSize().y));
-    this->background.setFillColor(sf::Color::White);
+    this->background.setFillColor(sf::Color::Black);
 }
 
 Basement::~Basement()
@@ -26,12 +26,12 @@ void Basement::endState()
 }
 
 
-void Basement::update(const float& dt)
-{
-
+void Basement::update(const float& dt){
+    GameState::update(dt);
 }
 
 void Basement::render(sf::RenderTarget* target)
 {
     target->draw(this->background);
+    GameState::render(target);
 }

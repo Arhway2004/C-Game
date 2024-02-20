@@ -9,7 +9,7 @@ ClickableIcon::ClickableIcon(int pos_x, int pos_y, float scale_x, float scale_y,
         std::cout << "ClickableIcon::Texture loaded" << std::endl;
     }
 
-    this->icon = new sf::Sprite(this->texture); 
+    this->icon = new sf::Sprite(this->texture);
     this->icon->setScale(scale_x, scale_y);
     this->icon->setPosition(pos_x, pos_y);
 }
@@ -27,7 +27,8 @@ bool ClickableIcon::isClicked(const sf::Vector2f mousePos){
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             this->clicked = true;
             std::cout << "icon cliked: "  << this->clicked << std::endl;
-        }else{
+        }
+        else{
             this->clicked = false;
             std::cout << "icon cliked: "  << this->clicked << std::endl;
         }
@@ -35,11 +36,26 @@ bool ClickableIcon::isClicked(const sf::Vector2f mousePos){
     return this->clicked;
 }
 
+bool ClickableIcon::onceClicked(const sf::Vector2f mousePos){
+    if(icon->getGlobalBounds().contains(mousePos)){
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            this->clicked = true;
+            return true; 
+        }
+    }
+    return false; 
+}
+
+bool ClickableIcon::resetClick(){
+    this->clicked = false; 
+    return false; 
+}
+
 void ClickableIcon::update(const float& dt){
     //chnge pic of smth
 }
 
 void ClickableIcon::render(sf::RenderTarget* target){
-    std::cout << "rendering icon" << std::endl;
+    // std::cout << "rendering icon" << std::endl;
     target->draw(*this->icon); 
 }

@@ -1,16 +1,5 @@
 #include "Base.h"
 
-// Base::Base(int pos_x, int pos_y, int scale_x, int scale_y, std::string title, std::string path){
-//     if(!this->texture.loadFromFile(path)){
-//         std::cout << "ERROR::BASE::CONSTRUCTOR::FAILED_TO_LOAD_TEXTURE" << std::endl; 
-//     }else{
-//         std::cout << "BASE::Texture loaded" << std::endl;
-//     }
-//     this->frame = new sf::Sprite(this->texture); 
-//     this->frame->setScale(scale_x, scale_y);
-//     this->frame->setPosition(pos_x, pos_y);
-//     this->set_up_sprite(pos_x, pos_y, scale_x, scale_y, this->frame, this->frame_texture, path); 
-// }
 
 Base::Base(std::string title, int pos_x, int pos_y, float scale_x, float scale_y){
     this->frame = new sf::Sprite();
@@ -70,24 +59,25 @@ void Base::closeWindow(){
     this->window->close(); 
 }
 
-// void Base::endState(){
-//     if 
-// }
+bool Base::getQuit(){
+    return this->quit;
+}
 
 //marked
 void Base::update(const sf::Vector2f mousePos){
     if(this->close_icon->getGlobalBounds().contains(mousePos)){
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            //close options window
-            // this->~Base(); 
             this->quit = true; 
-            // std::cout << "Base::update: Closing window" << std::endl;
         }
     }
 }   
 
 void Base::render(sf::RenderTarget* target){
     std::cout << "rendering base" << std::endl;
+    target->draw(*this->frame);
     // target->draw(*this->frame); 
     // target->draw(*this->close_icon); 
 }
+
+//add arrow
+//if arrow is clicked = back to base

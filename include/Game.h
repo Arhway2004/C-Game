@@ -3,9 +3,10 @@
 #include <iostream>
 #include "../Games/Scenes/MainMenu.h"
 #include "../Games/Scenes/Basement.h"
+#include "../Games/Scenes/Level1.h"
 
 class Game{
-    private: 
+    private:
         sf::RenderWindow* window;
 
         sf::Clock dtClock;

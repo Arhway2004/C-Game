@@ -1,7 +1,9 @@
 #include "../../include/Gamestate.h"
 
+
 class Basement : public GameState{
     private: 
+    
         sf::RenderWindow* window; 
         sf::RectangleShape background; 
         sf::Font font; 

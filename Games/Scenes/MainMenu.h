@@ -11,18 +11,13 @@ class MainMenu : public GameState{
     private:
         sf::RenderWindow* window;
         bool isPressed;
-        bool showOption = false;
 
         sf::RectangleShape background;
-        sf::Font font; 
+        sf::Font font;
 
-        // void initKeybinds(); for what 
-        Button* quit_btn; 
-        Button* start_btn; 
-
-        //icon
-        ClickableIcon* option_icon;
-        Options* option_page; 
+        // void initKeybinds(); for what
+        Button* quit_btn;
+        Button* start_btn;
 
         //should be enum
         // Base current_state; 
