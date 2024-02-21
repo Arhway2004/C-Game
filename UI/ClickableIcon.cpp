@@ -56,6 +56,6 @@ void ClickableIcon::update(const float& dt){
 }
 
 void ClickableIcon::render(sf::RenderTarget* target){
-    // std::cout << "rendering icon" << std::endl;
+    std::cout << "rendering icon" << std::endl;
     target->draw(*this->icon); 
 }

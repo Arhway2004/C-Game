@@ -29,7 +29,7 @@ class Options : public Base{
         // void update(const float& dt); 
         void update(const sf::Vector2f mousePos);
         void render_options(sf::RenderTarget* target = nullptr);
-
+        bool return_quit(); 
         //is button clicked 
 
 }; 

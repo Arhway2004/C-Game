@@ -33,5 +33,5 @@ void Basement::update(const float& dt){
 void Basement::render(sf::RenderTarget* target)
 {
     target->draw(this->background);
-    GameState::render(target);
+    // GameState::render(target);
 }

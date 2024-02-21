@@ -14,14 +14,15 @@ class GameState{
         std::vector<sf::Texture*> textures;
 
         ClickableIcon* option_icon;
+        // std::shared_ptr<ClickableIcon> option_icon;
         // Options* option_page; 
-        bool showOption = false;
+        bool showOption;
         // Guide* guide_page;
 
-        std::unique_ptr<Options> option_page; 
-        std::unique_ptr<Guide> guide_page;
+        std::shared_ptr<Options> option_page; 
+        std::shared_ptr<Guide> guide_page;
 
-        // bool isPressed; 
+        // bool isPressed;
         // bool resume_isPressed;
         // bool restart_isPressed;
         // bool setting_isPressed;

@@ -63,7 +63,6 @@ void MainMenu::update(const float& dt){
         this->endNow = false;
     }
     GameState::update(dt);
-
 }
 
 void MainMenu::render(sf::RenderTarget* target) {

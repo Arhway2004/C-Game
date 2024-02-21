@@ -10,3 +10,7 @@ g++ -o my_game main.cpp Game.cpp GameState.cpp MainMenu.cpp ../UI/Button.cpp  -l
 
 
 g++ -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp -lsfml-graphics -lsfml-window -lsfml-system
+
+
+
+g++ -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp -lsfml-graphics -lsfml-window -lsfml-system

@@ -27,6 +27,10 @@ void Options::reset_quit(){
     this->quit = false; 
 }
 
+bool Options::return_quit(){
+    return this->quit;
+}
+
 void Options::update(const sf::Vector2f mousePos){
     //add action
     if(this->resume_icon) this->resume_icon->isClicked(mousePos);

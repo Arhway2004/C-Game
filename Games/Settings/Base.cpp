@@ -50,8 +50,8 @@ void Base::set_up_sprite(int pos_x, int pos_y, float scale_x, float scale_y, sf:
 }
 
 Base::~Base(){
-    delete this->close_icon; 
-    delete this->frame; 
+    // delete this->close_icon; 
+    // delete this->frame; 
 }
 
 void Base::closeWindow(){
