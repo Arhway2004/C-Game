@@ -97,6 +97,7 @@ void Game::render(){
 
     //render item
     if(!this->states.empty()){
+        std::cout << "rendering state" << "\n";
         this->states.top()->render(this->window);   
     }
     this->window->display(); 
