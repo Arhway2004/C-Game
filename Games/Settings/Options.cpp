@@ -9,7 +9,6 @@ Options::Options() : Base("Options", 280, 100, 1.0, 1.2){
     this->setting_icon = new ClickableIcon(440, 260, 0.20, 0.20, "../assets/icons/setting2.png");
     this->guide_icon = new ClickableIcon(440, 320, 0.25, 0.25, "../assets/icons/guide2.png");
     this->quit_icon = new ClickableIcon(440, 380, 0.3, 0.3, "../assets/icons/quit2.png");
-
 }
 
 Options::~Options(){
@@ -65,7 +64,6 @@ void Options::update(const sf::Vector2f mousePos){
         std::cout << "Click quit" << std::endl;
         // this->closeWindow(); 
     }
-    
     else{
         // this->currentState = BASE;
         this->show_base = true;
