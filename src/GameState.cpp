@@ -1,8 +1,8 @@
 #include "../include/GameState.h"
 
 GameState::GameState(sf::RenderWindow* window){
-    this->window = window; 
-    this->endNow = false; 
+    this->window = window;
+    this->endNow = false;
     this->option_icon = new ClickableIcon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png");
     //pages
     // this->option_page = new Options();
