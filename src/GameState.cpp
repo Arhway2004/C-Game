@@ -52,3 +52,7 @@ void GameState::updateMousePosition(){
     this->mousePosWindow = sf::Mouse::getPosition(*this->window);
     this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 }
+
+void GameState::render(sf::RenderTarget* target){
+    
+}
