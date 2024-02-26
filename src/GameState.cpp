@@ -17,30 +17,35 @@ GameState::~GameState(){
 
 void GameState::update(const float& dt, sf::RenderWindow* window){
     this->updateMousePosition(); 
-    this->option_page->update(this->mousePosView);
-    this->guide_page->update(this->mousePosView);
+    this->option_page->update(this->mousePosView); 
+    this->guide_page->update(this->mousePosView); 
     // std::cout << "enum: " << this->option_page->currentState + 1 << std::endl;
 
     //icon
     this->option_icon->isClicked(this->mousePosView);
+    // std::cout << "show option: " << this->showOption << std::endl;
     if (this->option_icon->getClicked()){
        this->showOption = true;
        this->option_page->reset_quit();
     }
 
     if(this->option_page->return_quit()){
-        showOption = false; 
+        this->showOption = false; 
     }
 
+    if(this->option_page->show_guide){
+        this->showOption = false; 
+        this->showGuide = true;
+        this->option_page->reset_quit();
+    }
+
+    std::cout << "show guide: " << this->showGuide << std::endl;
+    std::cout << "show option: " << this->showOption << std::endl;
+
     // if(this->guide_page->return_quit()){
-    //     this->option_page->show_guide = false;
+    //     showGuide = false;
     // }
 
-    //     this->showOption = true;
-    //     this->option_page->currentState = BASE;
-    //     this->option_page->show_guide = false;
-    //     this->option_page->show_base = true;
-    // }
 }
 
 // void GameState::updateInput(const float& dt, Button* btn){
@@ -90,8 +95,12 @@ void GameState::render(sf::RenderTarget* target){
     this->option_icon->render(target);
     if(this->showOption){
         this->option_page->render_options(target);
+    }else{
+        if(this->showGuide){
+            this->guide_page->render_guide(target);
+        }else{
+            std::cout << "not render guide" << std::endl;
+        }
     }
-    // if(this->option_page->show_guide){
-    //     this->guide_page->render_guide(target);
-    // }
+    
 }

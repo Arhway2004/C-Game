@@ -74,7 +74,6 @@ void Game::update(){
     // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
         // this->states.top()->checkForEnd(); 
-
         this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit
 
         std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
@@ -99,5 +98,6 @@ void Game::render(){
     if(!this->states.empty()){
         this->states.top()->render(this->window);   
     }
-    this->window->display(); 
+    this->window->display();
+    
 }
