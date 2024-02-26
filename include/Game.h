@@ -3,6 +3,8 @@
 #include <iostream>
 #include "../Games/Scenes/MainMenu.h"
 #include "../Games/Scenes/Basement.h"
+#include "../Games/Scenes/FirstScenes.h"
+// #include "/Users/yangyaohui/Desktop/Arhway/C-Game/Games/Scenes/FirstScenes.h"
 
 class Game{
     private: 

@@ -32,8 +32,10 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    this->states.push(new Basement(this->window));
-    this->states.push(new MainMenu(this->window));
+    // this->states.push(new Basement(this->window));
+    // this->states.push(new MainMenu(this->window));
+    this->states.push(new FirstScenes(this->window));
+
 }
 
 void Game::run(){
@@ -77,7 +79,7 @@ void Game::update(){
 
         this->states.top()->update(this->dt); //if met some condition = ask to quit
 
-        std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
+        // std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
         if(this->states.top()->getQuit()){
             this->states.top()->endState(); 
             delete this->states.top(); 
