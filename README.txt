@@ -14,3 +14,7 @@ g++ -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableI
 
 
 g++ -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp -lsfml-graphics -lsfml-window -lsfml-system
+g++ -Wall -Wextra -g -fsanitize=address -O0 -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp -lsfml-graphics -lsfml-window -lsfml-system
+
+
+not work bc it overlap to the start/end btn so when pressed it also pressed/start and end

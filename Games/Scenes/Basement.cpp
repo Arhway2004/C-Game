@@ -26,8 +26,8 @@ void Basement::endState()
 }
 
 
-void Basement::update(const float& dt){
-    GameState::update(dt);
+void Basement::update(const float& dt, sf::RenderWindow* window){
+    GameState::update(dt, window);
 }
 
 void Basement::render(sf::RenderTarget* target)

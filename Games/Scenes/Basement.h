@@ -1,13 +1,11 @@
-#include "../../include/Gamestate.h"
+#include "../../include/GameState.h"
 
 
 class Basement : public GameState{
     private: 
-    
         sf::RenderWindow* window; 
         sf::RectangleShape background; 
         sf::Font font; 
-
         //fn
         // void initKeybinds(); for what
         
@@ -17,6 +15,6 @@ class Basement : public GameState{
         
         // void updateInput(const float& dt, Button* btn) override;
         void endState() override; 
-        void update(const float& dt) override; 
+        void update(const float& dt, sf::RenderWindow* window) override; 
         void render(sf::RenderTarget* target = nullptr) override;
 };
