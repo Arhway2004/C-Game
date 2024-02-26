@@ -1,56 +1,74 @@
 #include "../include/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window){
+GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
     this->window = window;
     this->endNow = false;
 
-    // this->option_icon = std::make_shared<ClickableIcon>(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png");
-    this->option_icon = new ClickableIcon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png");
-
     this->option_page = std::make_shared<Options>(); 
     this->guide_page = std::make_shared<Guide>(); 
+    this->showOption = false;
+    this->showGuide = false;
 }
 
 GameState::~GameState(){
 
-}
+}   
 
-void GameState::update(const float& dt, sf::RenderWindow* window){
+void GameState::updateOptions(){
+    //current state
+    //click 
+    std::cout << "option beginning: " << this->showOption << std::endl;
+    std::cout << "guide beginning: " << this->showGuide << std::endl;
     this->updateMousePosition(); 
-    this->option_page->update(this->mousePosView); 
-    this->guide_page->update(this->mousePosView); 
-    // std::cout << "enum: " << this->option_page->currentState + 1 << std::endl;
 
-    //icon
-    this->option_icon->isClicked(this->mousePosView);
-    // std::cout << "show option: " << this->showOption << std::endl;
-    if (this->option_icon->getClicked()){
-       this->showOption = true;
-       this->option_page->reset_quit();
+    this->option_icon.update(mousePosView);
+   
+    
+    if(this->showOption){
+        this->option_page->update(this->mousePosView);
+        if(this->option_page->return_quit()){
+            this->showOption = false;
+            this->option_page->endState();
+        }
+    }else if(this->showGuide){
+        this->guide_page->update(this->mousePosView);
+        if(this->guide_page->return_quit()){
+            this->showGuide = false;
+            this->showOption = false;
+            this->option_page->show_guide = false;
+            this->guide_page->endState();
+            std::cout << "show quit guide: " << this->option_page->show_guide << std::endl;
+        }else{
+            std::cout << "not enter quit" << std::endl;
+        }
     }
-
-    if(this->option_page->return_quit()){
-        this->showOption = false; 
-    }
-
-    if(this->option_page->show_guide){
-        this->showOption = false; 
-        this->showGuide = true;
+    
+    std::cout << "option icon clicked: " << option_icon.isClicked2() << std::endl;
+    if (this->option_icon.isClicked2()){
+        this->showOption = true;
+        this->showGuide = false;
+        this->option_page->show_guide = false;
         this->option_page->reset_quit();
     }
 
-    std::cout << "show guide: " << this->showGuide << std::endl;
-    std::cout << "show option: " << this->showOption << std::endl;
+     this->showGuide = this->option_page->show_guide;
+     if(this->option_page->show_guide) {
+        this->guide_page->reset_quit();
+     } 
 
-    // if(this->guide_page->return_quit()){
-    //     showGuide = false;
-    // }
+    
+    std::cout << "option_page->guide_icon.getClicked()" << this->option_page->guide_icon.getClicked() << std::endl;
+    std::cout << "guide before render: " << this->showGuide << std::endl;
+    std::cout << "show quit guide before render: " << this->option_page->show_guide << std::endl;
 
 }
+ 
 
-// void GameState::updateInput(const float& dt, Button* btn){
+void GameState::update(const float& dt, sf::RenderWindow* window){
+    this->updateOptions();
     
-// }
+}
+
 
 void GameState::initFont(sf::Font& font, std::string path){
     if(!font.loadFromFile(path)){
@@ -69,7 +87,7 @@ void GameState::setText(sf::Text& text, sf::Font& font, sf::Color msg_color, sho
 }
 
 bool GameState::getQuit() const{
-    return this->endNow; 
+    return this->endNow;
 }
 
 void GameState::endState(){
@@ -92,14 +110,16 @@ void GameState::render(sf::RenderTarget* target){
     if(!target){
         target = this->window; 
     }
-    this->option_icon->render(target);
-    if(this->showOption){
+    this->option_icon.render(target);
+    std::cout << "show option render: " << this->showOption << std::endl;
+    std::cout << "show guide render: " << this->showGuide << std::endl;
+    if(this->showOption){ //showOption
         this->option_page->render_options(target);
     }else{
         if(this->showGuide){
             this->guide_page->render_guide(target);
         }else{
-            std::cout << "not render guide" << std::endl;
+            std::cout << "not render guide" << this->showGuide << std::endl;
         }
     }
     
