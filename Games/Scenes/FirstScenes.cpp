@@ -5,18 +5,17 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
     this->window = window;
     this->endNow = false;
     this->background.setSize(sf::Vector2f(this->window->getSize().x, this->window->getSize().y));
-    if (!this->bg_t.loadFromFile("/Users/yangyaohui/Desktop/Arhway/C-Game/assets/textures/ClassRoomScenes.png"))
-    {
+    if (!this->bg_t.loadFromFile("../assets/textures/ClassRoomScenes.png")){
         std::cout << "Error loading texture" << std::endl;
     }
     this->background.setTexture(&this->bg_t);
 
-    this->p1t.loadFromFile("/Users/yangyaohui/Desktop/Arhway/C-Game/assets/textures/p1.png");
+    this->p1t.loadFromFile("../assets/textures/p1.png");
     this->p1.setTexture(p1t);
     p1.setPosition(-200, 20);
     p1.setScale(1.0, 1.2);
 
-    this->p2t.loadFromFile("/Users/yangyaohui/Desktop/Arhway/C-Game/assets/textures/p2.png");
+    this->p2t.loadFromFile("../assets/textures/p2.png");
     this->p2.setTexture(p2t);
     p2.setPosition(750, 150);
     p2.setScale(0.6, 0.6);
@@ -30,14 +29,12 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
     this->textLine.push_back("hw");
     this->textLine.push_back("das");
     this->message->Text(this->textLine, this->x);
-    this->guide = new Guide();
 }
 
 FirstScenes::~FirstScenes()
 {
-    delete this->window;
+    // delete this->window;
     delete this->message;
-    delete this->guide;
 }
 
 void FirstScenes::endState()
@@ -45,7 +42,7 @@ void FirstScenes::endState()
     this->endNow = true;
 }
 
-void FirstScenes::update(const float& dt)
+void FirstScenes::update(const float& dt, sf::RenderWindow* window)
 {
     static bool enterKeyPressedLastFrame = false; // Flag to track Enter key press
 
@@ -67,9 +64,14 @@ void FirstScenes::update(const float& dt)
             }
             this->message->Text(this->textLine, this->x);
         }
+    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        //change later 
+        this->endNow = true; 
     }
+
     
     enterKeyPressedLastFrame = sf::Keyboard::isKeyPressed(sf::Keyboard::Return); // Update flag
+    GameState::update(dt, window);
 }
 
 
@@ -79,5 +81,5 @@ void FirstScenes::render(sf::RenderTarget* target)
     target->draw(this->p1);
     target->draw(this->p2);
     this->message->render(target);
-    this->guide->render_guide(target);
+    GameState::render(target);
 }

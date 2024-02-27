@@ -32,10 +32,9 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    // this->states.push(new Basement(this->window));
-    // this->states.push(new MainMenu(this->window));
+    this->states.push(new Basement(this->window)); 
     this->states.push(new FirstScenes(this->window));
-
+    this->states.push(new MainMenu(this->window));
 }
 
 void Game::run(){
@@ -76,10 +75,9 @@ void Game::update(){
     // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
         // this->states.top()->checkForEnd(); 
+        this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit
 
-        this->states.top()->update(this->dt); //if met some condition = ask to quit
-
-        // std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
+        std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
         if(this->states.top()->getQuit()){
             this->states.top()->endState(); 
             delete this->states.top(); 
@@ -101,5 +99,6 @@ void Game::render(){
     if(!this->states.empty()){
         this->states.top()->render(this->window);   
     }
-    this->window->display(); 
+    this->window->display();
+    
 }

@@ -46,7 +46,6 @@ int main()
 // }
 
 
-
 // int main()
 // {
 //     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");

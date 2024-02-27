@@ -41,7 +41,6 @@ void Button::update(const sf::Vector2f mousePos){
     this->buttonStates = IDLE; 
 
     //hover
-    // std::cout << this->shape.getGlobalBounds().contains(mousePos) << std::endl; 
     if(this->shape.getGlobalBounds().contains(mousePos)){
         this->buttonStates = HOVER;
 

@@ -1,13 +1,16 @@
-#pragma once 
-#include "GameState.h"
+// #pragma once 
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
+#include "GameState.h"
 #include "../Games/Scenes/MainMenu.h"
 #include "../Games/Scenes/Basement.h"
 #include "../Games/Scenes/FirstScenes.h"
-// #include "/Users/yangyaohui/Desktop/Arhway/C-Game/Games/Scenes/FirstScenes.h"
+#include "../Games/Scenes/Level1.h"
 
 class Game{
-    private: 
+    private:
         sf::RenderWindow* window;
 
         sf::Clock dtClock;
@@ -36,3 +39,5 @@ class Game{
         void render(); 
         void endApplication(); 
 };
+
+#endif
