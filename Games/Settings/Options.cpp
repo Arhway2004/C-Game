@@ -29,21 +29,18 @@ void Options::update(const sf::Vector2f mousePos){
     this->show_base = true;
     std::cout << "show guide: " << this->show_guide << std::endl;
     if (this->resume_icon.getClicked()){
-        // this->currentState = RESUME;
         std::cout << "Click resume" << std::endl;
+        //add functionalities
     }
     else if (this->restart_icon.getClicked()){
-        // this->currentState = RESTART;
         std::cout << "Click restart" << std::endl;
+         //add functionalities
 
     }else if (this->setting_icon.getClicked()){
-        // this->show_setting = true;
         std::cout << "Click setting" << std::endl;
+        //add functionalities
     }
     else if (this->guide_icon.getClicked()){
-        // this->currentState = GUIDE;
-        // this->show_guide = true;
-        std::cout << "Guide button is clicked" << std::endl;
         this->quit = true;
         this->show_guide = true;
         this->show_resume = false;
@@ -52,14 +49,10 @@ void Options::update(const sf::Vector2f mousePos){
         this->show_quit = false;
     }
     else if (this->quit_icon.getClicked()){
-        // this->quit = true; 
-        // this->currentState = QUIT;
-        // this->show_quit = true;
         std::cout << "Click quit" << std::endl;
         // this->closeWindow(); 
     }
     else{
-        // this->currentState = BASE;
         this->show_guide = false;
         std::cout << "return base" << std::endl;
     }
@@ -68,7 +61,6 @@ void Options::update(const sf::Vector2f mousePos){
 
 void Options::render_options(sf::RenderTarget* target){
     if(!quit && this->show_base == true){
-        std::cout << "Options::render_options" << std::endl;
         target->draw(this->frame);
         target->draw(this->close_icon);
         target->draw(this->title);

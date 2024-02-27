@@ -32,7 +32,8 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    // this->states.push(new Basement(this->window)); memory address problem 
+    this->states.push(new Basement(this->window)); 
+    this->states.push(new FirstScenes(this->window));
     this->states.push(new MainMenu(this->window));
 }
 

@@ -2,6 +2,7 @@
 
 Guide::Guide(): Base("Guide", 280, 100, 1.0, 1.2){
     std::cout << "Guide::Guide: Guide constructor" << std::endl;
+    //add other ui here
 }
 
 Guide::~Guide(){
@@ -17,7 +18,7 @@ bool Guide::return_quit(){
 }
 
 void Guide::update(const sf::Vector2f mousePos){
-    Base::update(mousePos);
+    Base::update(mousePos); //track if user click red cross to quit 
 }
 
 
@@ -27,6 +28,7 @@ void Guide::render_guide(sf::RenderTarget* target){
         target->draw(this->frame);
         target->draw(this->close_icon);
         target->draw(this->title);
+        //render other ui elements here 
     }else{
         std::cout << "Options::render_options: Closing window" << std::endl;
     }

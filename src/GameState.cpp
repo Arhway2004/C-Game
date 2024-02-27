@@ -6,8 +6,10 @@ GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.
 
     this->option_page = std::make_shared<Options>(); 
     this->guide_page = std::make_shared<Guide>(); 
+    //init setting page here
     this->showOption = false;
     this->showGuide = false;
+    //show setting = false 
 }
 
 GameState::~GameState(){
@@ -17,8 +19,6 @@ GameState::~GameState(){
 void GameState::updateOptions(){
     //current state
     //click 
-    std::cout << "option beginning: " << this->showOption << std::endl;
-    std::cout << "guide beginning: " << this->showGuide << std::endl;
     this->updateMousePosition(); 
 
     this->option_icon.update(mousePosView);
@@ -37,13 +37,10 @@ void GameState::updateOptions(){
             this->showOption = false;
             this->option_page->show_guide = false;
             this->guide_page->endState();
-            std::cout << "show quit guide: " << this->option_page->show_guide << std::endl;
-        }else{
-            std::cout << "not enter quit" << std::endl;
         }
     }
+    //else if(this->showQuit) do what
     
-    std::cout << "option icon clicked: " << option_icon.isClicked2() << std::endl;
     if (this->option_icon.isClicked2()){
         this->showOption = true;
         this->showGuide = false;
@@ -51,16 +48,11 @@ void GameState::updateOptions(){
         this->option_page->reset_quit();
     }
 
-     this->showGuide = this->option_page->show_guide;
-     if(this->option_page->show_guide) {
-        this->guide_page->reset_quit();
-     } 
-
-    
-    std::cout << "option_page->guide_icon.getClicked()" << this->option_page->guide_icon.getClicked() << std::endl;
-    std::cout << "guide before render: " << this->showGuide << std::endl;
-    std::cout << "show quit guide before render: " << this->option_page->show_guide << std::endl;
-
+    this->showGuide = this->option_page->show_guide;
+    if(this->option_page->show_guide) {
+    this->guide_page->reset_quit();
+    } 
+    //else if(this->option_page->show_quit) do what
 }
  
 

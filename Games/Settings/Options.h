@@ -7,7 +7,6 @@
 
 class Options : public Base{
     private: 
-       
         ClickableIcon resume_icon; 
         ClickableIcon restart_icon; 
         ClickableIcon setting_icon; 

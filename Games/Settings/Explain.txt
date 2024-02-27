@@ -1,0 +1,4 @@
+new file protocol
+1. create new file both cpp and h in Settings 
+2. file has to be child class of class Base 
+3. handle user keyboard input in Option.cpp
