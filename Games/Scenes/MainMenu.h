@@ -1,5 +1,7 @@
 //nothing vdo18
-#pragma once 
+#ifndef MAINMENU_H
+#define MAINMENU_H
+
 #include "../../include/Game.h"
 #include "../../include/GameState.h"
 #include "../../UI/Button.h"
@@ -15,9 +17,9 @@ class MainMenu : public GameState{
         sf::RectangleShape background;
         sf::Font font;
 
-        // void initKeybinds(); for what
-        Button* quit_btn;
-        Button* start_btn;
+        // void initKeybinds(); 
+        Button quit_btn;
+        Button start_btn;
 
         //should be enum
         // Base current_state; 
@@ -28,7 +30,9 @@ class MainMenu : public GameState{
 
         // void updateInput(const float& dt, Button* btn) override;
         void endState() override; 
-        void update(const float& dt) override; 
+        void update(const float& dt, sf::RenderWindow* window) override; 
         void render(sf::RenderTarget* target = nullptr) override; 
 
 }; 
+
+#endif

@@ -1,7 +1,6 @@
 #pragma once
 #include "../../src/Config.h"
 
-
 enum CurrentState{
     BASE = 0, 
     RESUME = 1, 
@@ -9,7 +8,7 @@ enum CurrentState{
     SETTINGS = 3,
     GUIDE = 4, 
     QUIT = 5
- };
+};
 
 class Base{
     private: 
@@ -19,22 +18,21 @@ class Base{
         int frame_pos_x, frame_pos_y;
         sf::Text title; 
         sf::RenderWindow* window; 
-        sf::Sprite* frame; 
-        sf::Texture* frame_texture;
-        sf::Sprite* close_icon; 
-        sf::Texture* close_texture;
+        sf::Sprite frame; 
+        sf::Texture frame_texture;
+        sf::Sprite close_icon; 
+        sf::Texture close_texture;
 
         bool quit = false;
         sf::Vector2f mousePosView; 
     
     public:
-
         short unsigned currentState;
         // Base(int pos_x, int pos_y, int scale_x, int scale_y, std::string title, std::string path); 
         Base(std::string title, int pos_x, int pos_y, float scale_x, float scale_y);
 
         virtual ~Base();
-        void set_up_sprite( int pos_x, int pos_y, float scale_x, float scale_y, sf::Sprite*& sprite, sf::Texture* tex, std::string path);
+        void set_up_sprite(int pos_x, int pos_y, float scale_x, float scale_y, sf::Sprite& sprite, sf::Texture& tex, std::string path);
         void closeWindow();
 
         //add

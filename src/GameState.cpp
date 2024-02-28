@@ -1,62 +1,66 @@
 #include "../include/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window){
-    this->window = window; 
-    this->endNow = false; 
-    this->option_icon = new ClickableIcon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png");
-    // this->option_icon = std::make_shared<ClickableIcon>(new ClickableIcon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"));
+GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
+    this->window = window;
+    this->endNow = false;
 
-    //pages
-    // this->option_page = new Options(); 
-    // this->guide_page = new Guide(); 
-    this->option_page = std::make_shared<Options>(new Options()); 
-    this->guide_page = std::make_shared<Guide>(new Guide()); 
+    this->option_page = std::make_shared<Options>(); 
+    this->guide_page = std::make_shared<Guide>(); 
+    //init setting page here
+    this->showOption = false;
+    this->showGuide = false;
+    //show setting = false 
 }
 
 GameState::~GameState(){
-    // delete this->option_icon; 
-    // delete this->option_page;
-    // delete this->guide_page;
-}
 
-void GameState::update(const float& dt){
+}   
+
+void GameState::updateOptions(){
+    //current state
+    //click 
     this->updateMousePosition(); 
-    this->option_page->update(this->mousePosView);
-    // this->guide_page->update(this->mousePosView);
-    std::cout << "enum: " << this->option_page->currentState + 1 << std::endl;
 
-    //icon
-    this->option_icon->isClicked(this->mousePosView);
-    if (this->option_icon->getClicked()){
-       this->showOption = true;
-       this->option_page->reset_quit();
+    this->option_icon.update(mousePosView);
+   
+    
+    if(this->showOption){
+        this->option_page->update(this->mousePosView);
+        if(this->option_page->return_quit()){
+            this->showOption = false;
+            this->option_page->endState();
+        }
+    }else if(this->showGuide){
+        this->guide_page->update(this->mousePosView);
+        if(this->guide_page->return_quit()){
+            this->showGuide = false;
+            this->showOption = false;
+            this->option_page->show_guide = false;
+            this->guide_page->endState();
+        }
+    }
+    //else if(this->showQuit) do what
+    
+    if (this->option_icon.isClicked2()){
+        this->showOption = true;
+        this->showGuide = false;
+        this->option_page->show_guide = false;
+        this->option_page->reset_quit();
     }
 
-    // else{
-    //     this->showOption = false;
-    // }
+    this->showGuide = this->option_page->show_guide;
+    if(this->option_page->show_guide) {
+    this->guide_page->reset_quit();
+    } 
+    //else if(this->option_page->show_quit) do what
+}
+ 
 
-    // if(!this->guide_page->getQuit()){
-    //     this->showOption = false;
-    //     this->option_page->show_guide = true;
-    // }
-    // else{
-    //     this->showOption = true;
-    //     this->option_page->show_guide = false;
-    //     this->option_page->show_base = true;
-    // }
+void GameState::update(const float& dt, sf::RenderWindow* window){
+    this->updateOptions();
 
-    // if(this->guide_page->getQuit()){
-    //     this->showOption = true;
-    //     this->option_page->currentState = BASE;
-    //     this->option_page->show_guide = false;
-    //     this->option_page->show_base = true;
-    // }
 }
 
-// void GameState::updateInput(const float& dt, Button* btn){
-    
-// }
 
 void GameState::initFont(sf::Font& font, std::string path){
     if(!font.loadFromFile(path)){
@@ -75,7 +79,7 @@ void GameState::setText(sf::Text& text, sf::Font& font, sf::Color msg_color, sho
 }
 
 bool GameState::getQuit() const{
-    return this->endNow; 
+    return this->endNow;
 }
 
 void GameState::endState(){
@@ -84,7 +88,7 @@ void GameState::endState(){
 
 void GameState::checkForEnd(){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-        this->endNow = true; 
+        this->endNow = true;
     }
 }
 
@@ -98,29 +102,15 @@ void GameState::render(sf::RenderTarget* target){
     if(!target){
         target = this->window; 
     }
-    this->option_icon->render(target);
-    if(this->showOption){
+    this->option_icon.render(target);
+    if(this->showOption){ //showOption
         this->option_page->render_options(target);
-        this->showOption = false;
+    }else{
+        if(this->showGuide){
+            this->guide_page->render_guide(target);
+        }else{
+            std::cout << "not render guide" << this->showGuide << std::endl;
+        }
     }
-    // else if(this->option_page->show_guide){
-    //     std::cout << "Rendering Guide: " << this->option_page->show_guide << std::endl;
-    //     this->guide_page->render_guide(target);
-    // }
     
-    // else if(this->option_page->show_guide && this->option_page->currentState == GUIDE){
-    //     this->showOption = false;
-    //     this->guide_page->render_guide(target);
-    // }else{
-    //     std::cout << "No page to render" << std::endl;
-    // }
-
-
-    // std::cout << "enum: " << this->option_page->currentState + 1 << std::endl;
-    // if(this->showOption){
-    //     this->option_page->render_options(target);
-    // }
-    // else{
-    //     this->guide_page->render_guide(target);
-    // }
 }

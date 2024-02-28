@@ -6,36 +6,31 @@
 #include "../Games/Settings/Options.h"
 #include <memory>
 #include "../Games/Settings/Guide.h"
-
+// #include "../Games/Entities/Entity.h"
 //more general purpose than gamestate
 class GameState{
     private:
         sf::RenderWindow* window; 
         std::vector<sf::Texture*> textures;
 
-        ClickableIcon* option_icon;
-        // Options* option_page; 
-        bool showOption = false;
-        // Guide* guide_page;
+        ClickableIcon option_icon;
+        std::shared_ptr<Options> option_page; 
+        std::shared_ptr<Guide> guide_page;
 
-        std::unique_ptr<Options> option_page; 
-        std::unique_ptr<Guide> guide_page;
+        // Entity player; 
 
-        // bool isPressed; 
-        // bool resume_isPressed;
-        // bool restart_isPressed;
-        // bool setting_isPressed;
-        // bool guide_icon_isPressed;
-        // bool quit_icon_isPressed;
 
     protected: 
-        bool endNow; 
-        
-        sf::Text game_title; 
-        sf::Vector2i mousePosScreen; 
+        bool showOption;
+        bool showGuide;
+        bool endNow;
+        bool clicked_icon; 
+        sf::Text game_title;
+        sf::Vector2i mousePosScreen;
         sf::Vector2i mousePosWindow; //track only mouse in Window frame
         sf::Vector2f mousePosView; 
         void initFont(sf::Font& font, std::string path); 
+        void updateOptions(); 
 
     public:
         GameState(sf::RenderWindow* window);
@@ -52,6 +47,6 @@ class GameState{
         virtual void endState() = 0;
         virtual bool getQuit() const;
         virtual void checkForEnd();
-        virtual void update(const float& dt) = 0;  //pure virtual/ need to be defined a child class no implement(= 0) otherwise will crash
+        virtual void update(const float& dt, sf::RenderWindow* window) = 0;  //pure virtual/ need to be defined a child class no implement(= 0) otherwise will crash
         virtual void render(sf::RenderTarget* target = nullptr) = 0; 
 };

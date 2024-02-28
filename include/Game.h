@@ -1,8 +1,12 @@
-#pragma once 
-#include "GameState.h"
+// #pragma once 
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
+#include "GameState.h"
 #include "../Games/Scenes/MainMenu.h"
 #include "../Games/Scenes/Basement.h"
+#include "../Games/Scenes/FirstScenes.h"
 #include "../Games/Scenes/Level1.h"
 
 class Game{
@@ -35,3 +39,5 @@ class Game{
         void render(); 
         void endApplication(); 
 };
+
+#endif
