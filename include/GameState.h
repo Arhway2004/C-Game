@@ -6,7 +6,7 @@
 #include "../Games/Settings/Options.h"
 #include <memory>
 #include "../Games/Settings/Guide.h"
-
+// #include "../Games/Entities/Entity.h"
 //more general purpose than gamestate
 class GameState{
     private:
@@ -14,9 +14,11 @@ class GameState{
         std::vector<sf::Texture*> textures;
 
         ClickableIcon option_icon;
-         
         std::shared_ptr<Options> option_page; 
         std::shared_ptr<Guide> guide_page;
+
+        // Entity player; 
+
 
     protected: 
         bool showOption;

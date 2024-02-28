@@ -10,3 +10,7 @@ g++ -Wall -Wextra -g -fsanitize=address -O0 -o my_game main.cpp Game.cpp GameSta
 
 
 not work bc it overlap to the start/end btn so when pressed it also pressed/start and end
+
+git fork 
+rebase branch to make it catch up to main and merge into it 
+resolve conflict 

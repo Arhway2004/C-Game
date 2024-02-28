@@ -58,7 +58,7 @@ void GameState::updateOptions(){
 
 void GameState::update(const float& dt, sf::RenderWindow* window){
     this->updateOptions();
-    
+
 }
 
 
@@ -103,8 +103,6 @@ void GameState::render(sf::RenderTarget* target){
         target = this->window; 
     }
     this->option_icon.render(target);
-    std::cout << "show option render: " << this->showOption << std::endl;
-    std::cout << "show guide render: " << this->showGuide << std::endl;
     if(this->showOption){ //showOption
         this->option_page->render_options(target);
     }else{

@@ -6,7 +6,8 @@ Guide::Guide(): Base("Guide", 280, 100, 1.0, 1.2){
     //add other ui here
 }
 
-void Guide::update(const sf::Vector2f mousePos){
+
+
 Guide::~Guide(){
     
 }
@@ -22,7 +23,6 @@ bool Guide::return_quit(){
 void Guide::update(const sf::Vector2f mousePos){
     Base::update(mousePos); //track if user click red cross to quit 
 }
-
 
 void Guide::render_guide(sf::RenderTarget* target){
     if(!quit){
