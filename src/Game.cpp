@@ -22,7 +22,7 @@ void Game::endApplication(){
 }
 
 void Game::initWindow(){
-    this->window = new sf::RenderWindow(sf::VideoMode(960, 540), "Untitled"); 
+    this->window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Untitled"); 
     this->window->setFramerateLimit(144);
     this->window->setVerticalSyncEnabled(false);
 }

@@ -5,7 +5,7 @@
 
 class Level1: public GameState{
     private:
-        sf::RenderWindow* window; 
+        std::shared_ptr<sf::RenderWindow> window; 
 
         //temp
         sf::RectangleShape background;

@@ -10,6 +10,9 @@
 #include "../Games/Scenes/Level1.h"
 #include "../Games/Entities/Player.h"
 
+
+//global 
+
 class Game{
     private:
         sf::RenderWindow* window;
