@@ -29,11 +29,12 @@ void Bullet::update(const float& dt){
     //isOutBound();
     //isCollided();
     //updateInput();
-
 }
 
 bool Bullet::isOutBound() const{
-    
+    if (this->bulletSprite.getPosition().x > 800 || this->bulletSprite.getPosition().x < 0 || this->bulletSprite.getPosition().y > 600 || this->bulletSprite.getPosition().y < 0){
+        return true;
+    }
 }
 
 bool Bullet::isCollided(const Entity& entity) const{
@@ -41,6 +42,7 @@ bool Bullet::isCollided(const Entity& entity) const{
 }
 
 void Bullet::updateInput(const float& dt){
+
     
 }
 

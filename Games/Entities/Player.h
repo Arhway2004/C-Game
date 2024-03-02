@@ -11,9 +11,10 @@ class Player : public Entity{
         Playerstats player_stats;
         sf::Texture testTexture;
         sf::Sprite testSprite;
+        sf::Texture gunTexture; 
+        sf::Sprite gunSprite;
         Animation animation; 
         float movementSpeed = 100.f;
-
 
     public: 
         // Test(); 
@@ -37,11 +38,14 @@ class Player : public Entity{
         Player(); 
         virtual ~Player(); 
         void loadFile(sf::Texture& tex, std::string path) override;
-        void setPosition(const float x, const float y) override;  
+        void setPosition(const float x, const float y) override; 
+        void updateOrigin(); 
         void move(const float& dt, const float x, const float y, const float movementSpeed) override;
         void update(const float& dt) override;
+        void update(const float& dtm, sf::Vector2f mousePos);
         bool isOutBound() const override; //should be in entity class
         void updateInput(const float& dt) override;
+        void updateGunMovement(sf::Vector2f mousePos); 
         bool isCollided(const Entity& entity) const override;  
 
         //movement

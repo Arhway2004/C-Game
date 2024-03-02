@@ -3,13 +3,24 @@
 //problem: check player out of bound / or area that can't walk 
 //when idle player not move 
 //add isCollided function
+//change player's origin to center
+
+//gun point init weird 
 
 Player::Player(){
-    this->loadFile(this->testTexture, "../assets/textures/player_run.png");
+    this->loadFile(this->testTexture, "../assets/textures/right_idle2.png");
     this->testSprite.setTexture(this->testTexture);
     this->testSprite.setPosition(300.f, 300.f);
     this->testSprite.setTextureRect(sf::IntRect(0, 0, 80, 80));  //x, y, w, h
     this->testSprite.setScale(2.f, 2.f);
+    this->testSprite.setOrigin(23.f, 40.f);
+
+    //init gun
+    this->loadFile(this->gunTexture, "../assets/textures/gun_r.png");
+    this->gunSprite.setTexture(this->gunTexture);
+    this->gunSprite.setPosition(testSprite.getPosition().x + this->gunSprite.getGlobalBounds().width, testSprite.getPosition().y);
+    this->gunSprite.setScale(2.f, 2.f);//x, y, w, h
+    this->gunSprite.setOrigin(0.f, 0.f);
 }
 
 Player::~Player(){
@@ -20,6 +31,33 @@ void Player::setPosition(const float x, const float y){
     this->testSprite.setPosition(x, y);
 }
 
+void Player::updateOrigin(){
+    switch(this->playerState){
+        case IDLE:
+        case IDLE_LEFT:
+            this->testSprite.setOrigin(64/2, 80/2);
+            this->gunSprite.setOrigin(this->gunSprite.getLocalBounds().width, 0.f);
+            this->gunSprite.setPosition(testSprite.getPosition().x - 2*this->gunSprite.getLocalBounds().width, testSprite.getPosition().y);
+
+            break;
+        case IDLE_RIGHT:
+            this->testSprite.setOrigin(64/2, 80/2);
+            this->gunSprite.setOrigin(0.f, 0.f);
+            this->gunSprite.setPosition(testSprite.getPosition().x, testSprite.getPosition().y);
+            break;
+        case MOVING_LEFT:
+        case MOVING_RIGHT:
+            this->testSprite.setOrigin(80/2, 80/2);
+            break;
+        case SHOOTING:
+            // this->testSprite.setOrigin(40.f, 40.f);
+            break;
+        default:
+            std::cout << "Player::updateOrigin:: Error: Player state not found" << std::endl;
+            break;
+    }
+}
+
 void Player::loadFile(sf::Texture& texture, std::string path){
     if(!texture.loadFromFile(path)){
         std::cout << "Player::loadFile:: Error: Player texture not loaded" << std::endl;
@@ -28,18 +66,20 @@ void Player::loadFile(sf::Texture& texture, std::string path){
     }
 }
 
-
 void Player::move(const float& dt, const float x, const float y, const float movementSpeed){
     this->testSprite.move(x * movementSpeed * dt ,y * movementSpeed * dt); 
 }
 
 void Player::update(const float& dt){
+    
+}
+
+void Player::update(const float& dt, sf::Vector2f mousePos){
     // this->updateInput(dt);
-   
     this->updateMovement(dt);
+    this->updateOrigin();
+    this->updateGunMovement(mousePos); 
     this->updateAnimation();
-    
-    
 }
 
 void Player::updateInput(const float& dt){
@@ -76,7 +116,6 @@ void Player::updateMovement(const float& dt){
             this->move(dt, 1.f, 0.f, 200.f);
             // std::cout << "player x: " << this->testSprite.getPosition().x << " player y: " << this->testSprite.getPosition().y << std::endl;
             // std::cout << "player out of bound: " << this->isOutBound() << std::endl;
-
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
             this->move(dt, 0.f, -1.f, 200.f);
@@ -97,7 +136,20 @@ void Player::updateMovement(const float& dt){
             prevState = playerState;
         }
     // }
+}
 
+void Player::updateGunMovement(sf::Vector2f mousePos){
+// this->gunSprite.setPosition(testSprite.getPosition().x - 2*this->gunSprite.getLocalBounds().width, testSprite.getPosition().y);
+
+    float angle = 0.0; 
+    if(this->playerState == IDLE_RIGHT || this->playerState == IDLE){
+        angle = std::atan2(mousePos.y - this->gunSprite.getPosition().y , mousePos.x - this->gunSprite.getPosition().x); 
+    }else if(this->playerState == IDLE_LEFT){
+        angle = std::atan2(mousePos.y - this->gunSprite.getPosition().y , this->gunSprite.getPosition().x - mousePos.x); 
+    }
+   
+    angle = angle * 180.f / static_cast<float>(M_PI); 
+    this->gunSprite.setRotation(angle);
 }
 
 bool Player::isOutBound() const{
@@ -115,11 +167,13 @@ void Player::updateAnimation(){
     int xTexture = 0;
     switch(this->playerState){
         case IDLE:
-            if(this->prevState == MOVING_LEFT){
-                animation.updateAnimation(this->testSprite, this->testTexture, 240, 64, 80, 4, 35, "../assets/textures/player_idle.png");
-            }else{
-                animation.updateAnimation(this->testSprite, this->testTexture, 160, 64, 80, 4, 35, "../assets/textures/player_idle.png");
-            }
+            animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 1, 35, "../assets/textures/right_idle2.png");
+            this->loadFile(this->gunTexture, "../assets/textures/gun_r.png");
+
+            // if(this->prevState == MOVING_LEFT){
+            //     animation.updateAnimation(this->testSprite, this->testTexture, 240, 64, 80, 4, 35, "../assets/textures/player_idle.png");
+            // }else{
+            // }
             break;
         case MOVING_LEFT:
             animation.updateAnimation(this->testSprite, this->testTexture, 240, 80, 80, 8, 35, "../assets/textures/player_run.png");
@@ -131,10 +185,12 @@ void Player::updateAnimation(){
             // animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 4, 35, "../assets/textures/player_idle.png");
             break;
         case IDLE_LEFT:
-            animation.updateAnimation(this->testSprite, this->testTexture, 240, 64, 80, 4, 35, "../assets/textures/player_idle.png");
+            animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 1, 35, "../assets/textures/left_idle2.png");
+            this->loadFile(this->gunTexture, "../assets/textures/gun_l.png");
             break;
         case IDLE_RIGHT:
-            animation.updateAnimation(this->testSprite, this->testTexture, 160, 64, 80, 4, 35, "../assets/textures/player_idle.png");
+            animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 1, 35, "../assets/textures/right_idle2.png");
+            this->loadFile(this->gunTexture, "../assets/textures/gun_r.png");
             break;
         default:
             animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 4, 35, "../assets/textures/player_idle.png");
@@ -145,6 +201,9 @@ void Player::updateAnimation(){
 
 void Player::render(sf::RenderTarget* target){
     target->draw(this->testSprite);
+    if(this->playerState == IDLE_LEFT || this->playerState == IDLE_RIGHT || this->playerState == IDLE){
+        target->draw(this->gunSprite);
+    }
 }
 
 
