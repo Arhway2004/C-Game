@@ -29,6 +29,8 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
     this->textLine.push_back("hw");
     this->textLine.push_back("das");
     this->message->Text(this->textLine, this->x);
+    //music
+    this->music = new Music();  
 }
 
 FirstScenes::~FirstScenes()

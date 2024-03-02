@@ -8,6 +8,7 @@
 #include "../../UI/ClickableIcon.h"
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
+#include "/Users/arhway/Desktop/Git/C-Game/UI/Music.h"
 
 class MainMenu : public GameState{
     private:
@@ -20,7 +21,7 @@ class MainMenu : public GameState{
         // void initKeybinds(); 
         Button quit_btn;
         Button start_btn;
-
+        Music* music;
         //should be enum
         // Base current_state; 
 

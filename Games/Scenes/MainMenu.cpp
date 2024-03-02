@@ -13,6 +13,7 @@ MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);
+    this->music = new Music();  
 }
 
 MainMenu::~MainMenu(){

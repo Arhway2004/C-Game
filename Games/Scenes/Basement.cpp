@@ -12,6 +12,7 @@ Basement::Basement(sf::RenderWindow *window) : GameState(window)
     this->door1 = new ClickableIcon(400.0, 400.0, 1.0, 1.0, "../assets/textures/door_test.png");
     this->door2 = new ClickableIcon(600.0, 400.0, 1.0, 1.0, "../assets/textures/door_test.png");
     this->obj1 = new InteractableObj(800.0, 400.0, 1.0, 1.0, "../assets/textures/door_test.png");
+    this->music = new Music();  
 }
 
 Basement::~Basement()
