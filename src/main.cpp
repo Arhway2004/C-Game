@@ -51,11 +51,13 @@ int main()
 //     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");
 
 //     sf::Texture mushroomTexture;
-//     mushroomTexture.loadFromFile("../assets/icons/restart2.png");
+//     mushroomTexture.loadFromFile("../assets/textures/player_run.png");
 //     sf::Sprite mushroom(mushroomTexture);
 //     sf::Vector2u size = mushroomTexture.getSize();
-//     mushroom.setPosition(100, 20);
-//     mushroom.setScale(0.3, 0.3);
+//     mushroom.setPosition(0, 0);
+//     mushroom.setScale(2.0f, 2.1f);
+//     mushroom.setTextureRect(sf::IntRect(0, 0, 112.5, 113));  //x, y, w, h
+
 
 //     while (window.isOpen())
 //     {

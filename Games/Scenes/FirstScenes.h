@@ -18,6 +18,7 @@ public:
     FirstScenes(sf::RenderWindow* window);
     ~FirstScenes();
     void endState() override;
+    void updateInput(const float& dt) override; 
     void update(const float& dt, sf::RenderWindow* window) override;
     void render(sf::RenderTarget* target) override;
 };

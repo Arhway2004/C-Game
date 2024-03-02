@@ -1,4 +1,4 @@
-#include "../src/Config.h"
+#include "../../src/Config.h"
 
 class Tile{
     private: 

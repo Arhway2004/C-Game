@@ -6,7 +6,6 @@
 #include "../Games/Settings/Options.h"
 #include <memory>
 #include "../Games/Settings/Guide.h"
-// #include "../Games/Entities/Entity.h"
 //more general purpose than gamestate
 class GameState{
     private:
@@ -16,9 +15,6 @@ class GameState{
         ClickableIcon option_icon;
         std::shared_ptr<Options> option_page; 
         std::shared_ptr<Guide> guide_page;
-
-        // Entity player; 
-
 
     protected: 
         bool showOption;
@@ -37,13 +33,11 @@ class GameState{
         virtual ~GameState();
     
         // virtual void enter() = 0;
-        // virtual void endState() = 0;
-        // virtual void updateInput(const float& dt, Button* btn) = 0; 
+        virtual void updateInput(const float& dt); 
         virtual void updateMousePosition(); 
         virtual void setText(sf::Text& text, sf::Font& font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg);
 
         // void transitiionTo(GameState* nextState); 
-
         virtual void endState() = 0;
         virtual bool getQuit() const;
         virtual void checkForEnd();

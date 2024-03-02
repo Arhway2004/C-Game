@@ -42,8 +42,16 @@ void FirstScenes::endState()
     this->endNow = true;
 }
 
+void FirstScenes::updateInput(const float& dt)
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        this->endNow = true; 
+    }
+}
+
 void FirstScenes::update(const float& dt, sf::RenderWindow* window)
 {
+    this->updateInput(dt);
     static bool enterKeyPressedLastFrame = false; // Flag to track Enter key press
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
@@ -64,12 +72,7 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
             }
             this->message->Text(this->textLine, this->x);
         }
-    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-        //change later 
-        this->endNow = true; 
     }
-
-    
     enterKeyPressedLastFrame = sf::Keyboard::isKeyPressed(sf::Keyboard::Return); // Update flag
     GameState::update(dt, window);
 }

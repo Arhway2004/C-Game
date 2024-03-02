@@ -19,16 +19,11 @@ MainMenu::~MainMenu(){
 
 }
 
-// void MainMenu::updateInput(const float& dt, Button* btn){
-//     this->endNow = false; 
-//     std::cout << "button pressed: " << btn->isPressed() << "\n";
-//     if(btn->isPressed()){
-//         this->endNow = true;
-//     }else{
-//         this->endNow = false;
-//     }
-//     // this->checkForEnd();
-// }
+void MainMenu::updateInput(const float& dt){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        this->endNow = true;
+    }
+}
 
 void MainMenu::endState(){
     //transfer to another scene
@@ -46,6 +41,7 @@ void MainMenu::endState(){
 void MainMenu::update(const float& dt, sf::RenderWindow* window){
     //update per frame
     //update mouse
+    this->updateInput(dt);
     this->updateMousePosition();
     this->start_btn.update(this->mousePosView); 
     this->quit_btn.update(this->mousePosView);

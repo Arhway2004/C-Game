@@ -32,14 +32,15 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    this->states.push(new Basement(this->window)); 
-    this->states.push(new FirstScenes(this->window));
-    this->states.push(new MainMenu(this->window));
+    // this->states.push(new Basement(this->window)); 
+    // this->states.push(new FirstScenes(this->window));
+    // this->states.push(new MainMenu(this->window));
+    this->states.push(new Level1(this->window)); 
 }
 
 void Game::run(){
     while(this->window->isOpen()){
-        sf::Event event; 
+        sf::Event event;
         while(this->window->pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window->close(); 

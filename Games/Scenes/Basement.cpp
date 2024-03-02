@@ -19,10 +19,12 @@ Basement::~Basement()
     
 }
 
-// void Basement::updateInput(const float& dt, Button* btn)
-// {
-
-// }
+void Basement::updateInput(const float& dt)
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        this->endNow = true;
+    }
+}
 
 void Basement::endState()
 {
@@ -33,6 +35,7 @@ void Basement::update(const float &dt, sf::RenderWindow* window)
 {
     // Update per frame
     // Update mouse
+    this->updateInput(dt);
     this->updateMousePosition();
     std::cout << "mousePosView: " << this->mousePosView.x << ", " << this->mousePosView.y << std::endl;
     this->door1->isClicked(this->mousePosView);

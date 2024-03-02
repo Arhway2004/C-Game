@@ -28,7 +28,7 @@ class MainMenu : public GameState{
         MainMenu(sf::RenderWindow* window); 
         virtual ~MainMenu(); 
 
-        // void updateInput(const float& dt, Button* btn) override;
+        void updateInput(const float& dt) override;
         void endState() override; 
         void update(const float& dt, sf::RenderWindow* window) override; 
         void render(sf::RenderTarget* target = nullptr) override; 
