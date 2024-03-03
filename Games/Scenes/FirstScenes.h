@@ -1,5 +1,5 @@
 #include "../../include/Gamestate.h"
-#include "../../UI/Message.h"
+#include "/Users/arhway/Desktop/Git/C-Game/UI/Message.h"
 #include "/Users/arhway/Desktop/Git/C-Game/UI/Music.h"
 class FirstScenes : public GameState
 {

@@ -25,9 +25,11 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
 
     this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
 
-    this->textLine.push_back("Hello");
-    this->textLine.push_back("hw");
-    this->textLine.push_back("das");
+    this->textLine.push_back("Thun: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("                                              :Thun \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("Teemy: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("                                              :Teemy \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("End of conversation");
     this->message->Text(this->textLine, this->x);
     //music
     this->music = new Music();  
@@ -47,7 +49,8 @@ void FirstScenes::endState()
 void FirstScenes::update(const float& dt, sf::RenderWindow* window)
 {
     static bool enterKeyPressedLastFrame = false; // Flag to track Enter key press
-
+    int y = textLine.size();
+    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
         if (!enterKeyPressedLastFrame) // Check if Enter key wasn't pressed last frame
@@ -56,13 +59,11 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
             ++x;
             // this->textLine.clear();
             std::cout << x << std::endl;
-            if (x == 1)
+            if (x == y)
             {
-                this->textLine.push_back("Message 1");
-            }
-            else if (x == 2)
-            {
-                this->textLine.push_back("Message 2");
+                this->message->Text(this->textLine, this->x);
+                //waiting for connect with next slide
+                // this->textLine.push_back("Message 1");
             }
             this->message->Text(this->textLine, this->x);
         }

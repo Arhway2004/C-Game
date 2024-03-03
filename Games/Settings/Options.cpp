@@ -28,17 +28,28 @@ void Options::update(const sf::Vector2f mousePos){
     Base::update(mousePos);
     this->show_base = true;
     std::cout << "show guide: " << this->show_guide << std::endl;
+    std::cout << "show setting: " << this->show_setting << std::endl;       
     if (this->resume_icon.getClicked()){
         std::cout << "Click resume" << std::endl;
         //add functionalities
     }
     else if (this->restart_icon.getClicked()){
         std::cout << "Click restart" << std::endl;
-         //add functionalities
+        this->quit = true;
+        this->show_guide = false;
+        this->show_resume = false;
+        this->show_setting = false;
+        this->show_restart = true;
+        this->show_quit = false;
 
     }else if (this->setting_icon.getClicked()){
         std::cout << "Click setting" << std::endl;
-        //add functionalities
+        this->quit = true;
+        this->show_guide = false;
+        this->show_resume = false;
+        this->show_setting = true;
+        this->show_restart = false;
+        this->show_quit = false;
     }
     else if (this->guide_icon.getClicked()){
         this->quit = true;
