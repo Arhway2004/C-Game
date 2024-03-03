@@ -15,5 +15,7 @@ git fork
 rebase branch to make it catch up to main and merge into it 
 resolve conflict 
 
-run Teemy branch
+run Teemy branch.
 g++ -Wall -Wextra -g -fsanitize=address -O0 -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp ../UI/Message.cpp ../Games/Scenes/FirstScenes.cpp ../Games/Scenes/Level1.cpp ../Games/Entities/Player.cpp ../Games/Entities/Enemy.cpp ../Games/Entities/EnemySpawner.cpp  ../UI/interactable_obj.cpp -lsfml-graphics -lsfml-window -lsfml-system -L/opt/homebrew/Cellar/sfml/2.6.1/lib -I/opt/homebrew/Cellar/sfml/2.6.1/include
+
+Done enemy class but only basic movement. EnemySpawner class can add more enemies into the scene but the sprite does not load. It load as a whilte rectangle lmfao :Sadge:
