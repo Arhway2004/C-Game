@@ -8,6 +8,7 @@
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
 #include "../../UI/interactable_obj.h"
+#include "../Entities/Player.h"
 
 class Basement : public GameState{
     private: 
@@ -19,6 +20,8 @@ class Basement : public GameState{
         ClickableIcon* door1;
         ClickableIcon* door2;
         InteractableObj* obj1;
+        Player player;
+        
         //fn
         // void initKeybinds(); for what
         

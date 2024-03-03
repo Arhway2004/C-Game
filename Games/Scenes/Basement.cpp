@@ -47,6 +47,8 @@ void Basement::update(const float &dt, sf::RenderWindow* window)
         this->endNow = true;
     }
 
+    this->player.update(dt);
+
     GameState::update(dt, window);
 }
 
@@ -61,6 +63,8 @@ void Basement::render(sf::RenderTarget *target)
     this->door1->render(target);
     this->door2->render(target);
     this->obj1->render(target);
+
+    this->player.render(target);
     
     GameState::render(target);
 }
