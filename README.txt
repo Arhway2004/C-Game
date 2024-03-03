@@ -14,3 +14,7 @@ not work bc it overlap to the start/end btn so when pressed it also pressed/star
 git fork 
 rebase branch to make it catch up to main and merge into it 
 resolve conflict 
+
+
+run (new)
+../Games/Scenes/Firstscenes.cpp ../UI/ClickableIcon.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../UI/Message.cpp  ../Games/Settings/Setting.cpp ../UI/Music.cpp  ../UI/interactable_obj.cpp -I/usr/local/Cellar/sfml/2.6.1/include -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
