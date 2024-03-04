@@ -51,13 +51,13 @@ int main()
 //     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");
 
 //     sf::Texture mushroomTexture;
-//     mushroomTexture.loadFromFile("../assets/textures/gun.png");
+//     mushroomTexture.loadFromFile("../assets/textures/gun_l.png");
 //     sf::Sprite mushroom(mushroomTexture);
 //     sf::Vector2u size = mushroomTexture.getSize();
-//     mushroom.setPosition(0, 0);
+//     mushroom.setPosition(300, 300);
 //     mushroom.setScale(3.f, 3.f);
-//     // mushroom.setTextureRect(sf::IntRect(0, 0, 112.5, 113));  //x, y, w, h
-
+//     mushroom.setOrigin(size.x, 0.f);
+    
 
 //     while (window.isOpen())
 //     {
@@ -69,6 +69,10 @@ int main()
 //                 window.close();
 //             }
 //         }
+//         sf::Vector2f mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+//         float angle = -1 * std::atan2(mousePosView.y - mushroom.getPosition().y , (mushroom.getPosition().x + size.x) - mousePosView.x); 
+//         angle = angle * 180.f / static_cast<float>(M_PI); 
+//         mushroom.setRotation(angle);
 
 //         window.clear(sf::Color(16, 16, 16, 255)); // Dark gray.
 //         window.draw(mushroom);                    // Drawing our sprite.

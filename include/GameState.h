@@ -41,6 +41,6 @@ class GameState{
         virtual void endState() = 0;
         virtual bool getQuit() const;
         virtual void checkForEnd();
-        virtual void update(const float& dt, sf::RenderWindow* window) = 0;  //pure virtual/ need to be defined a child class no implement(= 0) otherwise will crash
+        virtual void update(const float& dt, sf::RenderWindow* window) = 0;//pure virtual/ need to be defined a child class no implement(= 0) otherwise will crash
         virtual void render(sf::RenderTarget* target = nullptr) = 0; 
 };

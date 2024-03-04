@@ -5,14 +5,13 @@
 
 class Level1: public GameState{
     private:
-        std::shared_ptr<sf::RenderWindow> window; 
+        sf::RenderWindow* window; 
 
         //temp
         sf::RectangleShape background;
         sf::Texture bgTex;
-        sf::Sprite bg;  
-        Player player; 
-
+        sf::Sprite bg;
+        Player player;
 
     public: 
         Level1(sf::RenderWindow* window); 

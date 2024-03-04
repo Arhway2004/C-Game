@@ -27,9 +27,8 @@ void Level1::updateInput(const float& dt){
 
 void Level1::update(const float& dt, sf::RenderWindow* window) {
     this->updateInput(dt);
-    this->updateOptions();
+    // this->updateOptions();
     this->player.update(dt, this->mousePosView); 
-
     //last
     GameState::update(dt, window);
 }
