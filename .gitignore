@@ -2,4 +2,4 @@
 *.dSYM
 /build
 *.DS_Store
-
+.cache

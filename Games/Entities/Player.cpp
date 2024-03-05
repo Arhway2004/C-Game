@@ -45,6 +45,7 @@ void Player::update(const float &dt)
 
     this->updateMovement(dt);
     this->updateAnimation();
+    this->getPosition();
 }
 
 void Player::updateInput(const float &dt)
