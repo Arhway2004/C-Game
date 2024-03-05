@@ -47,8 +47,6 @@ void Player::updateOrigin(){
         case MOVING_RIGHT:
             this->testSprite.setOrigin(80/2, 80/2);
             break;
-        case SHOOTING:
-            break;
         default:
             std::cout << "Player::updateOrigin:: Error: Player state not found" << std::endl;
             break;
@@ -87,6 +85,7 @@ void Player::update(const float& dt, sf::Vector2f mousePos){
         }
     }
 }
+
 
 void Player::updateInput(const float& dt){
     int xTexture = 0; 
@@ -130,8 +129,16 @@ void Player::updateMovement(const float& dt, sf::Vector2f mousePos){
             this->move(dt, 0.f, 1.f, 200.f);
         }
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            this->playerState = SHOOTING;
-            this->shootBullet(bullets, mousePos);
+            // this->playerState = SHOOTING;
+            if(this->canShoot){
+                this->shootBullet(bullets, mousePos);
+                this->shootCooldown.restart(); 
+                this->canShoot = false;
+            }
+            
+            if(!canShoot && this->shootCooldown.getElapsedTime().asSeconds() >= this->shootCooldownTime){
+                this->canShoot = true;
+            }
         }
 
         if(prevState == MOVING_LEFT && playerState == IDLE){
@@ -150,6 +157,15 @@ void Player::shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos){
     float angle = std::atan2(mousePos.y - this->testSprite.getPosition().y , mousePos.x - this->testSprite.getPosition().x); 
     angle = angle * (180.0f / M_PI);
     bulletAngles.push_back(angle);
+}
+
+bool Player::bulletHitEnemy(const Enemy& enemy) const{
+    for(auto& bullet : this->bullets){
+        if(bullet.isCollided(enemy)){
+            return true;
+        }
+    }
+    return false;
 }
 
 void Player::updateGunMovement(sf::Vector2f mousePos){
@@ -174,7 +190,7 @@ bool Player::isOutBound() const{
     return true;
 }
 
-bool Player::isCollided(const Entity& entity) const{
+bool Player::isCollided(const Enemy& enemy) const{
     return false;
 }
 

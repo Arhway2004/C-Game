@@ -20,7 +20,7 @@ class Entity {
         virtual void loadFile(sf::Texture& tex, std::string path) = 0;
         virtual void update(const float& dt) = 0;
         virtual bool isOutBound() const = 0; //check if object is out of bound
-        virtual bool isCollided(const Entity& entity) const = 0;  //check if object is collided
+        // virtual bool isCollided(const Entity& entity) const = 0;  //check if object is collided
         virtual void updateInput(const float& dt) = 0; 
         virtual void render(sf::RenderTarget* target) = 0; 
 };

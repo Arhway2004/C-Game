@@ -69,8 +69,11 @@ bool Bullet::isOutBound() const{
     return false;
 }
 
-bool Bullet::isCollided(const Entity& entity) const{
-
+bool Bullet::isCollided(const Enemy& enemy) const{
+    if(this->bulletSprite.getGlobalBounds().intersects(enemy.getGlobalBounds())){
+        return true;
+    }
+    return false; 
 }
 
 void Bullet::updateInput(const float& dt){

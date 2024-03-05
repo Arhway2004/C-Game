@@ -7,21 +7,20 @@
 //rotate bullet following gun direction
 class Player : public Entity{
     private:
-        struct Playerstats{
-            //might store player stats 
-        };
-
-        Playerstats player_stats;
         sf::Texture testTexture;
         sf::Sprite testSprite;
         sf::Texture gunTexture;
         sf::Sprite gunSprite;
-        float gunAngle; 
+        float gunAngle;
         Animation animation;
         float movementSpeed = 100.f;
         // Bullet bullet;
         std::vector<Bullet> bullets;
         std::vector<float> bulletAngles; 
+
+        bool canShoot = true;
+        sf::Clock shootCooldown;
+        const float shootCooldownTime = 0.3f;
 
     public: 
         enum PlayerStates{
@@ -34,7 +33,14 @@ class Player : public Entity{
         };
         PlayerStates playerState = IDLE;
         PlayerStates prevState;
-        
+
+        struct Playerstats{
+            //might store player stats 
+        };
+
+        Playerstats player_stats;
+
+
         Player(); 
         virtual ~Player(); 
         void loadFile(sf::Texture& tex, std::string path) override;
@@ -47,7 +53,9 @@ class Player : public Entity{
         void updateInput(const float& dt) override;
         void updateGunMovement(sf::Vector2f mousePos); 
         void shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos); 
-        bool isCollided(const Entity& entity) const override;  
+        bool isCollided(const Enemy& enemy) const;
+        bool bulletHitEnemy(const Enemy& enemy) const; 
+
 
         //movement
         void updateMovement(const float& dt, sf::Vector2f mousePos); 

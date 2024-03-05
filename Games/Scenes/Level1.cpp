@@ -25,10 +25,16 @@ void Level1::updateInput(const float& dt){
     }
 }
 
-void Level1::update(const float& dt, sf::RenderWindow* window) {
+void Level1::update(const float& dt, sf::RenderWindow* window){
     this->updateInput(dt);
     // this->updateOptions();
     this->player.update(dt, this->mousePosView); 
+    this->enemy.update(dt);
+    if(this->player.bulletHitEnemy(enemy)){
+        this->enemy.setState(Enemy::EnemyStates::DEAD);
+        std::cout << "Enemy hit" << std::endl;
+    }
+
     //last
     GameState::update(dt, window);
 }
@@ -45,7 +51,9 @@ void Level1::render(sf::RenderTarget* target) {
     if(!endNow){
         target->draw(this->background); 
         target->draw(this->bg);
-        this->player.render(target); 
+        this->player.render(target);
+        if(this->enemy.getState() != Enemy::EnemyStates::DEAD)
+            this->enemy.render(target);
     }
     //last
     GameState::render(target); 

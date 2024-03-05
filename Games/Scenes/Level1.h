@@ -2,6 +2,8 @@
 #include "../../include/GameState.h"
 #include "../../src/Config.h"
 #include "../Entities/Player.h"
+#include "../Entities/Enemy.h"
+
 
 class Level1: public GameState{
     private:
@@ -12,6 +14,7 @@ class Level1: public GameState{
         sf::Texture bgTex;
         sf::Sprite bg;
         Player player;
+        Enemy enemy;
 
     public: 
         Level1(sf::RenderWindow* window); 
