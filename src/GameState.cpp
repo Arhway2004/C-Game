@@ -1,6 +1,6 @@
 #include "../include/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
+GameState::GameState(sf::RenderWindow* window) : option_icon(950.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
     this->window = window;
     this->endNow = false;
 
