@@ -2,9 +2,7 @@
 //problem: check player out of bound / or area that can't walk
 //when idle player not move
 //add isCollided function
-//change player's origin to center
 //gun point init weird 
-//make timer for shooting effect
 
 Player::Player(){
     this->loadFile(this->testTexture, "../assets/textures/right_idle2.png");
@@ -159,7 +157,7 @@ void Player::shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos){
     bulletAngles.push_back(angle);
 }
 
-bool Player::bulletHitEnemy(const Enemy& enemy) const{
+bool Player::bulletHitEnemy(Enemy& enemy) const{
     for(auto& bullet : this->bullets){
         if(bullet.isCollided(enemy)){
             return true;
@@ -180,7 +178,7 @@ void Player::updateGunMovement(sf::Vector2f mousePos){
     angle = angle * 180.f / static_cast<float>(M_PI);
     this->gunAngle = angle;
     this->gunSprite.setRotation(angle);
-    // //rotate bullet
+    //rotate bullet
 }
 
 bool Player::isOutBound() const{
@@ -190,7 +188,13 @@ bool Player::isOutBound() const{
     return true;
 }
 
-bool Player::isCollided(const Enemy& enemy) const{
+//here
+bool Player::isCollided(const Enemy& enemy){
+    float distance = sqrt(pow(this->testSprite.getPosition().x - enemy.getPosition().x, 2) + pow(this->testSprite.getPosition().y - enemy.getPosition().y, 2)); 
+    if(distance <= (this->testSprite.getGlobalBounds().width + enemy.getGlobalBounds().height)/2){
+        this->playerState = DAMAGED;
+        return true;
+    }
     return false;
 }
 
@@ -236,8 +240,9 @@ void Player::render(sf::RenderTarget* target){
     if(this->playerState == IDLE_LEFT || this->playerState == IDLE_RIGHT || this->playerState == IDLE){
         target->draw(this->gunSprite);
     }
-
-    
 }
 
+
+//set enemy origin to center 
+//recalculate collision point(distant from player's origin to enemy's origin)
 

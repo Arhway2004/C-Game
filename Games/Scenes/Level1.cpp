@@ -1,3 +1,5 @@
+//delete enemy from list when it's dead
+
 #include "Level1.h"
 
 Level1::Level1(sf::RenderWindow* window) : GameState(window){
@@ -31,8 +33,11 @@ void Level1::update(const float& dt, sf::RenderWindow* window){
     this->player.update(dt, this->mousePosView); 
     this->enemy.update(dt);
     if(this->player.bulletHitEnemy(enemy)){
-        this->enemy.setState(Enemy::EnemyStates::DEAD);
+        //delete enemy from list when it's dead
         std::cout << "Enemy hit" << std::endl;
+    }
+    if(this->player.isCollided(enemy)){
+        std::cout << "Player hit" << std::endl;
     }
 
     //last

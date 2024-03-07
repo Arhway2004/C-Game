@@ -9,6 +9,7 @@ Enemy::Enemy()
     this->enemySprite.setPosition(400.f, 400.f);
     this->enemySprite.setTextureRect(sf::IntRect(0, 0, 72, 45)); // x, y, w, h
     this->enemySprite.setScale(2.f, 2.f);
+    this->enemySprite.setOrigin(this->enemyTexture->getSize().x / 2.f, this->enemyTexture->getSize().y / 2.f);
 }
 
 Enemy::~Enemy()
@@ -19,6 +20,11 @@ Enemy::~Enemy()
 void Enemy::setPosition(const float x, const float y)
 {
     this->enemySprite.setPosition(x, y);
+}
+
+sf::Vector2f Enemy::getPosition() const
+{
+    return sf::Vector2f(this->enemySprite.getPosition().x, this->enemySprite.getPosition().y);
 }
 
 sf::FloatRect Enemy::getGlobalBounds() const

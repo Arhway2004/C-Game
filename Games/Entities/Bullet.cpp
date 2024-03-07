@@ -69,8 +69,9 @@ bool Bullet::isOutBound() const{
     return false;
 }
 
-bool Bullet::isCollided(const Enemy& enemy) const{
+bool Bullet::isCollided(Enemy& enemy) const{
     if(this->bulletSprite.getGlobalBounds().intersects(enemy.getGlobalBounds())){
+        enemy.setState(Enemy::EnemyStates::DEAD);
         return true;
     }
     return false; 

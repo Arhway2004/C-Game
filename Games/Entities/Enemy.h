@@ -44,6 +44,7 @@ public:
     void setState(const EnemyStates state); 
     //getter
     EnemyStates getState();
+    sf::Vector2f getPosition() const;
 
 
     // Movement 

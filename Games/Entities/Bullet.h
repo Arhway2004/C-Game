@@ -29,7 +29,7 @@ class Bullet : public Entity{
         void update(const float& dt, const float angle);
 
         bool isOutBound() const override;
-        bool isCollided(const Enemy& enemy) const;  //check if object is collided
+        bool isCollided(Enemy& enemy) const;  //check if object is collided
         void updateInput(const float& dt) override;
         void updateInput(const float& dt, const float angle);
 

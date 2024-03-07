@@ -1,10 +1,11 @@
+//rotate bullet following gun direction
+
 #include "Entity.h"
 #include "Bullet.h"
 
-#ifndef PLAYER2_H //player2h
+#ifndef PLAYER2_H 
 #define PLAYER2_H
 
-//rotate bullet following gun direction
 class Player : public Entity{
     private:
         sf::Texture testTexture;
@@ -14,7 +15,6 @@ class Player : public Entity{
         float gunAngle;
         Animation animation;
         float movementSpeed = 100.f;
-        // Bullet bullet;
         std::vector<Bullet> bullets;
         std::vector<float> bulletAngles; 
 
@@ -30,6 +30,8 @@ class Player : public Entity{
             SHOOTING = 3,
             IDLE_LEFT = 4,
             IDLE_RIGHT = 5,
+            DAMAGED = 6, 
+            DEAD = 7
         };
         PlayerStates playerState = IDLE;
         PlayerStates prevState;
@@ -53,9 +55,8 @@ class Player : public Entity{
         void updateInput(const float& dt) override;
         void updateGunMovement(sf::Vector2f mousePos); 
         void shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos); 
-        bool isCollided(const Enemy& enemy) const;
-        bool bulletHitEnemy(const Enemy& enemy) const; 
-
+        bool isCollided(const Enemy& enemy);
+        bool bulletHitEnemy(Enemy& enemy) const; 
 
         //movement
         void updateMovement(const float& dt, sf::Vector2f mousePos); 
