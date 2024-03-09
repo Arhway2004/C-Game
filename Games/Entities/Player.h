@@ -1,10 +1,10 @@
 //rotate bullet following gun direction
 
+#ifndef PLAYER2_H
+#define PLAYER2_H
+
 #include "Entity.h"
 #include "Bullet.h"
-
-#ifndef PLAYER2_H 
-#define PLAYER2_H
 
 class Player : public Entity{
     private:
@@ -16,7 +16,7 @@ class Player : public Entity{
         Animation animation;
         float movementSpeed = 100.f;
         std::vector<Bullet> bullets;
-        std::vector<float> bulletAngles; 
+        std::vector<float> bulletAngles;
 
         bool canShoot = true;
         sf::Clock shootCooldown;
@@ -55,8 +55,11 @@ class Player : public Entity{
         void updateInput(const float& dt) override;
         void updateGunMovement(sf::Vector2f mousePos); 
         void shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos); 
+        
         bool isCollided(const Enemy& enemy);
         bool bulletHitEnemy(Enemy& enemy) const; 
+
+        sf::Vector2f getPosition() const;
 
         //movement
         void updateMovement(const float& dt, sf::Vector2f mousePos); 

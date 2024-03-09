@@ -5,19 +5,18 @@
 //gun point init weird 
 
 Player::Player(){
-    this->loadFile(this->testTexture, "../assets/textures/right_idle2.png");
+    this->loadFile(this->testTexture, "../assets/textures/right_idle2.png"); 
     this->testSprite.setTexture(this->testTexture);
-    this->testSprite.setPosition(300.f, 300.f);
     this->testSprite.setTextureRect(sf::IntRect(0, 0, 80, 80));  //x, y, w, h
     this->testSprite.setScale(2.f, 2.f);
-    this->testSprite.setOrigin(32.f, 40.f);
+    this->testSprite.setOrigin(this->testTexture.getSize().x/2, this->testTexture.getSize().y/2);
+    this->testSprite.setPosition(300.f, 300.f);
 
     //init gun
     this->loadFile(this->gunTexture, "../assets/textures/gun_r.png");
     this->gunSprite.setTexture(this->gunTexture);
-    this->gunSprite.setPosition(testSprite.getPosition().x + this->gunSprite.getGlobalBounds().width, testSprite.getPosition().y);
-    this->gunSprite.setScale(2.f, 2.f);//x, y, w, h
-    this->gunSprite.setOrigin(0.f, 0.f);
+    this->gunSprite.setPosition(300.f, 300.f);
+    this->gunSprite.setScale(2.f, 2.f);
 }
 
 Player::~Player(){
@@ -69,10 +68,15 @@ void Player::update(const float& dt){
 
 void Player::update(const float& dt, sf::Vector2f mousePos){
     // this->updateInput(dt);
+
+    // this->updateMovement(dt, mousePos);
+    // this->updateOrigin();
+    // this->updateGunMovement(mousePos);
+    // this->updateAnimation();
     this->updateMovement(dt, mousePos);
+    this->updateAnimation();
     this->updateOrigin();
     this->updateGunMovement(mousePos);
-    this->updateAnimation();
 
     //update bullet and check bullet out of bound
     for(int i = 0; i < bullets.size(); i++){
@@ -82,6 +86,8 @@ void Player::update(const float& dt, sf::Vector2f mousePos){
             bulletAngles.erase(bulletAngles.begin() + i);
         }
     }
+
+    // std::cout << " Gun width:: " << this->gunSprite.getGlobalBounds().width << " Gun h:: " << this->gunSprite.getGlobalBounds().height << std::endl;
 }
 
 
@@ -170,6 +176,8 @@ void Player::updateGunMovement(sf::Vector2f mousePos){
 // this->gunSprite.setPosition(testSprite.getPosition().x - 2*this->gunSprite.getLocalBounds().width, testSprite.getPosition().y);
     float angle = 0.0;
     if(this->playerState == IDLE_RIGHT || this->playerState == IDLE){
+    // if(this->playerState == IDLE_RIGHT){
+
         angle = std::atan2(mousePos.y - this->gunSprite.getPosition().y , mousePos.x - this->gunSprite.getPosition().x); 
     }else if(this->playerState == IDLE_LEFT){
         angle = -1 * std::atan2(mousePos.y - this->gunSprite.getPosition().y , (this->gunSprite.getPosition().x + this->gunTexture.getSize().x) - mousePos.x);
@@ -188,15 +196,19 @@ bool Player::isOutBound() const{
     return true;
 }
 
-//here
+//myabe a better collision detection
 bool Player::isCollided(const Enemy& enemy){
     float distance = sqrt(pow(this->testSprite.getPosition().x - enemy.getPosition().x, 2) + pow(this->testSprite.getPosition().y - enemy.getPosition().y, 2)); 
-    if(distance <= (this->testSprite.getGlobalBounds().width + enemy.getGlobalBounds().height)/2){
+    std::cout << "distance: " << distance << std::endl;
+    std::cout << "player width: " << this->testSprite.getGlobalBounds().width << " player height: " << this->testSprite.getGlobalBounds().height  << std::endl;
+    std::cout << "enemy width: " << enemy.getGlobalBounds().width <<  " enemy height: " << enemy.getGlobalBounds().height << std::endl;
+    if(distance <= this->testSprite.getGlobalBounds().width - 40){
         this->playerState = DAMAGED;
         return true;
     }
     return false;
 }
+
 
 void Player::updateAnimation(){
     int xTexture = 0;
@@ -246,3 +258,5 @@ void Player::render(sf::RenderTarget* target){
 //set enemy origin to center 
 //recalculate collision point(distant from player's origin to enemy's origin)
 
+
+//640 320

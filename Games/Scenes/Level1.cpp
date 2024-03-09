@@ -7,10 +7,11 @@ Level1::Level1(sf::RenderWindow* window) : GameState(window){
     // this->player = Player2(300.f, 300.f);
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);
-    this->loadTextures(this->bgTex, "../assets/textures/map.png");
+    this->loadTextures(this->bgTex, "../assets/textures/map4.png");
     this->bg.setTexture(this->bgTex);
-    this->bg.setScale(2.f, 2.1f);
+    this->bg.setScale(2.21f, 2.32f);
     this->bg.setPosition(0.f, 0.f);
+    enemySpawner = EnemySpawner();   
 }
 
 Level1::~Level1(){
@@ -30,7 +31,7 @@ void Level1::updateInput(const float& dt){
 void Level1::update(const float& dt, sf::RenderWindow* window){
     this->updateInput(dt);
     // this->updateOptions();
-    this->player.update(dt, this->mousePosView); 
+    this->player.update(dt, this->mousePosView);
     this->enemy.update(dt);
     if(this->player.bulletHitEnemy(enemy)){
         //delete enemy from list when it's dead
@@ -39,7 +40,7 @@ void Level1::update(const float& dt, sf::RenderWindow* window){
     if(this->player.isCollided(enemy)){
         std::cout << "Player hit" << std::endl;
     }
-
+    this->enemySpawner.update(dt);
     //last
     GameState::update(dt, window);
 }
@@ -59,6 +60,8 @@ void Level1::render(sf::RenderTarget* target) {
         this->player.render(target);
         if(this->enemy.getState() != Enemy::EnemyStates::DEAD)
             this->enemy.render(target);
+
+        this->enemySpawner.render(target);
     }
     //last
     GameState::render(target); 

@@ -3,6 +3,7 @@
 #include "../../src/Config.h"
 #include "../Entities/Player.h"
 #include "../Entities/Enemy.h"
+#include "../Entities/EnemySpawner.h"
 
 
 class Level1: public GameState{
@@ -15,9 +16,10 @@ class Level1: public GameState{
         sf::Sprite bg;
         Player player;
         Enemy enemy;
+        EnemySpawner enemySpawner;
 
-    public: 
-        Level1(sf::RenderWindow* window); 
+    public:
+        Level1(sf::RenderWindow* window);
         virtual ~Level1(); 
         void endState() override; 
         // void loadTextures(sf::Texture& tex);
