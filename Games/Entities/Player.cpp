@@ -2,7 +2,7 @@
 //problem: check player out of bound / or area that can't walk
 //when idle player not move
 //add isCollided function
-//gun point init weird 
+//gun point init weird
 
 Player::Player(){
     this->loadFile(this->testTexture, "../assets/textures/right_idle2.png"); 
@@ -22,6 +22,7 @@ Player::Player(){
 Player::~Player(){
     
 }
+
 
 void Player::setPosition(const float x, const float y){
     this->testSprite.setPosition(x, y);
@@ -62,6 +63,18 @@ void Player::move(const float& dt, const float x, const float y, const float mov
     this->testSprite.move(x * movementSpeed * dt ,y * movementSpeed * dt); 
 }
 
+void Player::setState(const Player::PlayerStates state){
+    this->playerState = state; 
+} 
+
+sf::FloatRect Player::getGlobalBounds() const{
+    return this->testSprite.getGlobalBounds(); 
+}
+
+sf::Vector2f Player::getPosition() const{
+    return this->testSprite.getPosition(); 
+}
+
 void Player::update(const float& dt){
     
 }
@@ -69,25 +82,11 @@ void Player::update(const float& dt){
 void Player::update(const float& dt, sf::Vector2f mousePos){
     // this->updateInput(dt);
 
-    // this->updateMovement(dt, mousePos);
-    // this->updateOrigin();
-    // this->updateGunMovement(mousePos);
-    // this->updateAnimation();
     this->updateMovement(dt, mousePos);
     this->updateAnimation();
     this->updateOrigin();
     this->updateGunMovement(mousePos);
 
-    //update bullet and check bullet out of bound
-    for(int i = 0; i < bullets.size(); i++){
-        bullets[i].update(dt, this->bulletAngles[i]);
-        if (bullets[i].isOutBound()){
-            bullets.erase(bullets.begin() + i); 
-            bulletAngles.erase(bulletAngles.begin() + i);
-        }
-    }
-
-    // std::cout << " Gun width:: " << this->gunSprite.getGlobalBounds().width << " Gun h:: " << this->gunSprite.getGlobalBounds().height << std::endl;
 }
 
 
@@ -132,18 +131,6 @@ void Player::updateMovement(const float& dt, sf::Vector2f mousePos){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
             this->move(dt, 0.f, 1.f, 200.f);
         }
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            // this->playerState = SHOOTING;
-            if(this->canShoot){
-                this->shootBullet(bullets, mousePos);
-                this->shootCooldown.restart(); 
-                this->canShoot = false;
-            }
-            
-            if(!canShoot && this->shootCooldown.getElapsedTime().asSeconds() >= this->shootCooldownTime){
-                this->canShoot = true;
-            }
-        }
 
         if(prevState == MOVING_LEFT && playerState == IDLE){
             this->playerState = IDLE_LEFT;
@@ -152,25 +139,9 @@ void Player::updateMovement(const float& dt, sf::Vector2f mousePos){
         }else{
             prevState = playerState;
         }
-    // }
+
 }
 
-void Player::shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos){
-    bullets.push_back(Bullet(this->gunSprite.getPosition().x, this->gunSprite.getPosition().y));
-    bullets.back().setRotation(this->gunAngle);
-    float angle = std::atan2(mousePos.y - this->testSprite.getPosition().y , mousePos.x - this->testSprite.getPosition().x); 
-    angle = angle * (180.0f / M_PI);
-    bulletAngles.push_back(angle);
-}
-
-bool Player::bulletHitEnemy(Enemy& enemy) const{
-    for(auto& bullet : this->bullets){
-        if(bullet.isCollided(enemy)){
-            return true;
-        }
-    }
-    return false;
-}
 
 void Player::updateGunMovement(sf::Vector2f mousePos){
 // this->gunSprite.setPosition(testSprite.getPosition().x - 2*this->gunSprite.getLocalBounds().width, testSprite.getPosition().y);
@@ -195,20 +166,6 @@ bool Player::isOutBound() const{
     }
     return true;
 }
-
-//myabe a better collision detection
-bool Player::isCollided(const Enemy& enemy){
-    float distance = sqrt(pow(this->testSprite.getPosition().x - enemy.getPosition().x, 2) + pow(this->testSprite.getPosition().y - enemy.getPosition().y, 2)); 
-    std::cout << "distance: " << distance << std::endl;
-    std::cout << "player width: " << this->testSprite.getGlobalBounds().width << " player height: " << this->testSprite.getGlobalBounds().height  << std::endl;
-    std::cout << "enemy width: " << enemy.getGlobalBounds().width <<  " enemy height: " << enemy.getGlobalBounds().height << std::endl;
-    if(distance <= this->testSprite.getGlobalBounds().width - 40){
-        this->playerState = DAMAGED;
-        return true;
-    }
-    return false;
-}
-
 
 void Player::updateAnimation(){
     int xTexture = 0;
@@ -245,10 +202,7 @@ void Player::updateAnimation(){
 
 void Player::render(sf::RenderTarget* target){
     target->draw(this->testSprite);
-
-    for(auto& bullet : bullets){
-        bullet.render(target);
-    }
+    
     if(this->playerState == IDLE_LEFT || this->playerState == IDLE_RIGHT || this->playerState == IDLE){
         target->draw(this->gunSprite);
     }

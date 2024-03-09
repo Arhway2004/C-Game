@@ -1,51 +1,3 @@
-// #include "EnemySpawner.h"
-
-
-// EnemySpawner::EnemySpawner(float spawnDelay)
-//     : spawnDelay(spawnDelay), spawnTimer(0.0f)
-// {
-    
-// }
-
-// EnemySpawner::EnemySpawner()
-//     : spawnDelay(1.0f), spawnTimer(0.0f) // Default constructor 
-// {
-// }
-
-// EnemySpawner::~EnemySpawner()
-// {
-   
-// }
-
-// void EnemySpawner::addEnemy()
-// {
-//     enemies.push_back(Enemy()); 
-// }
-
-// void EnemySpawner::update(const float &dt)
-// {
-//     spawnTimer += dt;
-
-//     if (spawnTimer >= spawnDelay)
-//     {
-//         addEnemy();        // Create a new enemy
-//         spawnTimer = 0.0f; // Reset the spawn timer
-//     }
-
-//     // Update positions of all existing enemies
-//     for (auto &enemy : enemies)
-//     {
-//         enemy.update(dt);
-//     }
-// }
-
-// void EnemySpawner::render(sf::RenderTarget *target)
-// {
-//     for (auto &enemy : enemies)
-//     {
-//         enemy.render(target);
-//     }
-// }
 
 // Another version with random spawn and set the spawn positions
 
@@ -65,7 +17,7 @@ EnemySpawner::~EnemySpawner()
     // The vector 'enemies' will clean up its member objects automatically
 }
 
-void EnemySpawner::spawnEnemy()
+void EnemySpawner::spawnEnemy(std::vector<Enemy>& enemies)
 {
     Enemy newEnemy;
 
@@ -78,28 +30,28 @@ void EnemySpawner::spawnEnemy()
     enemies.push_back(newEnemy);
 }
 
-void EnemySpawner::update(const float &dt)
+void EnemySpawner::update(const float &dt, sf::Vector2f mousePos, std::vector<Enemy>& enemies)
 {
     spawnTimer += dt;
     if (spawnTimer >= spawnInterval)
     {
-        spawnEnemy();
+        spawnEnemy(enemies);
         spawnTimer = 0.0f; // Reset the timer
     }
 
     // Update each enemy
     for (auto &enemy : enemies)
     {
-        enemy.update(dt);
+        enemy.update(dt, mousePos);
     }
     
 
 }
 
-void EnemySpawner::render(sf::RenderTarget *target)
-{
-    for (auto &enemy : enemies)
-    {
-        enemy.render(target);
-    }
-}
+// void EnemySpawner::render(sf::RenderTarget *target)
+// {
+//     for (auto &enemy : enemies)
+//     {
+//         enemy.render(target);
+//     }
+// }

@@ -10,13 +10,13 @@ public:
     EnemySpawner();
     ~EnemySpawner();
 
-    void spawnEnemy(); // Create a new enemy
+    void spawnEnemy(std::vector<Enemy>& enemies); // Create a new enemy
 
-    void update(const float &dt);
-    void render(sf::RenderTarget *target);
+    void update(const float &dt,  sf::Vector2f mousePos, std::vector<Enemy>& enemies);
+    // void render(sf::RenderTarget *target);
 
 private:
-    std::vector<Enemy> enemies;
+    // std::vector<Enemy> enemies;
 
     // Spawning parameters:
     float spawnTimer;

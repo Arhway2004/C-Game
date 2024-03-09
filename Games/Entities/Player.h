@@ -4,25 +4,23 @@
 #define PLAYER2_H
 
 #include "Entity.h"
-#include "Bullet.h"
 
 class Player : public Entity{
     private:
+
+    public: 
         sf::Texture testTexture;
         sf::Sprite testSprite;
         sf::Texture gunTexture;
         sf::Sprite gunSprite;
-        float gunAngle;
         Animation animation;
         float movementSpeed = 100.f;
-        std::vector<Bullet> bullets;
         std::vector<float> bulletAngles;
-
+        float gunAngle;
         bool canShoot = true;
         sf::Clock shootCooldown;
-        const float shootCooldownTime = 0.3f;
+        float shootCooldownTime = 0.3f;
 
-    public: 
         enum PlayerStates{
             IDLE = 0,
             MOVING_LEFT = 1,
@@ -54,12 +52,11 @@ class Player : public Entity{
         bool isOutBound() const override; //should be in entity class
         void updateInput(const float& dt) override;
         void updateGunMovement(sf::Vector2f mousePos); 
-        void shootBullet(std::vector<Bullet>& bullets, sf::Vector2f mousePos); 
-        
-        bool isCollided(const Enemy& enemy);
-        bool bulletHitEnemy(Enemy& enemy) const; 
 
+        //setter/getter
+        void setState(const Player::PlayerStates state); 
         sf::Vector2f getPosition() const;
+        sf::FloatRect getGlobalBounds() const; 
 
         //movement
         void updateMovement(const float& dt, sf::Vector2f mousePos); 

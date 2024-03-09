@@ -87,12 +87,17 @@ Enemy::EnemyStates Enemy::getState(){
     return this->enemyState;
 }
 
-void Enemy::update(const float &dt)
+void Enemy::update(const float &dt){
+    
+}
+
+
+void Enemy::update(const float &dt, sf::Vector2f mousePos)
 {
     this->Movement(dt, player.getPosition());
     this->updateAnimation();
     sf::Vector2f playerPosition = player.getPosition();
-    this->player.update(dt);
+    this->player.update(dt, mousePos); 
     std::cout << "Enemy Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
 }
 

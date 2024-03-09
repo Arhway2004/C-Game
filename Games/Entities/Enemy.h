@@ -38,6 +38,8 @@ public:
 
     void loadFile(sf::Texture& texture, std::string path) override;
     void update(const float &dt) override;
+    void update(const float &dt, sf::Vector2f mousePos); 
+
     // void update(const float &dt, Player &player);
     void render(sf::RenderTarget *target) override;
     sf::FloatRect getGlobalBounds() const;
