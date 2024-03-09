@@ -13,6 +13,7 @@ MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);
+    this->music = new Music();  
 }
 
 MainMenu::~MainMenu(){
@@ -50,7 +51,7 @@ void MainMenu::update(const float& dt, sf::RenderWindow* window){
     this->start_btn.update(this->mousePosView); 
     this->quit_btn.update(this->mousePosView);
 
-    if(!this->showOption && !this->showGuide){
+    if(!this->showOption && !this->showGuide && !this->showSetting){
         if(this->quit_btn.isPressed()){
             std::cout << "quit button pressed" << std::endl;
             if (window != nullptr) {

@@ -23,18 +23,21 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
     this->enterPress = false;
     this->x = 0;
 
-    this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
+    // this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
 
     this->textLine.push_back("Hello");
     this->textLine.push_back("hw");
     this->textLine.push_back("das");
-    this->message->Text(this->textLine, this->x);
+    // this->message->Text(this->textLine, this->x);
+    //music
+    this->music = new Music();  
 }
 
 FirstScenes::~FirstScenes()
 {
     // delete this->window;
-    delete this->message;
+
+    // delete this->message;
 }
 
 void FirstScenes::endState()
@@ -62,7 +65,7 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
             {
                 this->textLine.push_back("Message 2");
             }
-            this->message->Text(this->textLine, this->x);
+            // this->message->Text(this->textLine, this->x);
         }
     }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
         //change later 
@@ -80,6 +83,6 @@ void FirstScenes::render(sf::RenderTarget* target)
     target->draw(this->background);
     target->draw(this->p1);
     target->draw(this->p2);
-    this->message->render(target);
+    // this->message->render(target);
     GameState::render(target);
 }

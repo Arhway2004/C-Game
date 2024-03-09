@@ -8,6 +8,7 @@ private:
     sf::RectangleShape* Textbox;
     sf::Texture* Texture_T;
     sf::Text* text;
+    sf::Text* text1;
     sf::Font font;
 
 
@@ -17,6 +18,7 @@ public:
     // void box();
     void Text(std::vector<std::string> t, int x=0);
     void render(sf::RenderTarget *target);
+    void message(std::string t, float pos_x, float pos_y, int size);
     //  ClickableIcon(int pos_x, int pos_y, float scale_x, float scale_y, std::string path);
     //  virtual ~ClickableIcon();
     //  const bool getClicked() const;

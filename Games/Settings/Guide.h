@@ -3,7 +3,10 @@
 
 class Guide: public Base{
     private:
-        // bool quit_base = true;
+        // bool quit_base = true
+        sf::RenderWindow* window;
+        sf::RectangleShape background,A,D,S,W,Mouse;
+        sf::Texture bg_texture,A_texture,D_texture,S_texture,W_texture,Mouse_texture;
 
     public:
         Guide();
