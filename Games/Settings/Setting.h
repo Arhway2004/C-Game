@@ -2,7 +2,7 @@
 #include "Base.h"
 #include "../../UI/ClickableIcon.h"
 #include "../../UI/Message.h"
-#include "/Users/arhway/Desktop/Final/C-Game/UI/Music.h"
+// #include "/Users/arhway/Desktop/Final/C-Game/UI/Music.h"
 #include "Guide.h"
 
 
@@ -36,7 +36,13 @@ class Setting: public Base{
         Message* MUSIC;
         Message* SFX;
         Message* RESOLUTION;
-        Music& music;//need to use refre if want to use inheritance to cpp file
+
+        sf::Music backgroundMusic,backgroundSFX;
+
+
+
+
+        // Music& music;//need to use refre if want to use inheritance to cpp file
 
 
     public:
@@ -44,14 +50,20 @@ class Setting: public Base{
         virtual ~Setting();
         bool return_quit();
         void reset_quit();
+        void playSFX();
         void update(const sf::Vector2f mousePos);
         void render_setting(sf::RenderTarget* target = nullptr);
+        static int Mpos;
+        static int Spos;
+        static int sound;
+        static float volume,Svolume;
 
-        int Mpos = 535;// I not sure it need to use virtual or not
-        int Spos = 535;
-        int sound = 25;
+        // int Mpos = 535;// I not sure it need to use virtual or not
+        // int Spos = 535;
+        // int sound = 25;
         // int MUSIC = 0;
         // int SFX = 0;
+
 
 
 };

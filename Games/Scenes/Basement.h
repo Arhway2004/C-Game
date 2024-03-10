@@ -8,7 +8,7 @@
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
 #include "../../UI/interactable_obj.h"
-#include "../../UI/Music.h"
+// #include "../../UI/Music.h"
 
 
 
@@ -22,7 +22,7 @@ class Basement : public GameState{
         ClickableIcon* door1;
         ClickableIcon* door2;
         InteractableObj* obj1;
-        Music* music;
+        // Music* music;
         //fn
         // void initKeybinds(); for what
         

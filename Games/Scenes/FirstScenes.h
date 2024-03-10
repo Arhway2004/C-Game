@@ -1,6 +1,6 @@
 #include "../../include/Gamestate.h"
 // #include "../../UI/Message.h"
-#include "../../UI/Music.h"
+// #include "../../UI/Music.h"
 
 class FirstScenes : public GameState
 {
@@ -14,7 +14,7 @@ private:
     bool enterPress;
     int x;
     sf::RectangleShape Textbox;
-    Music* music;
+    // Music* music;
 
 
 public:
