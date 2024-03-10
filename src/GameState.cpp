@@ -17,6 +17,8 @@ GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.
     this->plus2click =false;
     this->delete1click =false;
     this->delete2click = false;
+    this->music = new(Setting);
+
 
     //show setting = false 
 }
@@ -28,6 +30,8 @@ GameState::~GameState(){
 void GameState::updateOptions(){
     //current state
     //click 
+    // music->playMusic();
+
     this->updateMousePosition(); 
 
     this->option_icon.update(mousePosView);

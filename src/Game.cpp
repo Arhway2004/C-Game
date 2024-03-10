@@ -1,4 +1,5 @@
 #include "../include/Game.h" 
+
 #include <iostream>
 
 Game::Game(){
@@ -7,6 +8,8 @@ Game::Game(){
     this->run(); 
     this->update();
     this->render(); 
+    this->music = new(Setting);
+    music->playMusic();
 }
 
 Game::~Game(){
@@ -28,7 +31,6 @@ void Game::initWindow(){
 }
 
 void Game::initVariables(){
-    
 }
 
 void Game::initStates(){
@@ -39,6 +41,7 @@ void Game::initStates(){
 
 void Game::run(){
     while(this->window->isOpen()){
+        // music->playMusic();
         sf::Event event; 
         while(this->window->pollEvent(event)){
             if(event.type == sf::Event::Closed){
@@ -48,6 +51,7 @@ void Game::run(){
         this->updateDt(); //set new dt every framerate
         this->update();
         this->render();
+
     }
 }
 
@@ -70,13 +74,14 @@ void Game::updateGUI(){
 }
 
 void Game::update(){
+
     // this->updateGUI();
     //temp
     // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
         // this->states.top()->checkForEnd(); 
         this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit
-
+        // music->playMusic();
         std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
         if(this->states.top()->getQuit()){
             this->states.top()->endState(); 
@@ -94,6 +99,8 @@ void Game::update(){
 
 void Game::render(){
     this->window->clear(); 
+
+
 
     //render item
     if(!this->states.empty()){
