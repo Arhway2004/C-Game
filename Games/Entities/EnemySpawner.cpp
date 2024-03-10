@@ -20,7 +20,6 @@ EnemySpawner::~EnemySpawner()
 void EnemySpawner::spawnEnemy(std::vector<Enemy>& enemies)
 {
     Enemy newEnemy;
-
     // choose a random spawn position from the position vector:
     std::random_device rd;
     std::mt19937 gen(rd());

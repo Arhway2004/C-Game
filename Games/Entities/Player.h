@@ -4,9 +4,11 @@
 #define PLAYER2_H
 
 #include "Entity.h"
+#include "../../UI/HealthBar.h"
 
 class Player : public Entity{
     private:
+        std::shared_ptr<HealthBar> playerHealthBar;
 
     public: 
         sf::Texture testTexture;
@@ -29,13 +31,16 @@ class Player : public Entity{
             IDLE_LEFT = 4,
             IDLE_RIGHT = 5,
             DAMAGED = 6, 
-            DEAD = 7
+            COLLIDED = 7,
+            DEAD = 8
         };
         PlayerStates playerState = IDLE;
         PlayerStates prevState;
 
         struct Playerstats{
-            //might store player stats 
+            int health; 
+            int damageReceived;
+            // Weapon currentWeapon;  
         };
 
         Playerstats player_stats;

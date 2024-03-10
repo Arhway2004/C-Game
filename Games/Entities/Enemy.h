@@ -8,6 +8,8 @@ class Enemy : public Entity
 {
 private:
     //Initializer
+    std::shared_ptr<HealthBar> enemyHealthBar;
+
     std::shared_ptr<sf::Texture> enemyTexture;
     std::shared_ptr<sf::Sprite> enemySprite;
     // sf::Sprite enemySprite;
@@ -21,14 +23,21 @@ private:
 
 public:
     // Constructors / Destructors
+
     enum EnemyStates
     {
         ALIVE = 0,
-        SHOOTED = 1,
         DAMAGED = 2,
         DEAD = 3,
     };
 
+    struct EnemyStats{
+        int maxHealth;
+        int bulletMax; //number of bullet to kill
+        int bulletReceived; //number of buller already hit 
+    }; 
+
+    EnemyStats enemy_stats;
     EnemyStates enemyState = ALIVE;
     Enemy();
     virtual ~Enemy();

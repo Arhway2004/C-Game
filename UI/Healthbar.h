@@ -1,19 +1,23 @@
+#pragma once 
+
 #include "../src/Config.h"
 
-class Healthbar{
+class HealthBar{
     private:
         sf::Vector2f position;
         int damage; //(%)damage per hit
-        int health; //(%)total damage can accept 
+        int fullHealth; //(%)total damage can accept 
         sf::RectangleShape frame;
         sf::RectangleShape blood;
         sf::Color bloodColor; 
+        int fullHealthtoPercent = 100;
 
     public:
-        Healthbar(); 
-        ~Healthbar();
-        void update(const float& dt);
-        void decreaseHealth(int damage);
+        HealthBar(float pos_x, float pos_y, float set_w, float set_h, int health, sf::Color bloodColor); 
+        ~HealthBar();
+        void update(const int change); 
+        void setPosition(float x, float y);
+        // void decreaseHealth(int damage);
         void render(sf::RenderTarget* target);
 
 }; 

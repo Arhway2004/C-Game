@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../include/Game.h"
-// #include <SFML/Graphics.hpp>
+// #include "../src/Config.h"
 
 int main()
 {
@@ -53,6 +53,8 @@ int main()
 //     this->gunSprite.setScale(2.f, 2.f);
 //     this->gunSprite.setOrigin(this->gunTexture.getSize().x / 2.f, this->gunTexture.getSize().y / 2.f);
 
+
+//test sprite
 // int main()
 // {
 //     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");
@@ -96,6 +98,48 @@ int main()
 //         window.draw(player);                 // Drawing our sprite.
 //         window.draw(mushroom);                  // Drawing our sprite.
 //         window.draw(circle);
+//         window.display();
+//     }
+//     return 0; 
+// }
+
+
+//test ui
+// int main()
+// {
+//     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");
+
+//     sf::RectangleShape frame;
+//     sf::RectangleShape blood;
+//     frame.setSize(sf::Vector2f(77, 8));
+//     frame.setFillColor(sf::Color::Transparent);
+//     frame.setOutlineColor(sf::Color::White);
+//     frame.setOutlineThickness(1.0f);
+//     frame.setPosition(300, 300);
+
+//     blood.setSize(sf::Vector2f(74, 5));
+//     blood.setFillColor(sf::Color::Red);
+//     blood.setOutlineColor(sf::Color::Red);
+//     // frame.setOutlineThickness(1.0f);
+//     blood.setPosition(302, 302);
+//     blood.setSize(sf::Vector2f(50, 5));
+
+//     while (window.isOpen())
+//     {
+//         sf::Event event;
+//         while (window.pollEvent(event))
+//         {
+//             if (event.type == sf::Event::Closed)
+//             {
+//                 window.close();
+//             }
+//         }
+//         // sf::Vector2f mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+      
+
+//         window.clear(sf::Color(16, 16, 16, 255)); // Dark gray.
+//         window.draw(frame);
+//         window.draw(blood);
 //         window.display();
 //     }
 //     return 0; 

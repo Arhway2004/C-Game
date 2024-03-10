@@ -1,6 +1,8 @@
 #include "Enemy.h"
 
 
+//enemy blood not appear
+
 Enemy::Enemy()
 {   
     this->enemyTexture = std::make_shared<sf::Texture>(); 
@@ -11,6 +13,10 @@ Enemy::Enemy()
     this->enemySprite->setTextureRect(sf::IntRect(0, 0, 72, 45)); // x, y, w, h
     this->enemySprite->setScale(2.f, 2.f);
     this->enemySprite->setOrigin(72/2.f, 45/2.f);
+    this->enemyHealthBar = std::make_shared<HealthBar>(this->enemySprite->getPosition().x, this->enemySprite->getPosition().y - 60, 77, 8, 100, sf::Color::Red);
+    
+    std::srand(std::time(0));
+    int rand = std::rand() % 4; 
 }
 
 Enemy::~Enemy()
@@ -57,16 +63,7 @@ void Enemy::move(const float &dt, const float x, const float y, const float move
 
 void Enemy::Movement(const float &dt, sf::Vector2f playerPosition)
 {
-    // // move back and forth
-    // oscillationTimer += dt;
-    // if (oscillationTimer >= 2.0f)
-    // { // Change direction every 2 seconds
-    //     oscillationTimer = 0.0f;
-    //     oscillationDirection *= -1.0f;
-    // }
-
-    // this->move(dt, oscillationDirection, 0.0f, 100.f);
-    // this->move(dt, 1.0f, 0.0f, 100.f); // move right
+ 
     sf::Vector2f direction = playerPosition - this->enemySprite->getPosition();
     float magnitude = sqrtf(direction.x * direction.x + direction.y * direction.y);
 
@@ -98,6 +95,8 @@ void Enemy::update(const float &dt, sf::Vector2f mousePos)
     this->updateAnimation();
     sf::Vector2f playerPosition = player.getPosition();
     this->player.update(dt, mousePos); 
+    this->enemyHealthBar->update(0);
+    this->enemyHealthBar->setPosition(this->enemySprite->getPosition().x - 40, this->enemySprite->getPosition().y - 40);
     std::cout << "Enemy Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
 }
 
@@ -129,5 +128,5 @@ void Enemy::updateAnimation()
 void Enemy::render(sf::RenderTarget *target)
 {
     target->draw(*this->enemySprite);
-    
+    this->enemyHealthBar->render(target);
 }

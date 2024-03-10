@@ -17,6 +17,10 @@ Player::Player(){
     this->gunSprite.setTexture(this->gunTexture);
     this->gunSprite.setPosition(300.f, 300.f);
     this->gunSprite.setScale(2.f, 2.f);
+
+    //healthbar
+    this->playerHealthBar = std::make_shared<HealthBar>(this->testSprite.getPosition().x, this->testSprite.getPosition().y - 60, 77, 8, 100, sf::Color::Red);
+
 }
 
 Player::~Player(){
@@ -86,6 +90,10 @@ void Player::update(const float& dt, sf::Vector2f mousePos){
     this->updateAnimation();
     this->updateOrigin();
     this->updateGunMovement(mousePos);
+    if(this->playerState == DAMAGED){ // if player is damaged
+        this->playerHealthBar->update(30);
+    }
+    this->playerHealthBar->setPosition(this->testSprite.getPosition().x - 40, this->testSprite.getPosition().y - 60);
 
 }
 
@@ -202,10 +210,11 @@ void Player::updateAnimation(){
 
 void Player::render(sf::RenderTarget* target){
     target->draw(this->testSprite);
-    
+
     if(this->playerState == IDLE_LEFT || this->playerState == IDLE_RIGHT || this->playerState == IDLE){
         target->draw(this->gunSprite);
     }
+    this->playerHealthBar->render(target);
 }
 
 
