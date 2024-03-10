@@ -1,7 +1,6 @@
 #include "../../include/Gamestate.h"
-// #include "../../UI/Message.h"
-// #include "../../UI/Music.h"
-
+#include "../../UI/Message.h"
+// #include "../../C-Game/UI/Music.h"
 class FirstScenes : public GameState
 {
 private:
@@ -9,7 +8,7 @@ private:
     sf::RectangleShape background;
     sf::Texture bg_t, p1t, p2t;
     sf::Sprite p1, p2;
-    // Message* message;
+    Message* message;
     std::vector<std::string> textLine;
     bool enterPress;
     int x;

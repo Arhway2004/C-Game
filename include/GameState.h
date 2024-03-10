@@ -22,6 +22,7 @@ class GameState{
         std::shared_ptr<Setting> setting_page;
 
         // Entity player; 
+        Setting* music;
 
 
     protected: 

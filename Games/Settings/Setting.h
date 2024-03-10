@@ -51,6 +51,7 @@ class Setting: public Base{
         bool return_quit();
         void reset_quit();
         void playSFX();
+        void playMusic();
         void update(const sf::Vector2f mousePos);
         void render_setting(sf::RenderTarget* target = nullptr);
         static int Mpos;

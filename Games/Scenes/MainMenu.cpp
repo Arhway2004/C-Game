@@ -13,7 +13,8 @@ MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);
-    // this->music = new Music();  
+    this->music = new(Setting);  
+
 
 }
 
@@ -48,6 +49,7 @@ void MainMenu::endState(){
 void MainMenu::update(const float& dt, sf::RenderWindow* window){
     //update per frame
     //update mouse
+
     this->updateMousePosition();
     this->start_btn.update(this->mousePosView); 
     this->quit_btn.update(this->mousePosView);
@@ -72,6 +74,8 @@ void MainMenu::update(const float& dt, sf::RenderWindow* window){
 }
 
 void MainMenu::render(sf::RenderTarget* target) {
+
+
     if(!target){
         target = this->window; 
     }

@@ -3,6 +3,7 @@
 
 #include "Base.h"
 #include "../../UI/ClickableIcon.h"
+#include "/Users/arhway/Desktop/FinalI/C-Game/Games/Settings/Setting.h"
 #include "Guide.h"
 
 class Options : public Base{
@@ -11,7 +12,7 @@ class Options : public Base{
         ClickableIcon restart_icon; 
         ClickableIcon quit_icon; 
         Guide guide_page;
-
+        Setting* music;
     public:
         ClickableIcon guide_icon; 
         ClickableIcon setting_icon; 

@@ -23,12 +23,14 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
     this->enterPress = false;
     this->x = 0;
 
-    // this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
+    this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
 
-    this->textLine.push_back("Hello");
-    this->textLine.push_back("hw");
-    this->textLine.push_back("das");
-    // this->message->Text(this->textLine, this->x);
+    this->textLine.push_back("Thun: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("                                              :Thun \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("Teemy: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("                                              :Teemy \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
+    this->textLine.push_back("End of conversation");
+    this->message->Text(this->textLine, this->x);
     //music
     // this->music = new Music();  
 }
@@ -36,8 +38,7 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
 FirstScenes::~FirstScenes()
 {
     // delete this->window;
-
-    // delete this->message;
+    delete this->message;
 }
 
 void FirstScenes::endState()
@@ -48,24 +49,22 @@ void FirstScenes::endState()
 void FirstScenes::update(const float& dt, sf::RenderWindow* window)
 {
     static bool enterKeyPressedLastFrame = false; // Flag to track Enter key press
-
+    int y = textLine.size();
+    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
         if (!enterKeyPressedLastFrame) // Check if Enter key wasn't pressed last frame
         {
             std::cout << "Enter key pressed" << std::endl;
             ++x;
-            // this->textLine.clear();
             std::cout << x << std::endl;
-            if (x == 1)
+            if (x == y)
             {
-                this->textLine.push_back("Message 1");
+                this->message->Text(this->textLine, this->x);
+                //waiting for connect with next slide
+                // this->textLine.push_back("Message 1");
             }
-            else if (x == 2)
-            {
-                this->textLine.push_back("Message 2");
-            }
-            // this->message->Text(this->textLine, this->x);
+            this->message->Text(this->textLine, this->x);
         }
     }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
         //change later 
@@ -83,6 +82,6 @@ void FirstScenes::render(sf::RenderTarget* target)
     target->draw(this->background);
     target->draw(this->p1);
     target->draw(this->p2);
-    // this->message->render(target);
+    this->message->render(target);
     GameState::render(target);
 }
