@@ -9,7 +9,7 @@
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
 #include "../../UI/Music.h"
-#include "/Users/arhway/Desktop/FinalI/C-Game/Games/Settings/Setting.h"
+#include "../Settings/Setting.h"
 
 class MainMenu : public GameState{
     private:
@@ -19,7 +19,6 @@ class MainMenu : public GameState{
         sf::RectangleShape background;
         sf::Font font;
 
-        // void initKeybinds(); 
         Button quit_btn;
         Button start_btn;
         bool startPressed;  // To track if the start button was pressed once

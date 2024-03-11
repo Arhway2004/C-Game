@@ -4,7 +4,7 @@ Message::Message(float pos_x, float pos_y, float set_w, float set_h, sf::Rectang
     this->Texture_T = new sf::Texture(); // Allocate memory for Texture_T
     this->Textbox = new sf::RectangleShape(); // Allocate memory for Textbox
     
-    this->Texture_T->loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/TextBox.jpeg");
+    this->Texture_T->loadFromFile("../../textures/TextBox.jpeg");
 
     this->Textbox->setTexture(this->Texture_T);
     this->Textbox->setSize(sf::Vector2f(900, 300));
@@ -25,7 +25,7 @@ Message::~Message()
 void Message::Text(std::vector<std::string> t, int x) {
 
     // Load the font
-    if (!font.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/font/Blomberg-8MKKZ.ttf")) {
+    if (!font.loadFromFile("../../font/Blomberg-8MKKZ.ttf")) {
         // Failed to load font
         std::cerr << "Failed to load font!" << std::endl;
         return;
@@ -40,7 +40,7 @@ void Message::Text(std::vector<std::string> t, int x) {
 
 }
 void Message::message(std::string t, float pos_x, float pos_y, int size) {
-    if (!font.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/font/Blomberg-8MKKZ.ttf")) {
+    if (!font.loadFromFile("../../font/Blomberg-8MKKZ.ttf")) {
         // Failed to load font
         std::cerr << "Failed to load font!" << std::endl;
         return;

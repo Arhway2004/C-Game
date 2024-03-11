@@ -9,11 +9,11 @@
 
 Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     std::cout << "Setting::Setting: Setting constructor" << std::endl;
-    this->bg_t.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/frame2.png");
-    this->Musicslide_texture.loadFromFile("/Users/arhway/Desktop/Final/C-Game/assets/textures/slide.png");
-    this->SFXslide_texture.loadFromFile("/Users/arhway/Desktop/Final/C-Game/assets/textures/slide.png");
-    this->Musicpoint_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/point.png");
-    this->SFXpoint_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/point.png");
+    this->bg_t.loadFromFile("../../textures/frame2.png");
+    this->Musicslide_texture.loadFromFile("../../textures/slide.png");
+    this->SFXslide_texture.loadFromFile("../../textures/slide.png");
+    this->Musicpoint_texture.loadFromFile("../../textures/point.png");
+    this->SFXpoint_texture.loadFromFile("../../textures/point.png");
 
     this->background.setSize(sf::Vector2f(522,370));
     this->background.setTexture(&this->bg_t);
@@ -36,13 +36,15 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     this->SFXpoint.setPosition(Mpos, 170);   
     this->Musicpoint.setPosition(Spos, 90); 
 
-    this->plus1 = new ClickableIcon(680, 170, 0.5, 0.5, "/Users/arhway/Desktop/Final/C-Game/assets/textures/plus.png");
-    this->delete1 = new ClickableIcon(350, 170, 0.5, 0.5, "/Users/arhway/Desktop/Final/C-Game/assets/textures/delete.png");
+    this->plus1 = new ClickableIcon(680, 170, 0.5, 0.5, "../../textures/plus.png");
+    this->delete1 = new ClickableIcon(350, 170, 0.5, 0.5, "../../textures/delete.png");
 
-    this->plus2 = new ClickableIcon(680, 250, 0.5, 0.5, "/Users/arhway/Desktop/Final/C-Game/assets/textures/plus.png");
-    this->delete2 = new ClickableIcon(350, 250, 0.5, 0.5, "/Users/arhway/Desktop/Final/C-Game/assets/textures/delete.png");     
+    this->plus2 = new ClickableIcon(680, 250, 0.5, 0.5, "../../textures/plus.png");
+    this->delete2 = new ClickableIcon(350, 250, 0.5, 0.5, "../../textures/delete.png");     
 
-    this->plusSFX = new ClickableIcon(570, 300, 5.0, 5.0, "/Users/arhway/Desktop/Final/C-Game/assets/textures/plusS.png");
+    this->plusSFX = new ClickableIcon(570, 300, 5.0, 5.0, "../../textures/plusS.png");
+    // this->X = new ClickableIcon(200,200,0.5,0.5,"../../textures/plusS.png");
+
     this->SFX = new Message(2000.0, 3500.0, 0.6, 0.6, Textbox);
     this->MUSIC = new Message(2000.0, 3500.0, 0.6, 0.6, Textbox);
     this->RESOLUTION = new Message(2000.0, 3500.0, 0.6, 0.6, Textbox);
@@ -51,13 +53,13 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     this->MUSIC->message("MUSIC", 510.0, 150.0, 24); 
     this->RESOLUTION->message("RESOLUTION: 1920X1080", 395.0, 320.0, 30);     
 
-    if (!backgroundMusic.openFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/sounds/background audio.wav")) {
+    if (!backgroundMusic.openFromFile("../../sounds/background audio.wav")) {
         std::cout << "Failed to load background music" << std::endl;
     } else {
         backgroundMusic.setVolume(volume); // Set the volume
         // backgroundMusic.play(); // Play the music
     }
-    if (!backgroundSFX.openFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/sounds/pop.wav")) {
+    if (!backgroundSFX.openFromFile("../../sounds/pop.wav")) {
         std::cout << "Failed to load background SFX" << std::endl;
     } else {
         backgroundSFX.setVolume(Svolume); // Set the volume
@@ -93,12 +95,12 @@ void Setting::update(const sf::Vector2f mousePos){
     static bool wasDelete1ClickedLastFrame = false;
     static bool wasPlus2ClickedLastFrame = false;
     static bool wasDelete2ClickedLastFrame = false;
+    static bool XX = true;
     static int SFX =4;
     static int MUSIC =4;
 
     const int x = 65; // Position adjustment step
     const float sound = 25.0f;
-
 
     bool isPlus1ClickedThisFrame = this->plus1->isClicked(mousePos);
     if (isPlus1ClickedThisFrame && !wasPlus1ClickedLastFrame) {
@@ -182,7 +184,7 @@ void Setting::playMusic(){
 void Setting::pauseMusic(){
     backgroundMusic.setVolume(volume); 
     backgroundMusic.pause();
-    backgroundMusic.setLoop(true);
+    // backgroundMusic.setLoop(true);
     std::cout <<"music" << std::endl;
 }
 

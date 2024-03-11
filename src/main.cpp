@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../include/Game.h"
-#include "/Users/arhway/Desktop/FinalI/C-Game/Games/Settings/Setting.h"
+// #include "../Settings/Setting.h"
 
 
 int main()

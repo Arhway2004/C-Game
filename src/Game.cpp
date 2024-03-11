@@ -1,7 +1,7 @@
 #include "../include/Game.h" 
 #include <iostream>
 
-Game::Game(): music(new Setting) {
+Game::Game(){
     this->initWindow();
     this->initStates(); 
     this->run(); 
@@ -9,7 +9,7 @@ Game::Game(): music(new Setting) {
     this->render(); 
     // this->music = new(Setting);
 }
-
+// : music(new Setting)
 Game::~Game(){
     delete this->window; 
     while(!this->states.empty()){
@@ -38,7 +38,7 @@ void Game::initStates(){
 }
 
 void Game::run(){
-    this->music->playMusic(); 
+    // this->music->playMusic(); 
     while(this->window->isOpen()){
         sf::Event event; 
         while(this->window->pollEvent(event)){

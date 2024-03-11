@@ -21,6 +21,7 @@ class Setting: public Base{
         sf::Texture Musicpoint_texture; 
         sf::Texture SFXpoint_texture;  
 
+
         ClickableIcon* plus1;
         ClickableIcon* delete1;
 
@@ -28,6 +29,7 @@ class Setting: public Base{
         ClickableIcon* delete2;
 
         ClickableIcon* plusSFX;
+        // ClickableIcon* X;
 
         sf::RectangleShape Textbox;
         Message* text;

@@ -3,7 +3,7 @@
 
 #include "Base.h"
 #include "../../UI/ClickableIcon.h"
-#include "/Users/arhway/Desktop/FinalI/C-Game/Games/Settings/Setting.h"
+#include "../Settings/Setting.h"
 #include "Guide.h"
 
 class Options : public Base{

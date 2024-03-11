@@ -2,13 +2,13 @@
 
 Music::Music() : volume(100.0f),Svolume(100.0f) {
     // Load and play music
-    if (!backgroundMusic.openFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/sounds/background audio.wav")) {
+    if (!backgroundMusic.openFromFile("../../sounds/background audio.wav")) {
         std::cout << "Failed to load background music" << std::endl;
     } else {
         backgroundMusic.setVolume(volume); // Set the volume
         backgroundMusic.play(); // Play the music
     }
-    if (!backgroundSFX.openFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/sounds/pop.wav")) {
+    if (!backgroundSFX.openFromFile("../../sounds/pop.wav")) {
         std::cout << "Failed to load background SFX" << std::endl;
     } else {
         backgroundSFX.setVolume(volume); // Set the volume

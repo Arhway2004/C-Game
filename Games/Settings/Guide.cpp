@@ -4,11 +4,11 @@
 Guide::Guide(): Base("Guide", 280, 100, 1.0, 1.2){
     std::cout << "Guide::Guide: Guide constructor" << std::endl;
     // this->bg_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/GreenBoard.png");
-    this->A_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/A.png");
-    this->D_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/D.png");
-    this->S_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/S.png");
-    this->W_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/W.png");
-    this->Mouse_texture.loadFromFile("/Users/arhway/Desktop/Arhway/C-Game/assets/textures/Mouse.png");
+    this->A_texture.loadFromFile("../../assets/textures/A.png");
+    this->D_texture.loadFromFile("../../assets/textures/D.png");
+    this->S_texture.loadFromFile("../../assets/textures/S.png");
+    this->W_texture.loadFromFile("../../assets/textures/W.png");
+    this->Mouse_texture.loadFromFile("../../assets/textures/Mouse.png");
 
     // this->background.setSize(sf::Vector2f(680, 400));
     // this->background.setTexture(&this->bg_texture);
