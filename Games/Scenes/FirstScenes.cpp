@@ -25,11 +25,11 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
 
     this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
 
-    this->textLine.push_back("Thun: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
-    this->textLine.push_back("                                              :Thun \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
-    this->textLine.push_back("Teemy: \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
-    this->textLine.push_back("                                              :Teemy \nhellowiodsjjdspdscdeiojcwieojcmopwkpcdk\niojweodjdoiewjdiojweodiwejiodwj");
-    this->textLine.push_back("End of conversation");
+    this->textLine.push_back("Thun: \nehhhhh,Hello, do you know where I am ?\n");
+    this->textLine.push_back("                                              :Thun \nNow, you are in the game 'SE Life'. To pass this\ngame and return to your world, you need to \neliminate every rust.");
+    this->textLine.push_back("Teemy: \nOkay, thank you for the direction.\n");
+    this->textLine.push_back("                                              :Teemy \nHope you enjoy with this game Thun.\n");
+    this->textLine.push_back("End of conversation.");
     this->message->Text(this->textLine, this->x);
     //music
     // this->music = new Music();  
@@ -53,6 +53,7 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
+        std::cout << y << std::endl;
         if (!enterKeyPressedLastFrame) // Check if Enter key wasn't pressed last frame
         {
             std::cout << "Enter key pressed" << std::endl;
@@ -60,6 +61,8 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
             std::cout << x << std::endl;
             if (x == y)
             {
+                std::cout << y << x <<"End of first scense" << std::endl;
+
                 this->message->Text(this->textLine, this->x);
                 //waiting for connect with next slide
                 // this->textLine.push_back("Message 1");
