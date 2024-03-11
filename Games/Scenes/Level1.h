@@ -17,6 +17,7 @@ private:
     Enemy enemy;
     EnemySpawner enemySpawner;
     sf::Texture enemyTexture;
+    std::vector<Enemy> enemies;
 
 public:
     Level1(sf::RenderWindow *window); 

@@ -15,11 +15,11 @@ class Basement : public GameState{
         sf::RenderWindow* window; 
         sf::RectangleShape background; 
         sf::Font font; 
+        sf::Texture bgTex;
+        sf::Sprite bg;
 
         Button* test_btn;
-        ClickableIcon* door1;
-        ClickableIcon* door2;
-        InteractableObj* obj1;
+        InteractableObj* door1;
         Player player;
         
         //fn
@@ -30,6 +30,7 @@ class Basement : public GameState{
         virtual ~Basement(); 
         
         // void updateInput(const float& dt, Button* btn) override;
+        void loadTextures(sf::Texture &tex, std::string path);
         void endState() override; 
         void update(const float& dt, sf::RenderWindow* window) override; 
         void render(sf::RenderTarget* target = nullptr) override;

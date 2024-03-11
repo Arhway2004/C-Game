@@ -10,6 +10,7 @@ private:
     // Initializer
     std::shared_ptr<sf::Texture> enemyTexture;
     sf::Sprite enemySprite;
+    sf::Vector2f currentDirection;
     Animation animation;
     Player player;
 
@@ -40,6 +41,10 @@ public:
     void move(const float &dt, const float x, const float y, const float movementSpeed) override;
     bool isOutBound() const override;
     bool isCollided(const Entity &entity) const;
+    sf::Vector2f lerp(const sf::Vector2f &a, const sf::Vector2f &b, float t)
+    {
+        return (1 - t) * a + t * b;
+    }
 
     // setter
     void setPosition(const float x, const float y) override;

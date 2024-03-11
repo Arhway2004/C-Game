@@ -1,105 +1,128 @@
-#include "../include/Game.h" 
+#include "../include/Game.h"
 #include <iostream>
 
-Game::Game(){
+Game::Game()
+{
     this->initWindow();
-    this->initStates(); 
-    this->run(); 
+    this->initStates();
+    this->run();
     this->update();
-    this->render(); 
+    this->render();
 }
 
-Game::~Game(){
-    delete this->window; 
-    while(!this->states.empty()){
-        delete this->states.top(); 
-        this->states.pop(); 
+Game::~Game()
+{
+    delete this->window;
+    while (!this->states.empty())
+    {
+        delete this->states.top();
+        this->states.pop();
     }
 }
 
-void Game::endApplication(){
-    std::cout << "Ending Application\n"; 
+void Game::endApplication()
+{
+    std::cout << "Ending Application\n";
 }
 
-void Game::initWindow(){
-    this->window = new sf::RenderWindow(sf::VideoMode(960, 540), "Untitled"); 
+void Game::initWindow()
+{
+    this->window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Untitled");
     this->window->setFramerateLimit(144);
     this->window->setVerticalSyncEnabled(false);
 }
 
-void Game::initVariables(){
-    
+void Game::initVariables()
+{
 }
 
-void Game::initStates(){
-    this->states.push(new Level1(this->window));
-//     this->states.push(new Basement(this->window));
-//     this->states.push(new FirstScenes(this->window));
-//     this->states.push(new MainMenu(this->window));
+void Game::initStates()
+{
+
+    // this->states.push(new Level1(this->window));
+    this->states.push(new Basement(this->window));
+    // this->states.push(new FirstScenes(this->window));
+    // this->states.push(new MainMenu(this->window));
+
 }
 
-void Game::run(){
-    while(this->window->isOpen()){
-        sf::Event event; 
-        while(this->window->pollEvent(event)){
-            if(event.type == sf::Event::Closed){
-                window->close(); 
+void Game::run()
+{
+    while (this->window->isOpen())
+    {
+        sf::Event event;
+        while (this->window->pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window->close();
             }
         }
-        this->updateDt(); //set new dt every framerate
+        this->updateDt(); // set new dt every framerate
         this->update();
         this->render();
     }
 }
 
-void Game::add_scene(GameState* scene){
-    this->states.push(scene); 
+void Game::add_scene(GameState *scene)
+{
+    this->states.push(scene);
 }
 
-void Game::updateDt(){
-    //update dt with time taken to update and render 1 frame
-    this->dt = this->dtClock.restart().asSeconds(); 
-    //debug
-    // std::cout << "\x1B[2J\x1B[H"; 
-    // std::cout << this->dt << "\n"; 
+void Game::updateDt()
+{
+    // update dt with time taken to update and render 1 frame
+    this->dt = this->dtClock.restart().asSeconds();
+    // debug
+    //  std::cout << "\x1B[2J\x1B[H";
+    //  std::cout << this->dt << "\n";
 }
 
-void Game::updateGUI(){
-    if(!this->font.loadFromFile("../assets/font/SEASHORE.otf")){
-        std::cout << "ERROR at game/updateGUI::couldn't upload the font" <<std::endl; 
+void Game::updateGUI()
+{
+    if (!this->font.loadFromFile("../assets/font/SEASHORE.otf"))
+    {
+        std::cout << "ERROR at game/updateGUI::couldn't upload the font" << std::endl;
     }
 }
 
-void Game::update(){
+void Game::update()
+{
     // this->updateGUI();
-    //temp
+    // temp
     // std::cout << "states size: "<< this->states.size() << "\n";
-    if(!this->states.empty()){
-        // this->states.top()->checkForEnd(); 
-        this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit
+    if (!this->states.empty())
+    {
+        // this->states.top()->checkForEnd();
+        this->states.top()->update(this->dt, this->window); // if met some condition = ask to quit
 
         std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
-        if(this->states.top()->getQuit()){
-            this->states.top()->endState(); 
-            delete this->states.top(); 
-            this -> states.pop(); 
+        if (this->states.top()->getQuit())
+        {
+            this->states.top()->endState();
+            delete this->states.top();
+            this->states.pop();
 
             std::cout << "states len : " << this->states.size() << "\n";
         }
-    }//App ends
-    else{
-        this->endApplication(); 
-        this->window->close(); 
+    } // App ends
+    else
+    {
+        this->endApplication();
+        this->window->close();
     }
 }
 
-void Game::render(){
-    this->window->clear(); 
+void Game::render()
+{
+    this->window->clear();
 
-    //render item
-    if(!this->states.empty()){
-        this->states.top()->render(this->window);   
+    // render item
+    if (!this->states.empty())
+    {
+        std::cout << "rendering state"
+                  << "\n";
+        this->states.top()->render(this->window);
     }
     this->window->display();
-    
 }

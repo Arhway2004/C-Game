@@ -1,6 +1,6 @@
 #include "../include/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
+GameState::GameState(sf::RenderWindow* window) : option_icon(950.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
     this->window = window;
     this->endNow = false;
 
@@ -14,16 +14,13 @@ GameState::GameState(sf::RenderWindow* window) : option_icon(850.0, 0.0, 1.0, 1.
 
 GameState::~GameState(){
 
-}   
+}
 
 void GameState::updateOptions(){
     //current state
     //click 
     this->updateMousePosition(); 
-
     this->option_icon.update(mousePosView);
-   
-    
     if(this->showOption){
         this->option_page->update(this->mousePosView);
         if(this->option_page->return_quit()){
@@ -54,7 +51,10 @@ void GameState::updateOptions(){
     } 
     //else if(this->option_page->show_quit) do what
 }
- 
+
+void GameState::updateInput(const float& dt){
+    
+}
 
 void GameState::update(const float& dt, sf::RenderWindow* window){
     this->updateOptions();
@@ -111,6 +111,5 @@ void GameState::render(sf::RenderTarget* target){
         }else{
             std::cout << "not render guide" << this->showGuide << std::endl;
         }
-    }
-    
+    }    
 }

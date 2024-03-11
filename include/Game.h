@@ -1,4 +1,4 @@
-// #pragma once 
+// #pragma once
 #ifndef GAME_H
 #define GAME_H
 
@@ -8,36 +8,42 @@
 #include "../Games/Scenes/Basement.h"
 #include "../Games/Scenes/FirstScenes.h"
 #include "../Games/Scenes/Level1.h"
+#include "../Games/Entities/Player.h"
 
-class Game{
-    private:
-        sf::RenderWindow* window;
+// global
 
-        sf::Clock dtClock;
-        float dt; //Synchonize graphics for every computer 
+class Game
+{
+private:
+    sf::RenderWindow *window;
 
-        //resources
-        sf::Font font;
-        std::stack<GameState*> states;
-        
-        //init
-        void initWindow(); 
-        void initVariables(); 
-        void initStates(); 
+    sf::Clock dtClock;
+    float dt; // Synchonize graphics for every computer
 
-    public:
-        //scenes
+    // resources
+    sf::Font font;
+    std::stack<GameState *> states;
 
-        Game(); 
-        virtual ~Game(); 
+    // init
+    void initWindow();
+    void initVariables();
+    void initStates();
 
-        void run(); 
-        void update(); 
-        void updateDt(); 
-        void add_scene(GameState* scene); 
-        void updateGUI(); //update fonts, score display etc
-        void render(); 
-        void endApplication(); 
+    std::shared_ptr<Player> player;
+
+public:
+    // scenes
+
+    Game();
+    virtual ~Game();
+
+    void run();
+    void update();
+    void updateDt();
+    void add_scene(GameState *scene);
+    void updateGUI(); // update fonts, score display etc
+    void render();
+    void endApplication();
 };
 
 #endif

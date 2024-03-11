@@ -1,25 +1,22 @@
 // #include "EnemySpawner.h"
 
-
 // EnemySpawner::EnemySpawner(float spawnDelay)
 //     : spawnDelay(spawnDelay), spawnTimer(0.0f)
 // {
-    
 // }
 
 // EnemySpawner::EnemySpawner()
-//     : spawnDelay(1.0f), spawnTimer(0.0f) // Default constructor 
+//     : spawnDelay(1.0f), spawnTimer(0.0f) // Default constructor
 // {
 // }
 
 // EnemySpawner::~EnemySpawner()
 // {
-   
 // }
 
 // void EnemySpawner::addEnemy()
 // {
-//     enemies.push_back(Enemy()); 
+//     enemies.push_back(Enemy()); // Assuming your Enemy class has a default constructor
 // }
 
 // void EnemySpawner::update(const float &dt)
@@ -62,7 +59,7 @@ EnemySpawner::EnemySpawner()
 
 EnemySpawner::~EnemySpawner()
 {
-    // The vector 'enemies' will clean up its member objects automatically
+
 }
 
 void EnemySpawner::spawnEnemy()
@@ -80,6 +77,7 @@ void EnemySpawner::spawnEnemy()
 
 void EnemySpawner::update(const float &dt)
 {
+    
     spawnTimer += dt;
     if (spawnTimer >= spawnInterval)
     {
@@ -87,14 +85,12 @@ void EnemySpawner::update(const float &dt)
         spawnTimer = 0.0f; // Reset the timer
     }
 
-    // Update each enemy
+    //Update each enemy
     for (auto &enemy : enemies)
     {
         enemy.update(dt);
-    }
-    
-
 }
+    }
 
 void EnemySpawner::render(sf::RenderTarget *target)
 {
@@ -103,3 +99,4 @@ void EnemySpawner::render(sf::RenderTarget *target)
         enemy.render(target);
     }
 }
+

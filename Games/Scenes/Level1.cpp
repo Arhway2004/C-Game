@@ -11,7 +11,7 @@ Level1::Level1(sf::RenderWindow *window) : GameState(window)
     this->bg.setTexture(this->bgTex);
     this->bg.setScale(2.f, 2.1f);
     this->bg.setPosition(0.f, 0.f);
-    enemySpawner = EnemySpawner();   
+    // enemySpawner = EnemySpawner(); 
 }
 
 Level1::~Level1()
@@ -32,6 +32,8 @@ void Level1::updateInput(const float &dt)
     }
 }
 
+
+
 void Level1::update(const float &dt, sf::RenderWindow *window)
 {
     this->updateInput(dt);
@@ -40,7 +42,7 @@ void Level1::update(const float &dt, sf::RenderWindow *window)
     this->enemy.update(dt);
     
 
-    this->enemySpawner.update(dt);
+    // this->enemySpawner.update(dt);
 
     sf::Vector2f playerPosition = player.getPosition();
     std::cout << "Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
@@ -69,7 +71,7 @@ void Level1::render(sf::RenderTarget *target)
         this->player.render(target);
         this->enemy.render(target);
 
-        this->enemySpawner.render(target);
+        // this->enemySpawner.render(target);
     }
     // last
     GameState::render(target);

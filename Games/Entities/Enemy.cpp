@@ -1,11 +1,11 @@
 #include "Enemy.h"
-
-Enemy::Enemy()
+    
+Enemy::Enemy() : currentDirection(0.0f, 0.0f)
 {
     this->enemyTexture = std::make_shared<sf::Texture>();
     this->loadFile(*this->enemyTexture, "../assets/textures/crab.png");
     this->enemySprite.setTexture(*this->enemyTexture);
-    this->enemySprite.setPosition(400.f, 400.f);
+    this->enemySprite.setPosition(600.f, 600.f);
     this->enemySprite.setTextureRect(sf::IntRect(0, 0, 72, 45)); // x, y, w, h
     this->enemySprite.setScale(2.f, 2.f);
 }
@@ -53,17 +53,38 @@ void Enemy::Movement(const float &dt, sf::Vector2f playerPosition)
 
     // this->move(dt, oscillationDirection, 0.0f, 100.f);
     // this->move(dt, 1.0f, 0.0f, 100.f); // move right
-    sf::Vector2f direction = playerPosition - this->enemySprite.getPosition();
-    float magnitude = sqrtf(direction.x * direction.x + direction.y * direction.y);
+//     sf::Vector2f direction = playerPosition - this->enemySprite.getPosition();
+//     float magnitude = sqrtf(direction.x * direction.x + direction.y * direction.y);
 
-    // Normalize the direction to get a unit vector
-    if (magnitude != 0)
+//     // Normalize the direction to get a unit vector
+//     if (magnitude != 0)
+//     {
+//         direction /= magnitude;
+//     }
+
+
+    sf::Vector2f direction = playerPosition - this->enemySprite.getPosition();
+    float distanceToPlayer = sqrtf(direction.x * direction.x + direction.y * direction.y);
+
+    // Chase the player if within range
+        if (distanceToPlayer != 0)
+        {
+            // Normalize direction for consistent movement speed
+            sf::Vector2f normalizedDirection = direction / distanceToPlayer;
+
+            // Smoothly update movement direction
+            currentDirection = lerp(currentDirection, normalizedDirection, 0.1f);
+        }
+    else
     {
-        direction /= magnitude;
+
     }
 
-    this->move(dt, direction.x, direction.y, 100.f); 
+    // Use the stored direction for movement
+    this->move(dt, currentDirection.x, currentDirection.y, 100.f);
 }
+
+
 
 void Enemy::setState(const EnemyStates state)
 {
@@ -79,9 +100,9 @@ void Enemy::update(const float &dt)
 {
     this->Movement(dt, player.getPosition());
     this->updateAnimation();
-    sf::Vector2f playerPosition = player.getPosition();
+    // sf::Vector2f playerPosition = player.getPosition();
     this->player.update(dt);
-    std::cout << "Enemy Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
+    // std::cout << "Enemy Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
 }
 
 void Enemy::updateInput(const float &dt)
