@@ -69,6 +69,7 @@ void Base::endState(){
 //marked
 void Base::update(const sf::Vector2f mousePos){
     if(this->close_icon.getGlobalBounds().contains(mousePos)){
+        
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             std::cout << "Base::update close icon clicked" << std::endl;
             this->quit = true; 

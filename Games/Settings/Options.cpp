@@ -67,6 +67,7 @@ void Options::update(const sf::Vector2f mousePos){
         this->show_quit = false;
     }
     else if (this->quit_icon.getClicked()){
+        music->playSFX();
         std::cout << "Click quit" << std::endl;
         // this->closeWindow(); 
     }

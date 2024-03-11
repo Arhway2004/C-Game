@@ -1,15 +1,13 @@
 #include "../include/Game.h" 
-
 #include <iostream>
 
-Game::Game(){
+Game::Game(): music(new Setting) {
     this->initWindow();
     this->initStates(); 
     this->run(); 
     this->update();
     this->render(); 
-    this->music = new(Setting);
-    music->playMusic();
+    // this->music = new(Setting);
 }
 
 Game::~Game(){
@@ -40,8 +38,8 @@ void Game::initStates(){
 }
 
 void Game::run(){
+    this->music->playMusic(); 
     while(this->window->isOpen()){
-        // music->playMusic();
         sf::Event event; 
         while(this->window->pollEvent(event)){
             if(event.type == sf::Event::Closed){
@@ -60,11 +58,7 @@ void Game::add_scene(GameState* scene){
 }
 
 void Game::updateDt(){
-    //update dt with time taken to update and render 1 frame
     this->dt = this->dtClock.restart().asSeconds(); 
-    //debug
-    // std::cout << "\x1B[2J\x1B[H"; 
-    // std::cout << this->dt << "\n"; 
 }
 
 void Game::updateGUI(){
@@ -74,10 +68,6 @@ void Game::updateGUI(){
 }
 
 void Game::update(){
-
-    // this->updateGUI();
-    //temp
-    // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
         // this->states.top()->checkForEnd(); 
         this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit

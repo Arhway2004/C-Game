@@ -18,6 +18,8 @@ private:
      // sf::Texture icon;
      sf::Sprite *icon;
      sf::Texture texture;
+     // Setting* music;
+
 
 public:
      ClickableIcon(int pos_x, int pos_y, float scale_x, float scale_y, std::string path);

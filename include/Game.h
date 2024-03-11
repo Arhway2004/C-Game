@@ -8,7 +8,7 @@
 #include "../Games/Scenes/Basement.h"
 #include "../Games/Scenes/FirstScenes.h"
 #include "../Games/Scenes/Level1.h"
-#include "/Users/arhway/Desktop/FinalI/C-Game/Games/Settings/Setting.h"
+#include "../Games/Settings/Setting.h"
 
 
 class Game{
