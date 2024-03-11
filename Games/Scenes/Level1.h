@@ -15,9 +15,15 @@ private:
     sf::Sprite bg;
     Player player;
     Enemy enemy;
+    // Enemy enemy1;
+    // Enemy enemy2;
+    // Enemy enemy3;
+    // Enemy enemy4;
     EnemySpawner enemySpawner;
     sf::Texture enemyTexture;
     std::vector<Enemy> enemies;
+    // float enemySpawnTimer = 0.0f;
+    // float spawnInterval = 2.0f;
 
 public:
     Level1(sf::RenderWindow *window); 
@@ -28,4 +34,5 @@ public:
     void updateInput(const float &dt);
     void update(const float &dt, sf::RenderWindow *window) override;
     void render(sf::RenderTarget *target = nullptr) override;
+    // void spawnEnemy(const float &dt);
 };

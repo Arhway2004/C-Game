@@ -42,6 +42,7 @@ public:
     ~EnemySpawner();
 
     void spawnEnemy(); // Create a new enemy
+    void enemyDied();  // Called when an enemy dies (or is otherwise removed from the game world
 
     void update(const float &dt);
     void render(sf::RenderTarget *target);
@@ -54,7 +55,33 @@ private:
     float spawnInterval;                      // Time between spawns
     std::vector<sf::Vector2f> spawnPositions; // Potential places to spawn enemies
     Player player;
+    int MaxAliveEnemies;
+    int CurrentAliveEnemies;
 };
 
 #endif
 
+// #include <vector>
+// #include <random>
+
+// class EnemySpawner
+// {
+// public:
+//     EnemySpawner(float spawnInterval); // Constructor
+//     EnemySpawner();                    // Default constructor   
+//     ~EnemySpawner();
+
+//     void update(const float &deltaTime);
+//     void render(sf::RenderTarget *target);
+
+// private:
+//     float spawnTimer;
+//     float spawnInterval;
+//     std::vector<Enemy> enemies;
+//     Player player;
+
+//     // Helper for random position generation
+//     float randomSpawnPositionX();
+//     float randomSpawnPositionY();
+// };
+// #endif

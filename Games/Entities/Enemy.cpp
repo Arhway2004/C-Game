@@ -82,6 +82,8 @@ void Enemy::Movement(const float &dt, sf::Vector2f playerPosition)
 
     // Use the stored direction for movement
     this->move(dt, currentDirection.x, currentDirection.y, 100.f);
+
+    
 }
 
 

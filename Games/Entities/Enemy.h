@@ -13,6 +13,7 @@ private:
     sf::Vector2f currentDirection;
     Animation animation;
     Player player;
+    
 
     // Variables for movenment
     float movementSpeed = 100.f;
@@ -35,7 +36,7 @@ public:
 
     // Functions
     void loadFile(sf::Texture &texture, std::string path) override;
-    void update(const float &dt) override;
+    void update(const float &dt);
     void render(sf::RenderTarget *target) override;
     sf::FloatRect getGlobalBounds() const;
     void move(const float &dt, const float x, const float y, const float movementSpeed) override;
