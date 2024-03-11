@@ -8,6 +8,11 @@ class Enemy : public Entity
 {
 private:
     //Initializer
+    struct EnemyStats{
+        int maxBullet;
+        int bulletReceived; //number of bullet to kill
+    }; 
+
     std::shared_ptr<HealthBar> enemyHealthBar;
 
     std::shared_ptr<sf::Texture> enemyTexture;
@@ -27,15 +32,9 @@ public:
     enum EnemyStates
     {
         ALIVE = 0,
-        DAMAGED = 2,
-        DEAD = 3,
+        DAMAGED = 1,
+        DEAD = 2,
     };
-
-    struct EnemyStats{
-        int maxHealth;
-        int bulletMax; //number of bullet to kill
-        int bulletReceived; //number of buller already hit 
-    }; 
 
     EnemyStats enemy_stats;
     EnemyStates enemyState = ALIVE;
@@ -48,6 +47,7 @@ public:
     void loadFile(sf::Texture& texture, std::string path) override;
     void update(const float &dt) override;
     void update(const float &dt, sf::Vector2f mousePos); 
+    void updateState(); 
 
     // void update(const float &dt, Player &player);
     void render(sf::RenderTarget *target) override;

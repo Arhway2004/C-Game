@@ -38,10 +38,10 @@ void Bullet::setRotation(const float angle){
     this->bulletSprite.setRotation(angle);
 }
 
-void Bullet::move(const float& dt, const float x, const float y, const float movementSpeed){
-    //set bullet angle
-    this->bulletSprite.move(x * movementSpeed * dt ,y * movementSpeed * dt);
-}
+// void Bullet::move(const float& dt, const float x, const float y, const float movementSpeed){
+//     //set bullet angle
+//     this->bulletSprite.move(x * movementSpeed * dt ,y * movementSpeed * dt);
+// }
 
 void Bullet::move(const float& dt, const float x, const float y, const float movementSpeed, const float angle){
     //set bullet angle 
@@ -52,9 +52,6 @@ void Bullet::move(const float& dt, const float x, const float y, const float mov
     // this->bulletSprite.move(velocity.x * dt, velocity.y * dt);
 }
 
-void Bullet::update(const float& dt){
-
-}
 
 void Bullet::update(const float& dt, const float angle){
     //isOutBound();
@@ -77,9 +74,6 @@ bool Bullet::isCollided(Enemy& enemy) const{
     return false; 
 }
 
-void Bullet::updateInput(const float& dt){
-
-}
 
 void Bullet::updateInput(const float& dt, const float angle){
     float angleRad = angle * (M_PI / 180.0f);

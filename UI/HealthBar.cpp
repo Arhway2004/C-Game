@@ -41,8 +41,13 @@ void HealthBar::update(const int change){ //if damage change = - / gain change =
     }
 }
 
+bool HealthBar::bloodRunsOut() const{
+    return this->fullHealthtoPercent <= 0;
+}
+
 
 void HealthBar::render(sf::RenderTarget* target){
-    target->draw(this->frame);  
+    target->draw(this->frame);
+    // if(this->fullHealthtoPercent > 0)
     target->draw(this->blood);
 }

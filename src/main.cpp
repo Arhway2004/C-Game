@@ -57,27 +57,41 @@ int main()
 //test sprite
 // int main()
 // {
-//     sf::RenderWindow window(sf::VideoMode(960, 540),"Bouncing mushroom.");
+//     sf::RenderWindow window(sf::VideoMode(1060, 740), "Bouncing mushroom.");
 
 //     sf::Texture mushroomTexture;
-//     mushroomTexture.loadFromFile("../assets/textures/gun_r.png");
+//     mushroomTexture.loadFromFile("../assets/textures/inventories.png");
 //     sf::Sprite mushroom(mushroomTexture);
-//     mushroom.setPosition(300, 300);
-//     mushroom.setScale(2.f, 2.f);
-//     sf::Vector2u size = mushroomTexture.getSize();
-//     // mushroom.setOrigin(0.f, 0.f);
+//     mushroom.setPosition(30, 550); // Adjusted position
+//     mushroom.setScale(1.5f, 1.5f);
 
-//     sf::Texture playerTex;
-//     playerTex.loadFromFile("../assets/textures/right_idle2.png");
-//     sf::Sprite player(playerTex);
-//     player.setScale(2.f, 2.f);
-//     sf::Vector2u size2 = playerTex.getSize();
-//     player.setOrigin(playerTex.getSize().x/2, playerTex.getSize().y/2);
-//     player.setPosition(300, 300);
+//     sf::Font font; 
+//     sf::Text text; 
+//     if(!font.loadFromFile("../assets/font/Blomberg-8MKKZ.ttf")){
+//         std::cout << "Failed to load font." << std::endl;
+//         return 1;
+//     }
+//     text.setFont(font);
+//     text.setString(std::to_string(5));
+//     text.setCharacterSize(30);
+//     text.setFillColor(sf::Color::Black);
+//     text.setPosition(180, 660);
 
-//     sf::CircleShape circle(10.f); // Radius of the circle
-//     circle.setFillColor(sf::Color::Red);
-//     circle.setPosition(300.f, 300.f);
+//     sf::RectangleShape frame;
+//     frame.setSize(sf::Vector2f(79, 65));
+//     frame.setFillColor(sf::Color(255, 255, 255, 120)); // Set alpha value for transparency
+//     frame.setPosition(275, 632); // Adjusted position
+
+
+//     sf::RectangleShape frame2;
+//     frame2.setSize(sf::Vector2f(79, 65));
+//     frame2.setFillColor(sf::Color(255, 255, 255, 120)); // Set alpha value for transparency
+//     frame2.setPosition(275 + 112, 632);
+
+//     sf::RectangleShape frame3;
+//     frame3.setSize(sf::Vector2f(79, 65));
+//     frame3.setFillColor(sf::Color(255, 255, 255, 120)); // Set alpha value for transparency
+//     frame3.setPosition(275 + 112 + 112, 632);
 
 //     while (window.isOpen())
 //     {
@@ -89,19 +103,19 @@ int main()
 //                 window.close();
 //             }
 //         }
-//         sf::Vector2f mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-//         float angle = -1 * std::atan2(mousePosView.y - mushroom.getPosition().y , (mushroom.getPosition().x + size.x) - mousePosView.x); 
-//         angle = angle * 180.f / static_cast<float>(M_PI); 
-//         mushroom.setRotation(angle + 180);
 
 //         window.clear(sf::Color(16, 16, 16, 255)); // Dark gray.
-//         window.draw(player);                 // Drawing our sprite.
-//         window.draw(mushroom);                  // Drawing our sprite.
-//         window.draw(circle);
+//         window.draw(mushroom);
+//         window.draw(frame);
+//         window.draw(frame2);
+//         window.draw(frame3);
+//         window.draw(text);
 //         window.display();
 //     }
-//     return 0; 
+
+//     return 0;
 // }
+
 
 
 //test ui

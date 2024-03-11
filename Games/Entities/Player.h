@@ -45,7 +45,6 @@ class Player : public Entity{
 
         Playerstats player_stats;
 
-
         Player(); 
         virtual ~Player(); 
         void loadFile(sf::Texture& tex, std::string path) override;
@@ -57,6 +56,7 @@ class Player : public Entity{
         bool isOutBound() const override; //should be in entity class
         void updateInput(const float& dt) override;
         void updateGunMovement(sf::Vector2f mousePos); 
+        void updateHealthbar(int damage);
 
         //setter/getter
         void setState(const Player::PlayerStates state); 

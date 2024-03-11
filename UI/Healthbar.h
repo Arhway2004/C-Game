@@ -17,6 +17,7 @@ class HealthBar{
         ~HealthBar();
         void update(const int change); 
         void setPosition(float x, float y);
+        bool bloodRunsOut() const;
         // void decreaseHealth(int damage);
         void render(sf::RenderTarget* target);
 

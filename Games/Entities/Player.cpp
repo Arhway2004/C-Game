@@ -20,7 +20,6 @@ Player::Player(){
 
     //healthbar
     this->playerHealthBar = std::make_shared<HealthBar>(this->testSprite.getPosition().x, this->testSprite.getPosition().y - 60, 77, 8, 100, sf::Color::Red);
-
 }
 
 Player::~Player(){
@@ -85,16 +84,19 @@ void Player::update(const float& dt){
 
 void Player::update(const float& dt, sf::Vector2f mousePos){
     // this->updateInput(dt);
-
     this->updateMovement(dt, mousePos);
     this->updateAnimation();
     this->updateOrigin();
     this->updateGunMovement(mousePos);
-    if(this->playerState == DAMAGED){ // if player is damaged
-        this->playerHealthBar->update(30);
-    }
+    // if(this->playerState == DAMAGED){ // if player is damaged
+    //     this->playerHealthBar->update(30);
+    // }
     this->playerHealthBar->setPosition(this->testSprite.getPosition().x - 40, this->testSprite.getPosition().y - 60);
 
+}
+
+void Player::updateHealthbar(int damage){
+    this->playerHealthBar->update(damage);
 }
 
 
@@ -147,7 +149,6 @@ void Player::updateMovement(const float& dt, sf::Vector2f mousePos){
         }else{
             prevState = playerState;
         }
-
 }
 
 
@@ -202,6 +203,8 @@ void Player::updateAnimation(){
             break;
         case SHOOTING:
             break;
+        // case DAMAGED:
+        //     break;
         default:
             animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 4, 35, "../assets/textures/player_idle.png");
             break;

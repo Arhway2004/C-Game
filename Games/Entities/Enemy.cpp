@@ -16,7 +16,9 @@ Enemy::Enemy()
     this->enemyHealthBar = std::make_shared<HealthBar>(this->enemySprite->getPosition().x, this->enemySprite->getPosition().y - 60, 77, 8, 100, sf::Color::Red);
     
     std::srand(std::time(0));
-    int rand = std::rand() % 4; 
+    int rand = std::rand() % 3 + 1;
+    this->enemy_stats.maxBullet = rand;
+    this->enemy_stats.bulletReceived = 0;
 }
 
 Enemy::~Enemy()
@@ -68,20 +70,33 @@ void Enemy::Movement(const float &dt, sf::Vector2f playerPosition)
     float magnitude = sqrtf(direction.x * direction.x + direction.y * direction.y);
 
     // Normalize the direction to get a unit vector
-    if (magnitude != 0)
-    {
+    if (magnitude != 0){
         direction /= magnitude;
     }
-
     this->move(dt, direction.x, direction.y, 100.f); 
 }
 
-void Enemy::setState(const EnemyStates state){
-    this->enemyState = state;
-}
-
-Enemy::EnemyStates Enemy::getState(){
-    return this->enemyState;
+void Enemy::updateState()
+{
+    switch (this->enemyState)
+    {
+        case Enemy::EnemyStates::DAMAGED: {
+            std::cout << "Enemy is damaged" << std::endl;
+            int damage = 100 / this->enemy_stats.maxBullet;
+            this->enemy_stats.bulletReceived++;
+            this->enemyHealthBar->update(-damage);
+            if(this->enemy_stats.bulletReceived == this->enemy_stats.maxBullet){
+                this->enemyState = Enemy::EnemyStates::DEAD;
+            }
+            break;
+        }
+        case Enemy::EnemyStates::DEAD: {
+            std::cout << "Enemy is dead" << std::endl;
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 void Enemy::update(const float &dt){
@@ -93,23 +108,35 @@ void Enemy::update(const float &dt, sf::Vector2f mousePos)
 {
     this->Movement(dt, player.getPosition());
     this->updateAnimation();
+    this->updateState();
     sf::Vector2f playerPosition = player.getPosition();
     this->player.update(dt, mousePos); 
-    this->enemyHealthBar->update(0);
+    // this->enemyHealthBar->update(0);
     this->enemyHealthBar->setPosition(this->enemySprite->getPosition().x - 40, this->enemySprite->getPosition().y - 40);
+    // if (this->enemyHealthBar->bloodRunsOut())
+    // {
+    //     this->enemyState = Enemy::EnemyStates::DEAD;
+    // }
     std::cout << "Enemy Player Position: " << playerPosition.x << ", " << playerPosition.y << std::endl;
 }
 
 void Enemy::updateInput(const float &dt)
 {
+    
+}
 
+void Enemy::setState(Enemy::EnemyStates state){
+    this->enemyState = state;
+}
+
+Enemy::EnemyStates Enemy::getState(){
+    return this->enemyState;
 }
 
 bool Enemy::isCollided(const Entity& entity) const
 {
 
 }
-
 
 bool Enemy::isOutBound() const
 {
@@ -127,6 +154,8 @@ void Enemy::updateAnimation()
 
 void Enemy::render(sf::RenderTarget *target)
 {
-    target->draw(*this->enemySprite);
-    this->enemyHealthBar->render(target);
+    if(this->enemyState != Enemy::EnemyStates::DEAD){
+        target->draw(*this->enemySprite);
+        // this->enemyHealthBar->render(target);
+    }
 }

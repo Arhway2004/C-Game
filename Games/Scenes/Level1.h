@@ -5,20 +5,31 @@
 #include "../Entities/Enemy.h"
 #include "../Entities/EnemySpawner.h"
 #include "../Entities/Bullet.h"
+#include "../../UI/InventoryPanel.h"
 
 
 class Level1: public GameState{
     private:
         sf::RenderWindow* window; 
-
-        //temp
         sf::RectangleShape background;
         sf::Texture bgTex;
         sf::Sprite bg;
+        sf::Sprite target;
+        sf::Texture targetTex;
         std::shared_ptr<Player> player;
         std::shared_ptr<EnemySpawner> enemySpawner;
-        std::vector<Bullet> bullets; 
-        std::vector<Enemy> enemies; 
+        std::vector<Bullet> bullets;
+        std::vector<Enemy> enemies;
+        sf::Text text;
+        sf::Font font;
+        int killCount = 0;
+
+        //temp
+        std::shared_ptr<InventoryPanel> inventoryPanel;
+
+        //time delay when collide with enemy
+        sf::Clock hitCooldownTimer;
+        sf::Time hitCooldownDuration;
 
     public:
         Level1(sf::RenderWindow* window);
@@ -34,6 +45,9 @@ class Level1: public GameState{
         //player n enemy
         bool isCollided(Player& player, const Enemy& enemy);
         bool bulletHitEnemy(Bullet& b, Enemy& enemy) const; 
+        bool playerCanTakeHit() const; 
+        void resetHitCooldown(); 
+
 
         //shoot bullet 
         void shootBullet(Player& player, std::vector<Bullet>& bullets, sf::Vector2f mousePos);
