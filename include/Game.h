@@ -9,6 +9,7 @@
 #include "../Games/Scenes/FirstScenes.h"
 #include "../Games/Scenes/Level1.h"
 #include "../Games/Entities/Player.h"
+#include "../Games/Scenes/WinScene.h"
 
 // global
 

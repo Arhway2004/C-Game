@@ -1,44 +1,52 @@
 #include "../include/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window) : option_icon(950.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png"){
+GameState::GameState(sf::RenderWindow *window) : option_icon(950.0, 0.0, 1.0, 1.0, "../assets/icons/setting.png")
+{
     this->window = window;
     this->endNow = false;
 
-    this->option_page = std::make_shared<Options>(); 
-    this->guide_page = std::make_shared<Guide>(); 
-    //init setting page here
+    this->option_page = std::make_shared<Options>();
+    this->guide_page = std::make_shared<Guide>();
+    // init setting page here
     this->showOption = false;
     this->showGuide = false;
-    //show setting = false 
+    // show setting = false
 }
 
-GameState::~GameState(){
-
+GameState::~GameState()
+{
 }
 
-void GameState::updateOptions(){
-    //current state
-    //click 
-    this->updateMousePosition(); 
+void GameState::updateOptions()
+{
+    // current state
+    // click
+    this->updateMousePosition();
     this->option_icon.update(mousePosView);
-    if(this->showOption){
+    if (this->showOption)
+    {
         this->option_page->update(this->mousePosView);
-        if(this->option_page->return_quit()){
+        if (this->option_page->return_quit())
+        {
             this->showOption = false;
             this->option_page->endState();
         }
-    }else if(this->showGuide){
+    }
+    else if (this->showGuide)
+    {
         this->guide_page->update(this->mousePosView);
-        if(this->guide_page->return_quit()){
+        if (this->guide_page->return_quit())
+        {
             this->showGuide = false;
             this->showOption = false;
             this->option_page->show_guide = false;
             this->guide_page->endState();
         }
     }
-    //else if(this->showQuit) do what
-    
-    if (this->option_icon.isClicked2()){
+    // else if(this->showQuit) do what
+
+    if (this->option_icon.isClicked2())
+    {
         this->showOption = true;
         this->showGuide = false;
         this->option_page->show_guide = false;
@@ -46,70 +54,86 @@ void GameState::updateOptions(){
     }
 
     this->showGuide = this->option_page->show_guide;
-    if(this->option_page->show_guide) {
-    this->guide_page->reset_quit();
-    } 
-    //else if(this->option_page->show_quit) do what
+    if (this->option_page->show_guide)
+    {
+        this->guide_page->reset_quit();
+    }
+    // else if(this->option_page->show_quit) do what
 }
 
-void GameState::updateInput(const float& dt){
-    
+void GameState::updateInput(const float &dt)
+{
 }
 
-void GameState::update(const float& dt, sf::RenderWindow* window){
+void GameState::update(const float &dt, sf::RenderWindow *window)
+{
     this->updateOptions();
-
 }
 
-
-void GameState::initFont(sf::Font& font, std::string path){
-    if(!font.loadFromFile(path)){
-        std::cout << "ERROR at MainMenu/initFont::couldn't upload the font" << std::endl; 
+void GameState::initFont(sf::Font &font, std::string path)
+{
+    if (!font.loadFromFile(path))
+    {
+        std::cout << "ERROR at MainMenu/initFont::couldn't upload the font" << std::endl;
     }
 }
 
-void GameState::setText(sf::Text& text, sf::Font& font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg){
+void GameState::setText(sf::Text &text, sf::Font &font, sf::Color msg_color, short size, short int pos_x, short int pos_y, std::string msg)
+{
     text.setFont(font);
     text.setString(msg);
     text.setFillColor(msg_color);
-    text.setCharacterSize(size); 
+    text.setCharacterSize(size);
     text.setPosition(
-        pos_x, pos_y
-    );
+        pos_x, pos_y);
 }
 
-bool GameState::getQuit() const{
+bool GameState::getQuit() const
+{
     return this->endNow;
 }
 
-void GameState::endState(){
-    std::cout << "Ending GameState!" << "\n"; 
+void GameState::endState()
+{
+    std::cout << "Ending GameState!"
+              << "\n";
 }
 
-void GameState::checkForEnd(){
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+void GameState::checkForEnd()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
         this->endNow = true;
     }
 }
 
-void GameState::updateMousePosition(){
-    this->mousePosScreen = sf::Mouse::getPosition(); 
+void GameState::updateMousePosition()
+{
+    this->mousePosScreen = sf::Mouse::getPosition();
     this->mousePosWindow = sf::Mouse::getPosition(*this->window);
     this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 }
 
-void GameState::render(sf::RenderTarget* target){
-    if(!target){
-        target = this->window; 
+void GameState::render(sf::RenderTarget *target)
+{
+    if (!target)
+    {
+        target = this->window;
     }
     this->option_icon.render(target);
-    if(this->showOption){ //showOption
+    if (this->showOption)
+    { // showOption
         this->option_page->render_options(target);
-    }else{
-        if(this->showGuide){
+    }
+    else
+    {
+        if (this->showGuide)
+        {
             this->guide_page->render_guide(target);
-        }else{
+        }
+        else
+        {
             std::cout << "not render guide" << this->showGuide << std::endl;
         }
-    }    
+    }
 }

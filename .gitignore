@@ -1,4 +1,4 @@
 .vscode
-*.dSYM
 /build
 .cache
+src/my_game.dSYM/

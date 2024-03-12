@@ -20,8 +20,8 @@ Button::Button(float x, float y, float width, float height, sf::Font* font, std:
         //this->shape.getPosition().x = top left corner 
     );
 
-    this->idleColor = sf::Color::Blue; 
-    this->hoverColor = sf::Color::Red; 
+    this->idleColor = sf::Color(153, 153, 153);
+    this->hoverColor = sf::Color::Red;
     this->activeColor = sf::Color::Green; 
 }
 
