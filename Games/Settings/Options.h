@@ -3,18 +3,19 @@
 
 #include "Base.h"
 #include "../../UI/ClickableIcon.h"
+#include "Setting.h"
 #include "Guide.h"
 
 class Options : public Base{
     private: 
         ClickableIcon resume_icon; 
         ClickableIcon restart_icon; 
-        ClickableIcon setting_icon; 
         ClickableIcon quit_icon; 
         Guide guide_page;
-
+        Setting* music;
     public:
         ClickableIcon guide_icon; 
+        ClickableIcon setting_icon; 
         bool show_base;
         bool show_resume; 
         bool show_restart;

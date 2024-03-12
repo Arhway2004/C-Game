@@ -1,6 +1,6 @@
 #include "../../include/Gamestate.h"
 #include "../../UI/Message.h"
-
+// #include "../../C-Game/UI/Music.h"
 class FirstScenes : public GameState
 {
 private:
@@ -13,12 +13,13 @@ private:
     bool enterPress;
     int x;
     sf::RectangleShape Textbox;
+    // Music* music;
+
 
 public:
     FirstScenes(sf::RenderWindow* window);
     ~FirstScenes();
     void endState() override;
-    void updateInput(const float& dt) override; 
     void update(const float& dt, sf::RenderWindow* window) override;
     void render(sf::RenderTarget* target) override;
 };

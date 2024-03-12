@@ -46,3 +46,14 @@
 //                 std::cout << "Bullet hit Enemy" << std::endl;
 //             }
 //         }
+
+
+
+//urgent
+//background/music
+//enter to continue : firstscene
+//win/lose
+//during gameplay, user press option = game pause
+//hui setting scene in option
+//other button in option
+//Setting in option not show anything
