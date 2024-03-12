@@ -1,11 +1,12 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../include/Game.h"
-// #include "../src/Config.h"
+#include "../src/Config.h"
 
 int main()
 {
-    srand(time(static_cast<unsigned>(0)));
+    // srand(time(static_cast<unsigned>(0)));
+    srand(static_cast<unsigned>(time(nullptr)));
     Game game;
     game.run();
     return 0;

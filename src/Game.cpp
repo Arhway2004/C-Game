@@ -32,10 +32,12 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    // this->states.push(new Basement(this->window)); 
-    // this->states.push(new FirstScenes(this->window));
-    // this->states.push(new MainMenu(this->window));
+    
     this->states.push(new Level1(this->window));
+    this->states.push(new Basement(this->window));
+    // this->states.push(new FirstScenes(this->window));
+    this->states.push(new MainMenu(this->window));
+
 }
 
 void Game::run(){
@@ -104,3 +106,7 @@ void Game::render(){
     this->window->display();
     
 }
+
+
+
+// g++ -Wall -Wextra -g -fsanitize=address -O0 -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp ../UI/Message.cpp ../Games/Scenes/FirstScenes.cpp ../Games/Scenes/Level1.cpp ../Games/Entities/Player.cpp ../Games/Entities/Enemy.cpp ../Games/Entities/Bullet.cpp  ../UI/interactable_obj.cpp ../UI/AnimatedGIF.cpp ../Games/Entities/EnemySpawner.cpp ../UI/HealthBar.cpp ../UI/InventoryPanel.cpp ../Games/Scenes/WinScene.cpp ../UI/Collectible.cpp -lsfml-graphics -lsfml-window -lsfml-system

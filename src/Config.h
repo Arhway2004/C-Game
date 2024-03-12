@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 #include <map>
 #include <string>
 #include <stack>

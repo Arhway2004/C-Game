@@ -17,6 +17,19 @@ InteractableObj::InteractableObj(int pos_x, int pos_y, float scale_x, float scal
     this->icon = new sf::Sprite(this->texture);
     this->icon->setScale(scale_x, scale_y);
     this->icon->setPosition(pos_x, pos_y);
+    this->bounds = icon->getGlobalBounds();
+
+    
+    if (!font.loadFromFile("../assets/font/SEASHORE.otf"))
+    {
+        // Handle font loading error
+    }
+
+    
+    interactText.setFont(font);
+    interactText.setString("Press F to Interact");
+    interactText.setCharacterSize(25);
+    interactText.setFillColor(sf::Color::White);
 }
 
 InteractableObj::~InteractableObj()
@@ -29,41 +42,26 @@ const bool InteractableObj::getInput() const
     return this->inputted;
 }
 
-// bool InteractableObj::IsPressed(const sf::Vector2f mousePos)
-// {   
-    
-    // Works now!
-    // if (icon->getGlobalBounds().contains(mousePos))
-    // {
-    //     std::cout << "Mouse over object" << std::endl; 
-    //     if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-    //     {
-    //         this->inputted = true;
-    //         std::cout << "Key pressed: " << this->inputted << std::endl;
-    //     }
-    //     else
-    //     {
-    //         this->inputted = false;
-    //         std::cout << "Key Pressed: " << this->inputted << std::endl;
-    //     }
-    // }
-    // return this->inputted;
 
-// Might use this logic in the future
-// need to adjust some of logic for getting player position
+
 bool InteractableObj::IsPressed(const sf::Vector2f playerPosition)
 {
-    float interactionDistance = 50.0f; // Adjust this distance as needed
+    float interactionDistance = 85.0f;
+    // Calculate center of the object
+    sf::Vector2f objectCenter = sf::Vector2f(
+        bounds.left + bounds.width / 2.0f,
+        bounds.top + bounds.height / 2.0f);
 
-    // Calculate distance between player and object
-    float dx = playerPosition.x - (icon->getPosition().x + icon->getGlobalBounds().width / 2);
-    float dy = playerPosition.y - (icon->getPosition().y + icon->getGlobalBounds().height / 2);
-    float distance = std::sqrt(dx * dx + dy * dy);
+    // Calculate distance between player and object center
+    sf::Vector2f delta = playerPosition - objectCenter;
+    float distance = std::sqrt(delta.x * delta.x + delta.y * delta.y);
 
     // If player is near the object, check for key press
-    // Test player is exactly on the object
-    if (playerPosition == icon->getPosition())
-    {   
+    if (distance < interactionDistance)
+    {
+        sf::Vector2f textPosition(475.f,2.f);
+        interactText.setPosition(textPosition);
+        showText = true;
         std::cout << "Player near object" << std::endl;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
         {
@@ -77,6 +75,7 @@ bool InteractableObj::IsPressed(const sf::Vector2f playerPosition)
     else
     {
         this->inputted = false;
+        showText = false;
     }
 
     return this->inputted;
@@ -85,12 +84,15 @@ bool InteractableObj::IsPressed(const sf::Vector2f playerPosition)
 
 void InteractableObj::update(const float &dt)
 {
-    // Change picture or any other update logic here
 }
 
 void InteractableObj::render(sf::RenderTarget *target)
 {
     std::cout << "Rendering interactable" << std::endl;
     target->draw(*this->icon);
+    if (showText)
+    {
+        target->draw(interactText);
+    }
 }
 
