@@ -1,8 +1,4 @@
 #include "Player.h"
-//problem: check player out of bound / or area that can't walk
-//when idle player not move
-//add isCollided function
-//gun point init weird
 
 Player::Player(){
     this->loadFile(this->testTexture, "../assets/textures/right_idle2.png"); 
@@ -182,10 +178,6 @@ void Player::updateAnimation(){
         case IDLE:
             animation.updateAnimation(this->testSprite, this->testTexture, 0, 64, 80, 1, 35, "../assets/textures/right_idle2.png");
             this->loadFile(this->gunTexture, "../assets/textures/gun_r.png");
-            // if(this->prevState == MOVING_LEFT){
-            //     animation.updateAnimation(this->testSprite, this->testTexture, 240, 64, 80, 4, 35, "../assets/textures/player_idle.png");
-            // }else{
-            // }
             break;
         case MOVING_LEFT:
             animation.updateAnimation(this->testSprite, this->testTexture, 240, 80, 80, 8, 35, "../assets/textures/player_run.png");

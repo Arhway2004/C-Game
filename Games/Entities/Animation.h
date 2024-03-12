@@ -17,4 +17,9 @@ struct Animation{
         xTexture = xTexture * width;
         sprite.setTextureRect(sf::IntRect(xTexture, startPosY, width, height));  //x, y, w, h>
     }
+
+    // void playAnimation(int pos_x, int pos_y, int width, int height, int number_of_frames, int framespeed, std::string path){
+    //     sprite.setPosition(pos_x, pos_y);
+    //     updateAnimation(sprite, tex, 0, width, height, number_of_frames, framespeed, path);
+    // }
 };

@@ -1,7 +1,5 @@
 #include "HealthBar.h"
 
-//frame.setSize(sf::Vector2f(77, 8));
-//blood.setSize(sf::Vector2f(74, 5));
 HealthBar::HealthBar(float pos_x, float pos_y, float set_w, float set_h, int fullHealth, sf::Color bloodColor) {
     this->position = sf::Vector2f(pos_x, pos_y);
     this->frame.setSize(sf::Vector2f(set_w, set_h));

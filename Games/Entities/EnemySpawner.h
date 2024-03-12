@@ -12,7 +12,7 @@ public:
 
     void spawnEnemy(std::vector<Enemy>& enemies); // Create a new enemy
 
-    void update(const float &dt,  sf::Vector2f mousePos, std::vector<Enemy>& enemies);
+    void update(const float &dt, float spawn_interval,  sf::Vector2f mousePos, std::vector<Enemy>& enemies);
     // void render(sf::RenderTarget *target);
 
 private:

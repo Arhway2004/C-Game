@@ -1,15 +1,26 @@
 
 // Another version with random spawn and set the spawn positions
 
+
 #include "EnemySpawner.h"
 
 EnemySpawner::EnemySpawner()
     : spawnTimer(0.0f), spawnInterval(3.0f) // Spawn every 3 seconds
 {
-    // Initialize with some basic spawn positions
-    spawnPositions.push_back(sf::Vector2f(-100.0f, 100.0f));
-    //  
-    // ... add more as needed
+    std::random_device rd; 
+    std::mt19937 gen(rd()); 
+    for(size_t i = 0; i < 20; i++){
+        if(i % 3 == 1){
+            std::uniform_int_distribution<> dist(50, 740);
+            spawnPositions.push_back(sf::Vector2f(dist(gen), 1100.f));
+        }else if(i % 3 == 2){
+            std::uniform_int_distribution<> dist(0, 1060);
+            spawnPositions.push_back(sf::Vector2f(dist(gen), 790.f));
+        }else{
+            std::uniform_int_distribution<> dist(50, 740);
+            spawnPositions.push_back(sf::Vector2f(-50.f, dist(gen)));
+        }   
+    }
 }
 
 EnemySpawner::~EnemySpawner()
@@ -29,8 +40,9 @@ void EnemySpawner::spawnEnemy(std::vector<Enemy>& enemies)
     enemies.push_back(newEnemy);
 }
 
-void EnemySpawner::update(const float &dt, sf::Vector2f mousePos, std::vector<Enemy>& enemies)
-{
+void EnemySpawner::update(const float &dt, float spawn_interval, sf::Vector2f mousePos, std::vector<Enemy>& enemies)
+{   
+    spawnInterval = spawn_interval;
     spawnTimer += dt;
     if (spawnTimer >= spawnInterval)
     {

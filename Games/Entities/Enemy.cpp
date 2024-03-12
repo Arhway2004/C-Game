@@ -46,6 +46,11 @@ sf::FloatRect Enemy::getGlobalBounds() const
     return this->enemySprite->getGlobalBounds();
 }
 
+sf::Vector2f Enemy::getOrigin() const
+{
+    return sf::Vector2f(this->enemySprite->getOrigin().x, this->enemySprite->getOrigin().y);
+}
+
 void Enemy::loadFile(sf::Texture &texture, std::string path)
 {
     if (!texture.loadFromFile(path))

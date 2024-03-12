@@ -55,6 +55,17 @@ int main()
 
 
 //test sprite
+// void initFont(int pos_x, int pos_y, sf::Text& text, sf::Font& font, std::string msg, short size, std::string path){
+//     if(!font.loadFromFile(path)){
+//         std::cout << "Failed to load font." << std::endl;
+//     }
+//     text.setFont(font);
+//     text.setString(msg);
+//     text.setCharacterSize(size);
+//     text.setFillColor(sf::Color::Black);
+//     text.setPosition(pos_x, pos_y);
+// }
+
 // int main()
 // {
 //     sf::RenderWindow window(sf::VideoMode(1060, 740), "Bouncing mushroom.");
@@ -67,15 +78,16 @@ int main()
 
 //     sf::Font font; 
 //     sf::Text text; 
-//     if(!font.loadFromFile("../assets/font/Blomberg-8MKKZ.ttf")){
-//         std::cout << "Failed to load font." << std::endl;
-//         return 1;
-//     }
-//     text.setFont(font);
-//     text.setString(std::to_string(5));
-//     text.setCharacterSize(30);
-//     text.setFillColor(sf::Color::Black);
-//     text.setPosition(180, 660);
+//     // if(!font.loadFromFile("../assets/font/Blomberg-8MKKZ.ttf")){
+//     //     std::cout << "Failed to load font." << std::endl;
+//     //     return 1;
+//     // }
+//     // text.setFont(font);
+//     // text.setString(std::to_string(5));
+//     // text.setCharacterSize(30);
+//     // text.setFillColor(sf::Color::Black);
+//     // text.setPosition(180, 660);
+//     initFont(180, 660, text, font, std::to_string(8), 30, "../assets/font/Blomberg-8MKKZ.ttf");
 
 //     sf::RectangleShape frame;
 //     frame.setSize(sf::Vector2f(79, 65));
@@ -117,7 +129,6 @@ int main()
 // }
 
 
-
 //test ui
 // int main()
 // {
@@ -149,8 +160,6 @@ int main()
 //             }
 //         }
 //         // sf::Vector2f mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-      
-
 //         window.clear(sf::Color(16, 16, 16, 255)); // Dark gray.
 //         window.draw(frame);
 //         window.draw(blood);

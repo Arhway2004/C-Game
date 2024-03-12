@@ -10,14 +10,16 @@ class InventoryPanel{
         sf::RectangleShape selectedSquare;
         
         //add text to show score
-        sf::Text text;
-        sf::Font font;
+        sf::Text scoreText;
+        sf::Font scoreFont;
+        sf::Text iceText;
+        sf::Font iceFont;
 
         //inventories item
-        sf::Sprite bomb; 
-        sf::Texture bombTex;
-        sf::Sprite sniper;
-        sf::Texture sniperTex;
+        sf::Sprite ice; 
+        sf::Texture iceTex;
+        sf::Sprite bullet1;
+        sf::Texture bullet1Tex;
         sf::Sprite healer;
         sf::Texture healerTex;
         int clicked = 0; 
@@ -28,8 +30,8 @@ class InventoryPanel{
 
     public: 
         enum currentItem{
-            Bomb = 0, 
-            Sniper = 1, 
+            Bullet1 = 0, 
+            Ice = 1, 
             Healer = 2
         };
         currentItem currentItemSelected;
@@ -39,10 +41,11 @@ class InventoryPanel{
         void setPosition(float x, float y);
         short getcurrentItemSelected() const;
         void loadTextures(sf::Texture& texture, std::string path); 
+        void initFont(int pos_x, int pos_y, sf::Text& text, sf::Font& font, std::string msg, short size, std::string path); 
         bool canPress() const;
         void resetPressCooldown(); 
 
-        void update(int killCount);
+        void update(int killCount, int iceCount);
         void updateInput();
         void updateCurrentItem(); 
         void updateFramePosition();

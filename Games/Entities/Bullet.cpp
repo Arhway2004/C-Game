@@ -30,12 +30,24 @@ void Bullet::loadFile(sf::Texture& tex, std::string path){
     }
 }
 
+void Bullet::resetImage(std::string path, float scale_x, float scale_y){
+    std::cout << "Bullet::resetImage" << std::endl;
+    this->bulletTexture.reset(new sf::Texture());
+    this->bulletSprite.setScale(scale_x, scale_y);
+    this->loadFile(*this->bulletTexture, path);
+    this->bulletSprite.setTexture(*this->bulletTexture);
+}
+
 void Bullet::setPosition(const float x, const float y){
     this->bulletSprite.setPosition(x, y);
 }
 
 void Bullet::setRotation(const float angle){
     this->bulletSprite.setRotation(angle);
+}
+
+sf::Vector2f Bullet::getPosition() const{
+    return this->bulletSprite.getPosition();
 }
 
 // void Bullet::move(const float& dt, const float x, const float y, const float movementSpeed){
@@ -74,6 +86,23 @@ bool Bullet::isCollided(Enemy& enemy) const{
     return false; 
 }
 
+bool Bullet::isEnemyWithinRadius(const Enemy& enemy, int radius) {
+        // Calculate distance between bomb and enemy
+    float distance = std::sqrt(std::pow(enemy.getPosition().x - this->getPosition().x, 2) +
+                                std::pow(enemy.getPosition().y - this->getPosition().y, 2));
+    return distance <= radius;
+}
+
+
+//temp
+bool Bullet::isCollided(Enemy& enemy, float radius) const {
+    float distance = sqrt(pow(this->bulletSprite.getPosition().x - enemy.getPosition().x, 2) + pow(this->bulletSprite.getPosition().y - enemy.getPosition().y, 2)); 
+    if(distance <= radius){
+        enemy.setState(Enemy::EnemyStates::DEAD);
+        return true;
+    }
+    return false;
+}
 
 void Bullet::updateInput(const float& dt, const float angle){
     float angleRad = angle * (M_PI / 180.0f);

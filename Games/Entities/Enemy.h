@@ -56,13 +56,14 @@ public:
     bool isOutBound() const override;
     bool isCollided(const Entity& entity) const;
 
+
     //setter 
     void setPosition(const float x, const float y) override;
     void setState(const EnemyStates state); 
     //getter
     EnemyStates getState();
     sf::Vector2f getPosition() const;
-
+    sf::Vector2f getOrigin() const;
 
     // Movement 
     void updateAnimation();
