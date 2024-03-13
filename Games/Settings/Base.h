@@ -1,5 +1,6 @@
 #pragma once
 #include "../../src/Config.h"
+// #include "./../Settings/Setting.h"
 
 enum CurrentState{
     BASE = 0, 
@@ -25,6 +26,7 @@ class Base{
 
         bool quit = false;
         sf::Vector2f mousePosView; 
+        // Setting* music;
     
     public:
         short unsigned currentState;

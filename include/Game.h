@@ -8,6 +8,8 @@
 #include "../Games/Scenes/Basement.h"
 #include "../Games/Scenes/FirstScenes.h"
 #include "../Games/Scenes/Level1.h"
+// #include "../Games/Settings/Setting.h"
+
 
 class Game{
     private:
@@ -24,6 +26,8 @@ class Game{
         void initWindow(); 
         void initVariables(); 
         void initStates(); 
+        // Setting* music;
+
 
     public:
         //scenes

@@ -15,6 +15,8 @@ Base::Base(std::string title, int pos_x, int pos_y, float scale_x, float scale_y
 
     this->initBaseFont(this->font, "../assets/font/BACKTO1982.TTF");
     this->setBaseText(this->title, this->font, title, sf::Color::White, 25, x + 280 , y + 70);
+    // this->music = new(Setting);
+
 }
 
 void Base::initBaseFont(sf::Font& font, std::string path){
@@ -50,20 +52,24 @@ Base::~Base(){
 }
 
 void Base::closeWindow(){
+    // music->playSFX();
     this->window->close(); 
 }
 
 bool Base::getQuit(){
+    // music->playSFX();
     return this->quit;
 }
 
 void Base::endState(){
+    // music->playSFX();
     this->quit = true; 
 }
 
 //marked
 void Base::update(const sf::Vector2f mousePos){
     if(this->close_icon.getGlobalBounds().contains(mousePos)){
+        
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             std::cout << "Base::update close icon clicked" << std::endl;
             this->quit = true; 

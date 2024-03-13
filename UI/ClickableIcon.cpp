@@ -2,7 +2,6 @@
 
 ClickableIcon::ClickableIcon(int pos_x, int pos_y, float scale_x, float scale_y, std::string path){
     this->clicked = false; 
-
     if(!this->texture.loadFromFile(path)){
         std::cout << "ERROR at ClickableIcon::Couldn't load the texture" << std::endl;
     }else{

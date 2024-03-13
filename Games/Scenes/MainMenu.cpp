@@ -13,6 +13,9 @@ MainMenu::MainMenu(sf::RenderWindow* window) : GameState(window)
 
     this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     this->background.setFillColor(sf::Color::Black);
+    this->music = new(Setting);  
+
+
 }
 
 MainMenu::~MainMenu(){
@@ -43,33 +46,74 @@ void MainMenu::endState(){
 // }
 
 
+// void MainMenu::update(const float& dt, sf::RenderWindow* window){
+//     //update per frame
+//     //update mouse
+//     music->playMusic();
+//     this->updateMousePosition();
+//     this->start_btn.update(this->mousePosView); 
+//     this->quit_btn.update(this->mousePosView);
+
+//     if(!this->showOption && !this->showGuide && !this->showSetting){
+//         if(this->quit_btn.isPressed()){
+//             music->playSFX();
+//             std::cout << "quit button pressed" << std::endl;
+//             if (window != nullptr) {
+//                 std::cout << "MainMenu::update:: window = null ptr" << std::endl;
+//                 window->close();
+//             }
+//         }
+//         if(this->start_btn.isPressed()){
+//             music->playSFX();
+//             std::cout << "str button pressed" << std::endl;
+//             this->endNow = true;
+//         }else{
+//             this->endNow = false;
+//         } 
+//     }
+
+//     GameState::update(dt, window);
+// }
 void MainMenu::update(const float& dt, sf::RenderWindow* window){
-    //update per frame
-    //update mouse
+    // Update per frame
+    // Update mouse position
     this->updateMousePosition();
     this->start_btn.update(this->mousePosView); 
     this->quit_btn.update(this->mousePosView);
-
-    if(!this->showOption && !this->showGuide){
-        if(this->quit_btn.isPressed()){
-            std::cout << "quit button pressed" << std::endl;
+    
+    // Play music only if the start button hasn't been pressed yet.
+    if (!this->endNow) {
+        music->playMusic();
+        std::cout << "playMusic" << std::endl;
+    }
+    
+    if (!this->showOption && !this->showGuide && !this->showSetting) {
+        if (this->quit_btn.isPressed()) {
+            music->playSFX();
+            std::cout << "Quit button pressed" << std::endl;
             if (window != nullptr) {
-                std::cout << "MainMenu::update:: window = null ptr" << std::endl;
                 window->close();
             }
         }
-        if(this->start_btn.isPressed()){
-            std::cout << "str button pressed" << std::endl;
+        
+        if (this->start_btn.isPressed()) {
+            music->playSFX();
+            std::cout << "Start button pressed" << std::endl;
             this->endNow = true;
-        }else{
+            // Pause the music when the start button is pressed.
+            music->pauseMusic();
+        } else {
             this->endNow = false;
         } 
     }
 
+    // Call the parent update method.
     GameState::update(dt, window);
 }
 
 void MainMenu::render(sf::RenderTarget* target) {
+
+
     if(!target){
         target = this->window; 
     }

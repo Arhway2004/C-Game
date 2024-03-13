@@ -6,6 +6,9 @@
 #include "../Games/Settings/Options.h"
 #include <memory>
 #include "../Games/Settings/Guide.h"
+#include "../Games/Settings/Setting.h"
+
+
 // #include "../Games/Entities/Entity.h"
 //more general purpose than gamestate
 class GameState{
@@ -16,15 +19,26 @@ class GameState{
         ClickableIcon option_icon;
         std::shared_ptr<Options> option_page; 
         std::shared_ptr<Guide> guide_page;
+        std::shared_ptr<Setting> setting_page;
 
         // Entity player; 
+        Setting* music;
 
 
     protected: 
         bool showOption;
         bool showGuide;
+        bool showSetting;
         bool endNow;
         bool clicked_icon; 
+
+        // click for setting
+        bool plus1click;
+        bool plus2click;
+        bool delete1click;
+        bool delete2click;
+
+
         sf::Text game_title;
         sf::Vector2i mousePosScreen;
         sf::Vector2i mousePosWindow; //track only mouse in Window frame

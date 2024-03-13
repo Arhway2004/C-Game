@@ -7,8 +7,9 @@ Game::Game(){
     this->run(); 
     this->update();
     this->render(); 
+    // this->music = new(Setting);
 }
-
+// : music(new Setting)
 Game::~Game(){
     delete this->window; 
     while(!this->states.empty()){
@@ -28,7 +29,6 @@ void Game::initWindow(){
 }
 
 void Game::initVariables(){
-    
 }
 
 void Game::initStates(){
@@ -38,6 +38,7 @@ void Game::initStates(){
 }
 
 void Game::run(){
+    // this->music->playMusic(); 
     while(this->window->isOpen()){
         sf::Event event; 
         while(this->window->pollEvent(event)){
@@ -48,6 +49,7 @@ void Game::run(){
         this->updateDt(); //set new dt every framerate
         this->update();
         this->render();
+
     }
 }
 
@@ -56,11 +58,7 @@ void Game::add_scene(GameState* scene){
 }
 
 void Game::updateDt(){
-    //update dt with time taken to update and render 1 frame
     this->dt = this->dtClock.restart().asSeconds(); 
-    //debug
-    // std::cout << "\x1B[2J\x1B[H"; 
-    // std::cout << this->dt << "\n"; 
 }
 
 void Game::updateGUI(){
@@ -70,13 +68,10 @@ void Game::updateGUI(){
 }
 
 void Game::update(){
-    // this->updateGUI();
-    //temp
-    // std::cout << "states size: "<< this->states.size() << "\n";
     if(!this->states.empty()){
         // this->states.top()->checkForEnd(); 
         this->states.top()->update(this->dt, this->window); //if met some condition = ask to quit
-
+        // music->playMusic();
         std::cout << "states quit : " << this->states.top()->getQuit() << "\n";
         if(this->states.top()->getQuit()){
             this->states.top()->endState(); 
@@ -94,6 +89,8 @@ void Game::update(){
 
 void Game::render(){
     this->window->clear(); 
+
+
 
     //render item
     if(!this->states.empty()){
