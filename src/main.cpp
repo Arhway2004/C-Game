@@ -67,6 +67,18 @@ int main()
 //     text.setPosition(pos_x, pos_y);
 // }
 
+// {
+//     this->window = window; 
+//     if(this->playerLose){
+//         this->loadfile(this->bgTex, "../assets/Textures/gameover.png");
+//     }else{
+//         this->loadfile(this->bgTex, "../assets/Textures/win_cert.jpeg");
+//     }
+//     this->bg.setTexture(this->bgTex);
+//     this->bg.setScale(1.f, 1.f);
+// }
+
+
 // int main()
 // {
 //     sf::RenderWindow window(sf::VideoMode(1060, 740), "Bouncing mushroom.");

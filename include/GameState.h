@@ -1,11 +1,13 @@
 #pragma once 
 
+#include <memory>
 #include "../src/Config.h"
 #include "../UI/Button.h"
 #include "../UI/ClickableIcon.h"
 #include "../Games/Settings/Options.h"
-#include <memory>
 #include "../Games/Settings/Guide.h"
+#include "../Games/Settings/Setting.h"
+
 //more general purpose than gamestate
 class GameState{
     private:
@@ -15,10 +17,13 @@ class GameState{
         ClickableIcon option_icon;
         std::shared_ptr<Options> option_page; 
         std::shared_ptr<Guide> guide_page;
+        std::shared_ptr<Setting> setting_page;
 
     protected: 
+        bool playerLose = false; 
         bool showOption;
         bool showGuide;
+        bool showSetting;
         bool endNow;
         bool clicked_icon; 
         sf::Text game_title;
@@ -27,6 +32,7 @@ class GameState{
         sf::Vector2f mousePosView; 
         void initFont(sf::Font& font, std::string path); 
         void updateOptions(); 
+
 
     public:
         GameState(sf::RenderWindow* window);

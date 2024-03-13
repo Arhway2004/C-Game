@@ -1,10 +1,4 @@
-//resolve bugs when enemy crowded player : lagging so bad(limiting enemy spawn)
-//music player
-//enemy spawn 
-//resume/restart/quit game
 
-//player damage = can't hold a gun
-//problem: check player out of bound / or area that can't walk
 #include "Level1.h"
 
 Level1::Level1(sf::RenderWindow* window) : GameState(window){
@@ -77,104 +71,86 @@ void Level1::updateInput(const float& dt){
 
 
 void Level1::update(const float& dt, sf::RenderWindow* window){
-    this->target.setPosition(this->mousePosView.x, this->mousePosView.y);
-    this->updateInput(dt);
-    this->player->update(dt, this->mousePosView);
-    this->updateSpawnTimer(); 
+    if(!this->showOption && !this->showGuide && !this->showSetting || !endNow){
+        this->target.setPosition(this->mousePosView.x, this->mousePosView.y);
+        this->updateInput(dt);
+        this->player->update(dt, this->mousePosView);
+        this->updateSpawnTimer(); 
 
-    if(this->freezeTimer.getElapsedTime().asSeconds() >= 3.0f){
-        this->enemySpawner->update(dt, this->enemySpawnInterval, this->mousePosView , this->enemies);
-        this->freeze = false;
-    }
-    
-    for(size_t i = 0; i < this->bullets.size(); i++){
-        this->bullets[i].update(dt, this->player->bulletAngles[i]);
-        if(this->bullets[i].isOutBound()){
-            this->bullets.erase(this->bullets.begin() + i);
-            this->player->bulletAngles.erase(this->player->bulletAngles.begin() + i);
-            break;
-        }else{
-            for(size_t j = 0; j < this->enemies.size(); j++){
-                if(this->bulletHitEnemy(this->bullets[i], this->enemies[j])){
-                    //fume animation
-                    this->killCount++;
-                    this->enemies.erase(this->enemies.begin() + j);
-                    this->bullets.erase(this->bullets.begin() + i);
-                    this->player->bulletAngles.erase(this->player->bulletAngles.begin() + i);
-                    std::cout << "Bullet hit Enemy" << std::endl;
-                    break;
+        if(this->freezeTimer.getElapsedTime().asSeconds() >= 3.0f){
+            this->enemySpawner->update(dt, this->enemySpawnInterval, this->mousePosView , this->enemies);
+            this->freeze = false;
+        }
+        
+        for(size_t i = 0; i < this->bullets.size(); i++){
+            this->bullets[i].update(dt, this->player->bulletAngles[i]);
+            if(this->bullets[i].isOutBound()){
+                this->bullets.erase(this->bullets.begin() + i);
+                this->player->bulletAngles.erase(this->player->bulletAngles.begin() + i);
+                break;
+            }else{
+                for(size_t j = 0; j < this->enemies.size(); j++){
+                    if(this->bulletHitEnemy(this->bullets[i], this->enemies[j])){
+                        //fume animation
+                        this->killCount++;
+                        this->enemies.erase(this->enemies.begin() + j);
+                        this->bullets.erase(this->bullets.begin() + i);
+                        this->player->bulletAngles.erase(this->player->bulletAngles.begin() + i);
+                        std::cout << "Bullet hit Enemy" << std::endl;
+                        break;
+                    }
                 }
             }
         }
-    }
-    // for (auto it = this->bullets.begin(); it != this->bullets.end();) {
-    //     it->update(dt, this->player->bulletAngles[std::distance(this->bullets.begin(), it)]);
-    //     if (it->isOutBound()) {
-    //         auto index = std::distance(this->bullets.begin(), it);
-    //         it = this->bullets.erase(it);
-    //         this->player->bulletAngles.erase(this->player->bulletAngles.begin() + index);
-    //     } else {
-    //         bool bulletRemoved = false;
-    //         for (auto jt = this->enemies.begin(); jt != this->enemies.end();) {
-    //             if (this->bulletHitEnemy(*it, *jt)) {
-    //                 this->killCount++;
-    //                 auto index = std::distance(this->bullets.begin(), it);
-    //                 jt = this->enemies.erase(jt);
-    //                 it = this->bullets.erase(it);
-    //                 this->player->bulletAngles.erase(this->player->bulletAngles.begin() + index);
-    //                 bulletRemoved = true;
-    //                 break; // Exit the loop after erasing the enemy
-    //             } else {
-    //                 ++jt;
-    //             }
-    //         }
-    //         if (!bulletRemoved) {
-    //             ++it;
-    //         }
-    //     }
-    // }
-
-
-    
-    for(auto& enemy : enemies){
-        if(this->isCollided(*this->player, enemy) && this->playerCanTakeHit()){
-            this->player->setState(Player::DAMAGED);
-            this->player->updateHealthbar(-3);
-            this->resetHitCooldown();
-            std::cout << "Player hit" << std::endl;
+        
+        for(auto& enemy : enemies){
+            if(this->isCollided(*this->player, enemy) && this->playerCanTakeHit()){
+                this->player->setState(Player::DAMAGED);
+                this->player->updateHealthbar(-3);
+                this->resetHitCooldown();
+                std::cout << "Player hit" << std::endl;
+            }
         }
-    }
 
-    this->inventoryPanel->update(this->killCount, this->iceCount);
-    this->currentItemSelected = this->inventoryPanel->getcurrentItemSelected();
-    
-    //gen and collect item
-    std::random_device rd; 
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> pos_x(60, WINDOW_WIDTH-60);
-    std::uniform_int_distribution<> pos_y(100, 600);
-    if(this->spawnItemTimer.getElapsedTime().asSeconds() >= 10.0f){ //spawn item every 8 seconds
-        this->iceCollectibles.push_back(Collectible(pos_x(gen), pos_y(gen), 0.07f, 0.07f, "../assets/textures/ice.png"));
-    }
-    if(this->iceCollectibles.size() > 0){
-        if(this->iceCollectibles[0].isCollectedByPlayer(*this->player)){
-            this->iceCount++;
-            this->iceCollectibles.erase(this->iceCollectibles.begin());
-            spawnItemTimer.restart(); 
+        this->inventoryPanel->update(this->killCount, this->iceCount);
+        this->currentItemSelected = this->inventoryPanel->getcurrentItemSelected();
+        
+        //gen and collect item
+        std::random_device rd; 
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> pos_x(60, WINDOW_WIDTH-60);
+        std::uniform_int_distribution<> pos_y(100, 600);
+        if(this->spawnItemTimer.getElapsedTime().asSeconds() >= 10.0f){ //spawn item every 8 seconds
+            this->iceCollectibles.push_back(Collectible(pos_x(gen), pos_y(gen), 0.07f, 0.07f, "../assets/textures/ice.png"));
         }
-    }
+        if(this->iceCollectibles.size() > 0){
+            if(this->iceCollectibles[0].isCollectedByPlayer(*this->player)){
+                this->iceCount++;
+                this->iceCollectibles.erase(this->iceCollectibles.begin());
+                spawnItemTimer.restart(); 
+            }
+        }
 
-    //freezing effect
-    if(this->freeze){
-        if( this->freezeColor.a < 255){
-            this->freezeColor.a += 5;
+        //freezing effect
+        if(this->freeze){
+            if( this->freezeColor.a < 255){
+                this->freezeColor.a += 5;
+            }else{
+                this->freezeColor.a = 255;
+            }
         }else{
-            this->freezeColor.a = 255;
+            this->freezeColor.a = 0;
         }
-    }else{
-        this->freezeColor.a = 0;
+        this->freezeScreen.setColor(this->freezeColor);
     }
-    this->freezeScreen.setColor(this->freezeColor);
+
+    if(this->player->defeated){
+        this->playerLose = true;
+        this->endNow = true;
+    }else if(this->killCount >= 50){
+        this->playerLose = false;
+        this->endNow = true;
+    }
     
     //last
     GameState::update(dt, window);

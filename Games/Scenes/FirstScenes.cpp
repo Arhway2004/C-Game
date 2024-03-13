@@ -25,11 +25,12 @@ FirstScenes::FirstScenes(sf::RenderWindow* window) : GameState(window)
 
     this->message = new Message(200.0, 350.0, 0.6, 0.6, Textbox);
 
-    this->textLine.push_back("Thun: \nehhhhh,Hello, do you know where I am ?\n");
+    this->textLine.push_back("You: \nehhhhh,Hello, do you know where I am ?\n");
     this->textLine.push_back("                                              :Thun \nNow, you are in the game 'SE Life'. To pass this\ngame and return to your world, you need to \neliminate every rust.");
-    this->textLine.push_back("Teemy: \nOkay, thank you for the direction.\n");
+    this->textLine.push_back("You: \nOkay, thank you for the direction.\n");
     this->textLine.push_back("                                              :Teemy \nHope you enjoy with this game Thun.\n");
-    this->textLine.push_back("End of conversation.");
+    this->textLine.push_back("<End of conversation.>");
+    this->textLine.push_back("Press F to continue.");
     this->message->Text(this->textLine, this->x);
     //music
     // this->music = new Music();  
@@ -69,8 +70,7 @@ void FirstScenes::update(const float& dt, sf::RenderWindow* window)
             }
             this->message->Text(this->textLine, this->x);
         }
-    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-        //change later 
+    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)){
         this->endNow = true; 
     }
 

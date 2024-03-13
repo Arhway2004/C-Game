@@ -5,20 +5,20 @@
 #include "../../src/config.h"
 
 class WinScene : public GameState{
-    private: 
-        sf::RenderWindow* window; 
-        sf::RectangleShape background; 
+    private:
+        sf::RenderWindow* window;
+        sf::RectangleShape background;
         sf::Texture bgTex;
         sf::Sprite bg;
+        
         
     public: 
         WinScene(sf::RenderWindow* window); 
         virtual ~WinScene(); 
         
-        
         void loadfile(sf::Texture &tex, std::string path);
-        void endState() override; 
-        void update(const float& dt, sf::RenderWindow* window) override; 
+        void endState() override;
+        void update(const float& dt, sf::RenderWindow* window) override;
         void render(sf::RenderTarget* target = nullptr) override;
 };
 

@@ -11,6 +11,7 @@ class Player : public Entity{
         std::shared_ptr<HealthBar> playerHealthBar;
 
     public: 
+        bool defeated = false; 
         sf::Texture testTexture;
         sf::Sprite testSprite;
         sf::Texture gunTexture;

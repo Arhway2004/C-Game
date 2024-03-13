@@ -4,7 +4,11 @@ WinScene::WinScene(sf::RenderWindow* window)
     : GameState(window)
 {
     this->window = window; 
-    this->loadfile(this->bgTex, "../assets/Textures/win_cert.png");
+    if(this->playerLose){
+        this->loadfile(this->bgTex, "../assets/Textures/gameover.png");
+    }else{
+        this->loadfile(this->bgTex, "../assets/Textures/win_cert.jpeg");
+    }
     this->bg.setTexture(this->bgTex);
     this->bg.setScale(1.f, 1.f);
 }
@@ -34,7 +38,9 @@ void WinScene::endState()
 void WinScene::update(const float &dt, sf::RenderWindow *window)
 {
 
-    this->endState();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        this->endNow = true;
+    }
     GameState::update(dt, window);
 }
 

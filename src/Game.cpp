@@ -32,7 +32,7 @@ void Game::initVariables(){
 }
 
 void Game::initStates(){
-    
+    this->states.push(new WinScene(this->window));
     this->states.push(new Level1(this->window));
     this->states.push(new Basement(this->window));
     this->states.push(new FirstScenes(this->window));

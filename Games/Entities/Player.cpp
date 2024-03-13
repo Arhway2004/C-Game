@@ -88,6 +88,9 @@ void Player::update(const float& dt, sf::Vector2f mousePos){
     //     this->playerHealthBar->update(30);
     // }
     this->playerHealthBar->setPosition(this->testSprite.getPosition().x - 40, this->testSprite.getPosition().y - 60);
+    if(this->playerHealthBar->bloodRunsOut()){
+        this->defeated = true;
+    }
 
 }
 

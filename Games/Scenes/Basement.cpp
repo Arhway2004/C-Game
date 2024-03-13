@@ -14,7 +14,6 @@ Basement::Basement(sf::RenderWindow *window) : GameState(window)
     // this->initFont(this->font, "../assets/font/SEASHORE.otf");
     // this->test_btn = new Button(400.0, 250.0, 150.0, 60.0, &this->font, "Door Test");
     this->door1 = new InteractableObj(485.0, 33.0, 2.76, 2.9, "../assets/textures/door1.png");
-    
 }
 
 Basement::~Basement()

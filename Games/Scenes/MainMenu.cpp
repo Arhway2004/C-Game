@@ -36,16 +36,6 @@ void MainMenu::loadfile(sf::Texture &texture, std::string path)
     }
 }
 
-// void MainMenu::updateInput(const float& dt, Button* btn){
-//     this->endNow = false;
-//     std::cout << "button pressed: " << btn->isPressed() << "\n";
-//     if(btn->isPressed()){
-//         this->endNow = true;
-//     }else{
-//         this->endNow = false;
-//     }
-//     // this->checkForEnd();
-// }
 
 void MainMenu::endState()
 {
@@ -53,13 +43,6 @@ void MainMenu::endState()
     std::cout << "Ending Main Menu"
               << "\n";
 }
-
-// bool MainMenu::getQuit() const {
-// }
-
-// void MainMenu::checkForEnd(){
-//     GameState::checkForEnd();
-// }
 
 void MainMenu::update(const float &dt, sf::RenderWindow *window)
 {
@@ -71,7 +54,7 @@ void MainMenu::update(const float &dt, sf::RenderWindow *window)
 
     this->gif.update(bg_gif);
 
-    if (!this->showOption && !this->showGuide)
+    if (!this->showOption && !this->showGuide && !this->showSetting)
     {
         if (this->quit_btn.isPressed())
         {

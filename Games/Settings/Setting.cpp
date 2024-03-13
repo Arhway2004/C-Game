@@ -1,9 +1,11 @@
 #include "Setting.h"
+
     int Setting::Mpos = 535;
     int Setting::Spos = 535;
     // int Setting::sound = 25;
     float Setting::volume = 100.0f;
     float Setting::Svolume = 100.0f;
+
 
 Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     std::cout << "Setting::Setting: Setting constructor" << std::endl;
@@ -23,10 +25,10 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     this->SFXslide.setTexture(&this->Musicslide_texture);
 
     this->Musicpoint.setSize(sf::Vector2f(300,300));
-    this->Musicpoint.setTexture(&this->Musicpoint_texture);
+    this->Musicpoint.setTexture(&this->Musicpoint_texture); 
 
     this->SFXpoint.setSize(sf::Vector2f(300,300));  
-    this->SFXpoint.setTexture(&this->SFXpoint_texture);
+    this->SFXpoint.setTexture(&this->SFXpoint_texture);     
 
     this->background.setPosition(280, 100);
     this->Musicslide.setPosition(245,155);
@@ -41,7 +43,7 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     this->delete2 = new ClickableIcon(350, 250, 0.5, 0.5, "../assets/textures/delete.png");     
 
     this->plusSFX = new ClickableIcon(570, 300, 5.0, 5.0, "../assets/textures/plusS.png");
-    this->plusS = new ClickableIcon(200, 200, 5.0, 5.0, "../assets/textures/plusS.png");
+    // this->X = new ClickableIcon(200,200,0.5,0.5,"../../textures/plusS.png");
 
     this->SFX = new Message(2000.0, 3500.0, 0.6, 0.6, Textbox);
     this->MUSIC = new Message(2000.0, 3500.0, 0.6, 0.6, Textbox);
@@ -51,29 +53,27 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     this->MUSIC->message("MUSIC", 510.0, 150.0, 24); 
     this->RESOLUTION->message("RESOLUTION: 1920X1080", 395.0, 320.0, 30);     
 
-    // if (!backgroundMusic.openFromFile("../assets/sounds/background_audio.wav")) {
-    //     std::cout << "Failed to load background music" << std::endl;
-    // } else {
-    //     backgroundMusic.setVolume(volume); // Set the volume
-    //     // backgroundMusic.play(); // Play the music
-    // }
-    // if (!backgroundSFX.openFromFile("../assets/sounds/pop.wav")) {
-    //     std::cout << "Failed to load background SFX" << std::endl;
-    // } else {
-    //     backgroundSFX.setVolume(Svolume); // Set the volume
-    //     // backgroundSFX.play(); // Play the music
-    // }
+    if (!backgroundMusic.openFromFile("../assets/sounds/background_audio.wav")) {
+        std::cout << "Failed to load background music" << std::endl;
+    } else {
+        backgroundMusic.setVolume(volume); // Set the volume
+        // backgroundMusic.play(); // Play the music
+    }
+    if (!backgroundSFX.openFromFile("../assets/sounds/pop.wav")) {
+        std::cout << "Failed to load background SFX" << std::endl;
+    } else {
+        backgroundSFX.setVolume(Svolume); // Set the volume
+        // backgroundSFX.play(); // Play the music
+    }
 }
 
 
 
 Setting::~Setting(){
-    // delete this->plus1;
-    // delete this->delete1;
-    // delete this->plus2;
-    // delete this->delete2;
-  
-    // delete this->text;
+    delete this->plus1;
+    delete this->delete1;
+    delete this->plus2;
+    delete this->delete2;
     // delete this->SFX;
 }
 
@@ -95,13 +95,12 @@ void Setting::update(const sf::Vector2f mousePos){
     static bool wasDelete1ClickedLastFrame = false;
     static bool wasPlus2ClickedLastFrame = false;
     static bool wasDelete2ClickedLastFrame = false;
-    // static bool wasplus1 = false;
+    static bool XX = true;
     static int SFX =4;
     static int MUSIC =4;
 
     const int x = 65; // Position adjustment step
     const float sound = 25.0f;
-
 
     bool isPlus1ClickedThisFrame = this->plus1->isClicked(mousePos);
     if (isPlus1ClickedThisFrame && !wasPlus1ClickedLastFrame) {
@@ -185,18 +184,17 @@ void Setting::playMusic(){
 void Setting::pauseMusic(){
     backgroundMusic.setVolume(volume); 
     backgroundMusic.pause();
-    backgroundMusic.setLoop(true);
+    // backgroundMusic.setLoop(true);
     std::cout <<"music" << std::endl;
 }
 
-void Setting::volume1(){
-    backgroundMusic.setVolume(volume);
-}
+
 void Setting::render_setting(sf::RenderTarget* target){
     if(!quit){
         std::cout << "Setting::render_Setting" << std::endl;
         target->draw(this->frame);
         target->draw(this->close_icon);
+        // target->draw(this->background);
         target->draw(this->title);
         target->draw(this->Musicslide);
         target->draw(this->SFXslide);
@@ -210,7 +208,6 @@ void Setting::render_setting(sf::RenderTarget* target){
         this->SFX->render(target);  
         this->MUSIC->render(target);   
         this->RESOLUTION->render(target); 
-        this->plusS->render(target);
     }else{
         std::cout << "Options::render_options: Closing window" << std::endl;
     }

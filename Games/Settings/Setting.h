@@ -5,7 +5,6 @@
 // #include "/Users/arhway/Desktop/Final/C-Game/UI/Music.h"
 #include "Guide.h"
 
-
 class Setting: public Base{
     private:
         sf::RenderWindow* window;
@@ -20,6 +19,7 @@ class Setting: public Base{
         sf::Texture Musicpoint_texture; 
         sf::Texture SFXpoint_texture;  
 
+
         ClickableIcon* plus1;
         ClickableIcon* delete1;
 
@@ -27,7 +27,7 @@ class Setting: public Base{
         ClickableIcon* delete2;
 
         ClickableIcon* plusSFX;
-        ClickableIcon* plusS;
+        // ClickableIcon* X;
 
         sf::RectangleShape Textbox;
         Message* text;
@@ -36,6 +36,8 @@ class Setting: public Base{
         Message* RESOLUTION;
 
         sf::Music backgroundMusic,backgroundSFX;
+
+
 
     public:
         Setting();
@@ -47,9 +49,12 @@ class Setting: public Base{
         void pauseMusic();
         void update(const sf::Vector2f mousePos);
         void render_setting(sf::RenderTarget* target = nullptr);
-        void volume1();
         static int Mpos;
         static int Spos;
         static int sound;
         static float volume,Svolume;
+
+
+
+
 };

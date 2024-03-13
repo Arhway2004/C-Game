@@ -6,10 +6,10 @@ GameState::GameState(sf::RenderWindow* window) : option_icon(950.0, 0.0, 1.0, 1.
 
     this->option_page = std::make_shared<Options>(); 
     this->guide_page = std::make_shared<Guide>(); 
-    //init setting page here
+    this->setting_page = std::make_shared<Setting>(); 
     this->showOption = false;
     this->showGuide = false;
-    //show setting = false 
+    this->showSetting = false;
 }
 
 GameState::~GameState(){
@@ -35,20 +35,36 @@ void GameState::updateOptions(){
             this->option_page->show_guide = false;
             this->guide_page->endState();
         }
+    }else if(this->showSetting){
+        this->setting_page->update(this->mousePosView);
+
+        if(this->setting_page->return_quit()){
+            this->showSetting = false;
+            this->showOption = false;
+            this->option_page->show_setting = false;
+            this->setting_page->endState();
+        }
     }
     //else if(this->showQuit) do what
     
     if (this->option_icon.isClicked2()){
         this->showOption = true;
         this->showGuide = false;
+        this->showSetting = false;
         this->option_page->show_guide = false;
+        this->option_page->show_setting = false;
         this->option_page->reset_quit();
     }
 
     this->showGuide = this->option_page->show_guide;
+    this->showSetting = this->option_page->show_setting;
+
     if(this->option_page->show_guide) {
     this->guide_page->reset_quit();
-    } 
+    }
+    if(this->option_page->show_setting) {
+    this->setting_page->reset_quit();
+    }
     //else if(this->option_page->show_quit) do what
 }
 
@@ -110,6 +126,12 @@ void GameState::render(sf::RenderTarget* target){
             this->guide_page->render_guide(target);
         }else{
             std::cout << "not render guide" << this->showGuide << std::endl;
+        }
+
+        if(this->showSetting){
+            this->setting_page->render_setting(target);
+        }else{
+            std::cout << "not render setting" << this->showSetting << std::endl;
         }
     }    
 }

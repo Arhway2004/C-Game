@@ -25,7 +25,6 @@ void HealthBar::setPosition(float x, float y){
     this->blood.setPosition(x + 2, y + 2);
 }
 
-
 void HealthBar::update(const int change){ //if damage change = - / gain change = +
     //move health bar 
     float percent = ((float)change / (float)this->fullHealth) * 100;
