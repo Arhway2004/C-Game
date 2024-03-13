@@ -16,6 +16,7 @@ Player::Player(){
 
     //healthbar
     this->playerHealthBar = std::make_shared<HealthBar>(this->testSprite.getPosition().x, this->testSprite.getPosition().y - 60, 77, 8, 100, sf::Color::Red);
+    this->music = new Setting();
 }
 
 Player::~Player(){
@@ -125,19 +126,23 @@ void Player::updateMovement(const float& dt, sf::Vector2f mousePos){
     // std::cout << "Player::outbound:: " << this->isOutBound() << std::endl;
     // if(!this->isOutBound()){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            // music->wSFX();
             this->playerState = MOVING_LEFT;
             this->move(dt, -1.f, 0.f, 200.f);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){     
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){  
+            // music->wSFX();
             this->playerState = MOVING_RIGHT;   
             this->move(dt, 1.f, 0.f, 200.f);
             // std::cout << "player x: " << this->testSprite.getPosition().x << " player y: " << this->testSprite.getPosition().y << std::endl;
             // std::cout << "player out of bound: " << this->isOutBound() << std::endl;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+            // music->wSFX();
             this->move(dt, 0.f, -1.f, 200.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+            // music->wSFX();
             this->move(dt, 0.f, 1.f, 200.f);
         }
 

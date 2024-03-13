@@ -10,8 +10,8 @@
 Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     std::cout << "Setting::Setting: Setting constructor" << std::endl;
     this->bg_t.loadFromFile("../assets/textures/frame2.png");
-    this->Musicslide_texture.loadFromFile("../assets/textures/slide.png");
-    this->SFXslide_texture.loadFromFile("../assets/textures/slide.png");
+    this->Musicslide_texture.loadFromFile("../assets/textures/slide1.png");
+    this->SFXslide_texture.loadFromFile("../assets/textures/slide1.png");
     this->Musicpoint_texture.loadFromFile("../assets/textures/point.png");
     this->SFXpoint_texture.loadFromFile("../assets/textures/point.png");
 
@@ -63,6 +63,24 @@ Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
         std::cout << "Failed to load background SFX" << std::endl;
     } else {
         backgroundSFX.setVolume(Svolume); // Set the volume
+        // backgroundSFX.play(); // Play the music
+    }
+    if (!shottingSFX.openFromFile("../assets/sounds/shot.wav")) {
+        std::cout << "Failed to load background shottingSFX" << std::endl;
+    } else {
+        shottingSFX.setVolume(Svolume); // Set the volume
+        // backgroundSFX.play(); // Play the music
+    }
+    if (!walkSFX.openFromFile("../assets/sounds/walk.wav")) {
+        std::cout << "Failed to load background walkSFX" << std::endl;
+    } else {
+        walkSFX.setVolume(Svolume); // Set the volume
+        // backgroundSFX.play(); // Play the music
+    }
+    if (!startSFX.openFromFile("../assets/sounds/start_game.wav")) {
+        std::cout << "Failed to load background startSFX" << std::endl;
+    } else {
+        startSFX.setVolume(Svolume); // Set the volume
         // backgroundSFX.play(); // Play the music
     }
 }
@@ -144,7 +162,10 @@ void Setting::update(const sf::Vector2f mousePos){
             Spos += x; 
             this->SFXpoint.setPosition(Spos, 170); 
             Svolume += sound;
-            this->backgroundMusic.setVolume(Svolume); 
+            this->backgroundSFX.setVolume(Svolume); 
+            this->shottingSFX.setVolume(Svolume);
+            this->walkSFX.setVolume(Svolume); 
+            this->startSFX.setVolume(Svolume); 
             std::cout << Svolume << std::endl;
             SFX++;
         }
@@ -160,7 +181,10 @@ void Setting::update(const sf::Vector2f mousePos){
             Spos -= x; 
             this->SFXpoint.setPosition(Spos, 170); 
             Svolume -= sound;
-            this->backgroundMusic.setVolume(Svolume); 
+            this->backgroundSFX.setVolume(Svolume); 
+            this->shottingSFX.setVolume(Svolume); 
+            this->walkSFX.setVolume(Svolume); 
+            this->startSFX.setVolume(Svolume); 
             std::cout << Svolume << std::endl;
             SFX--;
         }
@@ -168,12 +192,29 @@ void Setting::update(const sf::Vector2f mousePos){
     wasDelete2ClickedLastFrame = isDelete2ClickedThisFrame;
     backgroundMusic.setVolume(volume); // Apply music volume change
     backgroundSFX.setVolume(Svolume); 
+    shottingSFX.setVolume(Svolume); 
+    walkSFX.setVolume(Svolume); 
+    startSFX.setVolume(Svolume); 
     Base::update(mousePos); 
 }
 
 void Setting::playSFX(){
     backgroundSFX.setVolume(Svolume); 
     backgroundSFX.play();
+}
+void Setting::shotSFX(){
+    shottingSFX.setVolume(Svolume); 
+    shottingSFX.play();
+}
+void Setting::wSFX(){
+    walkSFX.setVolume(Svolume); 
+    walkSFX.play();
+    walkSFX.setLoop(true);
+
+}
+void Setting::sSFX(){
+    startSFX.setVolume(Svolume); 
+    startSFX.play();
 }
 void Setting::playMusic(){
     backgroundMusic.setVolume(volume); 

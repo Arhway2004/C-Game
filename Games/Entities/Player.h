@@ -5,10 +5,13 @@
 
 #include "Entity.h"
 #include "../../UI/HealthBar.h"
+#include "./../Settings/Setting.h"
+
 
 class Player : public Entity{
     private:
         std::shared_ptr<HealthBar> playerHealthBar;
+        Setting* music;
 
     public: 
         bool defeated = false; 

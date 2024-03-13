@@ -16,6 +16,7 @@ MainMenu::MainMenu(sf::RenderWindow *window) : GameState(window) ,gif("../assets
     this->start_btn = Button(450.0, 350.0, 150.0, 60.0, &this->font, "Start Game");
     this->quit_btn = Button(450.0, 430.0, 150.0, 60.0, &this->font, "Quit Game");
 
+    this->music = new Setting();
     // this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
     // this->background.setFillColor(sf::Color::Black);
 }
@@ -67,6 +68,7 @@ void MainMenu::update(const float &dt, sf::RenderWindow *window)
         }
         if (this->start_btn.isPressed())
         {
+            music->sSFX();
             std::cout << "str button pressed" << std::endl;
             this->endNow = true;
         }

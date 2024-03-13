@@ -34,6 +34,8 @@ Level1::Level1(sf::RenderWindow* window) : GameState(window){
     //collectible
     this->iceCollectibles.push_back(Collectible(200.f, 200.f, 0.07f, 0.07f, "../assets/textures/ice.png"));
 
+    // sound
+    this->music = new Setting();
 }
 
 Level1::~Level1(){
@@ -44,6 +46,33 @@ void Level1::endState(){
     std::cout << "Ending Level1" << "\n";
 }
 
+// void Level1::updateInput(const float& dt){
+//     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+//         this->endNow = true;
+//     }
+
+//     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !this->freeze && this->iceCount > 0 && this->currentItemSelected == 1){
+//         this->freeze = true;
+//         this->freezeTimer.restart();
+//         this->iceCount--;
+//     }
+
+//     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+//             // this->playerState = SHOOTING;
+//         music->shotSFX();
+//         if(this->player->canShoot){
+//             music->shotSFX();
+//             this->shootBullet(*this->player, this->bullets, this->mousePosView);
+//             this->player->shootCooldown.restart(); 
+//             this->player->canShoot = false;
+//         }
+        
+//         if(!this->player->canShoot && this->player->shootCooldown.getElapsedTime().asSeconds() >= this->player->shootCooldownTime){
+//             music->shotSFX();
+//             this->player->canShoot = true;
+//         }
+//     }
+// }
 void Level1::updateInput(const float& dt){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
         this->endNow = true;
@@ -55,19 +84,26 @@ void Level1::updateInput(const float& dt){
         this->iceCount--;
     }
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            // this->playerState = SHOOTING;
+    // Check for a single click of the left mouse button
+    bool isLeftMousePressedThisFrame = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    if(isLeftMousePressedThisFrame && !wasLeftMousePressedLastFrame){
+        music->shotSFX(); // Assume this plays the shooting sound effect
         if(this->player->canShoot){
             this->shootBullet(*this->player, this->bullets, this->mousePosView);
             this->player->shootCooldown.restart(); 
             this->player->canShoot = false;
         }
-        
-        if(!this->player->canShoot && this->player->shootCooldown.getElapsedTime().asSeconds() >= this->player->shootCooldownTime){
-            this->player->canShoot = true;
-        }
+    }
+
+    // After processing, update wasLeftMousePressedLastFrame for the next frame
+    wasLeftMousePressedLastFrame = isLeftMousePressedThisFrame;
+
+    // Handle cooldown for shooting independently from the click detection
+    if(!this->player->canShoot && this->player->shootCooldown.getElapsedTime().asSeconds() >= this->player->shootCooldownTime){
+        this->player->canShoot = true;
     }
 }
+
 
 
 void Level1::update(const float& dt, sf::RenderWindow* window){

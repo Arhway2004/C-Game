@@ -1,7 +1,7 @@
 #include "../include/Game.h" 
 #include <iostream>
 
-Game::Game(){
+Game::Game():music(new Setting()){
     this->initWindow();
     this->initStates(); 
     this->run(); 
@@ -41,6 +41,7 @@ void Game::initStates(){
 }
 
 void Game::run(){
+    music->playMusic();
     while(this->window->isOpen()){
         sf::Event event;
         while(this->window->pollEvent(event)){

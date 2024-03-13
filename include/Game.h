@@ -10,7 +10,7 @@
 #include "../Games/Scenes/Level1.h"
 #include "../Games/Scenes/WinScene.h"
 #include "../Games/Entities/Player.h"
-
+#include "../Games/Settings/Setting.h"
 
 
 //global 
@@ -32,6 +32,7 @@ class Game{
         void initStates(); 
 
         std::shared_ptr<Player> player; 
+        Setting* music;
 
     public:
         //scenes

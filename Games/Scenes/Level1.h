@@ -7,6 +7,9 @@
 #include "../Entities/Bullet.h"
 #include "../../UI/InventoryPanel.h"
 #include "../../UI/Collectible.h"
+#include "./../Settings/Setting.h"
+
+// C-Game/Games/Settings/Setting.h
 
 //add healer to inventory panel
 //freeze screen later 
@@ -44,6 +47,9 @@ class Level1: public GameState{
         sf::Clock freezeTimer; 
 
         sf::Clock spawnItemTimer; 
+
+        Setting* music;
+        bool wasLeftMousePressedLastFrame = false;
 
 
     public:

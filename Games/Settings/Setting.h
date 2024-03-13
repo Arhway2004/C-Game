@@ -35,7 +35,7 @@ class Setting: public Base{
         Message* SFX;
         Message* RESOLUTION;
 
-        sf::Music backgroundMusic,backgroundSFX;
+        sf::Music backgroundMusic,backgroundSFX,shottingSFX,walkSFX,startSFX;
 
 
 
@@ -49,6 +49,9 @@ class Setting: public Base{
         void pauseMusic();
         void update(const sf::Vector2f mousePos);
         void render_setting(sf::RenderTarget* target = nullptr);
+        void shotSFX();
+        void wSFX();
+        void sSFX();
         static int Mpos;
         static int Spos;
         static int sound;

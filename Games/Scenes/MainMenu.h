@@ -8,7 +8,9 @@
 #include "../../UI/ClickableIcon.h"
 #include "../Settings/Options.h"
 #include "../Settings/Base.h"
+#include "./../Settings/Setting.h"
 #include "../../UI/AnimatedGIF.h"
+
 
 class MainMenu : public GameState{
     private:
@@ -28,6 +30,7 @@ class MainMenu : public GameState{
         sf::Sprite bg_gif;  
         AnimatedGIF gif;
 
+        Setting* music;
         //should be enum
         // Base current_state; 
 
