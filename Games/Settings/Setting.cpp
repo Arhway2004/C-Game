@@ -10,8 +10,8 @@
 Setting::Setting(): Base("Setting", 280, 100, 1.0, 1.2){
     std::cout << "Setting::Setting: Setting constructor" << std::endl;
     this->bg_t.loadFromFile("../assets/textures/frame2.png");
-    this->Musicslide_texture.loadFromFile("../assets/textures/slide1.png");
-    this->SFXslide_texture.loadFromFile("../assets/textures/slide1.png");
+    this->Musicslide_texture.loadFromFile("../assets/textures/slide.png");
+    this->SFXslide_texture.loadFromFile("../assets/textures/slide.png");
     this->Musicpoint_texture.loadFromFile("../assets/textures/point.png");
     this->SFXpoint_texture.loadFromFile("../assets/textures/point.png");
 
