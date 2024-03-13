@@ -16,3 +16,5 @@ resolve conflict
 
 
 g++ -std=c++17 -Wall -Wextra -g -fsanitize=address -O0 -o my_game main.cpp Game.cpp GameState.cpp ../UI/Button.cpp ../UI/ClickableIcon.cpp ../Games/Settings/Base.cpp ../Games/Settings/Options.cpp ../Games/Scenes/Basement.cpp ../Games/Scenes/MainMenu.cpp ../Games/Settings/Guide.cpp ../UI/Message.cpp ../Games/Scenes/FirstScenes.cpp ../Games/Settings/Setting.cpp ../Games/Scenes/Level1.cpp ../Games/Entities/Player.cpp ../Games/Entities/Enemy.cpp ../Games/Entities/Bullet.cpp  ../UI/interactable_obj.cpp ../UI/AnimatedGIF.cpp ../Games/Entities/EnemySpawner.cpp ../UI/HealthBar.cpp ../UI/InventoryPanel.cpp ../Games/Scenes/WinScene.cpp ../UI/Collectible.cpp ../Games/Entities/Player_w.cpp -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+.
