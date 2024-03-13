@@ -14,3 +14,5 @@ not work bc it overlap to the start/end btn so when pressed it also pressed/star
 git fork 
 rebase branch to make it catch up to main and merge into it 
 resolve conflict 
+
+.
